@@ -15,6 +15,7 @@ test("build generates discoverable static pages and indexes", async () => {
   const developerCategory = await readFile(path.join(root, "dist", "categories", "developer-tools", "index.html"), "utf8");
   const unitCategory = await readFile(path.join(root, "dist", "categories", "unit-converters", "index.html"), "utf8");
   const colorCategory = await readFile(path.join(root, "dist", "categories", "color-tools", "index.html"), "utf8");
+  const securityCategory = await readFile(path.join(root, "dist", "categories", "security-generators", "index.html"), "utf8");
   const tool = await readFile(path.join(root, "dist", "tools", "word-counter", "index.html"), "utf8");
   const search = JSON.parse(await readFile(path.join(root, "dist", "search", "index.json"), "utf8"));
   const sitemap = await readFile(path.join(root, "dist", "sitemap.xml"), "utf8");
@@ -24,7 +25,7 @@ test("build generates discoverable static pages and indexes", async () => {
   assert.match(home, /Word Counter/);
   assert.match(home, /The tool you need/);
   assert.match(home, /Featured tools<\/h2>/);
-  assert.match(home, /94 tools and growing/);
+  assert.match(home, /104 tools and growing/);
   assert.match(home, /category-card/);
   assert.match(home, /tool-card/);
   assert.match(category, /Word Counter/);
@@ -38,7 +39,7 @@ test("build generates discoverable static pages and indexes", async () => {
   assert.match(tool, /application\/ld\+json/);
   assert.equal(search.v, 2);
   assert.equal(search.x.find((item) => item.i === "word-counter").c, "text");
-  assert.equal(search.x.length, 94);
+  assert.equal(search.x.length, 104);
   for (const id of ["character-counter","case-converter","remove-duplicate-lines","remove-empty-lines","text-sorter","text-reverser","whitespace-cleaner","line-counter","sentence-counter","paragraph-counter","url-encoder","url-decoder","base64-encoder","base64-decoder","html-encoder","html-decoder","rot13-converter","lorem-ipsum-generator"]) {
     assert.ok(search.x.some((item) => item.i === id), `${id} should be searchable`);
     assert.match(sitemap, new RegExp(`tools/${id}/`));
@@ -63,6 +64,9 @@ test("build generates discoverable static pages and indexes", async () => {
   const colorIds=["hex-to-rgb","rgb-to-hex","hex-to-hsl","hsl-to-hex","rgb-to-hsl","hsl-to-rgb","hex-to-cmyk","cmyk-to-hex","rgb-to-hsv","hsv-to-rgb","color-picker","random-color-generator","color-palette-generator","complementary-color-generator","analogous-color-generator","triadic-color-generator","tint-shade-generator","color-mixer","gradient-generator","contrast-checker","wcag-color-accessibility-checker","css-color-converter","color-name-lookup","opacity-alpha-calculator","lighten-darken-color"];
   const colorPositions=colorIds.map(id=>colorCategory.indexOf(`href="/alltools/tools/${id}/"`));assert.ok(colorPositions.every(position=>position>=0),"category should contain all Color Tools");assert.deepEqual(colorPositions,[...colorPositions].sort((a,b)=>a-b),"Color Tools should follow catalog priority");
   for(const id of colorIds){const item=search.x.find(entry=>entry.i===id);assert.equal(item?.c,"color",`${id} should be in Color Tools search`);assert.match(sitemap,new RegExp(`tools/${id}/`));const page=await readFile(path.join(root,"dist","tools",id,"index.html"),"utf8");assert.match(page,/WebApplication/);assert.match(page,/BreadcrumbList/);assert.match(page,/This tool runs in your browser/);assert.match(page,/Related color tools/);assert.equal((page.match(/googletagmanager\.com\/gtag\/js/g)??[]).length,1);assert.equal((page.match(/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/g)??[]).length,1);}
+  const securityIds=["password-generator","password-strength-checker","random-string-generator","secure-token-generator","hash-generator","hmac-generator","checksum-calculator","passphrase-generator","pin-generator","uuid-v7-generator"];
+  const securityPositions=securityIds.map(id=>securityCategory.indexOf(`href="/alltools/tools/${id}/"`));assert.ok(securityPositions.every(position=>position>=0),"category should contain all Security tools");assert.deepEqual(securityPositions,[...securityPositions].sort((a,b)=>a-b),"Security tools should follow metadata priority");
+  for(const id of securityIds){const item=search.x.find(entry=>entry.i===id);assert.equal(item?.c,"security",`${id} should be in Security search`);assert.match(sitemap,new RegExp(`tools/${id}/`));const page=await readFile(path.join(root,"dist","tools",id,"index.html"),"utf8");assert.match(page,/WebApplication/);assert.match(page,/BreadcrumbList/);assert.match(page,/This tool runs in your browser/);assert.match(page,/Related security tools/);assert.equal((page.match(/googletagmanager\.com\/gtag\/js/g)??[]).length,1);assert.equal((page.match(/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/g)??[]).length,1);}
   assert.match(sitemap, /tools\/word-counter\//);
   assert.match(runtimeConfig, /"enabled":true/);
   assert.match(runtimeConfig, /G-JLNSC16GEQ/);

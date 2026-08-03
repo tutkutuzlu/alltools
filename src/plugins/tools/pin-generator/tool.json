@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-generator",
+  "version": "1.0.0",
+  "type": "generator",
+  "family": "security-generators",
+  "variant": "pin-generator",
+  "slug": "pin-generator",
+  "icon": "private",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 84,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "security",
+  "tags": [
+    "security",
+    "pin",
+    "generator"
+  ],
+  "aliases": [
+    "pin generator",
+    "generate secure numeric pins with pattern exclusions"
+  ],
+  "components": [
+    "tool.shell",
+    "field.input",
+    "field.textarea",
+    "field.select",
+    "field.checkbox",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 322
+  }
+}

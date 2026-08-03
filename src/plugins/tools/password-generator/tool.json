@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "password-generator",
+  "version": "1.0.0",
+  "type": "generator",
+  "family": "security-generators",
+  "variant": "password-generator",
+  "slug": "password-generator",
+  "icon": "private",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": true,
+  "popularity": 92,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "security",
+  "tags": [
+    "security",
+    "password",
+    "generator"
+  ],
+  "aliases": [
+    "password generator",
+    "create strong passwords with secure browser randomness"
+  ],
+  "components": [
+    "tool.shell",
+    "field.input",
+    "field.textarea",
+    "field.select",
+    "field.checkbox",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 330
+  }
+}

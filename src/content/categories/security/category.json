@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "security",
+  "slug": "security-generators",
+  "title": "Security & Generators",
+  "shortDescription": "Generate secure random values and calculate hashes locally with browser-native cryptography.",
+  "icon": "private",
+  "order": 50,
+  "featured": true,
+  "accent": "blue",
+  "status": "published"
+}

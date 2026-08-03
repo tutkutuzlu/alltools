@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "password-strength-checker",
+  "version": "1.0.0",
+  "type": "calculator",
+  "family": "security-generators",
+  "variant": "password-strength-checker",
+  "slug": "password-strength-checker",
+  "icon": "private",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": true,
+  "popularity": 91,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "security",
+  "tags": [
+    "security",
+    "password",
+    "strength",
+    "checker"
+  ],
+  "aliases": [
+    "password strength checker",
+    "analyze password length, diversity and common patterns locally"
+  ],
+  "components": [
+    "tool.shell",
+    "field.input",
+    "field.textarea",
+    "field.select",
+    "field.checkbox",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 329
+  }
+}

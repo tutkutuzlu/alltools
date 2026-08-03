@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "hmac-generator",
+  "version": "1.0.0",
+  "type": "generator",
+  "family": "security-generators",
+  "variant": "hmac-generator",
+  "slug": "hmac-generator",
+  "icon": "private",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 87,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "security",
+  "tags": [
+    "security",
+    "hmac",
+    "generator"
+  ],
+  "aliases": [
+    "hmac generator",
+    "create keyed sha-256, sha-384 or sha-512 macs"
+  ],
+  "components": [
+    "tool.shell",
+    "field.input",
+    "field.textarea",
+    "field.select",
+    "field.checkbox",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 325
+  }
+}

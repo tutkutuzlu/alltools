@@ -22,6 +22,10 @@ Unit Converters use `src/plugins/families/unit-converters/catalog.js` for declar
 
 Color Tools share `src/plugins/families/color-tools/engine.js` for safe HEX, RGB, HSL, HSV, CMYK and alpha parsing, conversion, WCAG contrast, deterministic palettes, gradients and compositing. `definitions.js` declares the 25 operations, while `universal-plugin.js` owns accessible inputs, live bordered previews, clipboard and optional CSS download actions, validation and deduplicated telemetry with the `color` category. User-entered colors and generated values never enter telemetry.
 
+## Security & Generators
+
+Security tools use `src/plugins/families/security-generators/engine.js` for Web Crypto hashing and HMAC, cryptographically secure random sampling, checksums, password analysis and UUID v7 generation. `definitions.js` declares tool controls and async operations; `universal-plugin.js` owns generation, sensitive input cleanup, copy/download actions and deduplicated telemetry with the `security` category. Passwords, HMAC keys, tokens and source values are never stored or included in telemetry.
+
 ```js
 const plugin = createTextTransformerPlugin({
   id: "example-transformer",

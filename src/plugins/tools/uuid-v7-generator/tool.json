@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "uuid-v7-generator",
+  "version": "1.0.0",
+  "type": "generator",
+  "family": "security-generators",
+  "variant": "uuid-v7-generator",
+  "slug": "uuid-v7-generator",
+  "icon": "private",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 83,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "security",
+  "tags": [
+    "security",
+    "uuid",
+    "v7",
+    "generator"
+  ],
+  "aliases": [
+    "uuid v7 generator",
+    "generate time-ordered standards-compatible uuid v7 values"
+  ],
+  "components": [
+    "tool.shell",
+    "field.input",
+    "field.textarea",
+    "field.select",
+    "field.checkbox",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 321
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "passphrase-generator",
+  "version": "1.0.0",
+  "type": "generator",
+  "family": "security-generators",
+  "variant": "passphrase-generator",
+  "slug": "passphrase-generator",
+  "icon": "private",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 85,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "security",
+  "tags": [
+    "security",
+    "passphrase",
+    "generator"
+  ],
+  "aliases": [
+    "passphrase generator",
+    "generate memorable phrases from an embedded word list"
+  ],
+  "components": [
+    "tool.shell",
+    "field.input",
+    "field.textarea",
+    "field.select",
+    "field.checkbox",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 323
+  }
+}
