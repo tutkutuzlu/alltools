@@ -1,23 +1,34 @@
 {
   "schemaVersion": 1,
-  "id": "word-counter",
+  "id": "line-counter",
   "version": "1.0.0",
   "type": "tool",
   "family": "text-tools",
   "variant": "analyzer",
-  "slug": "word-counter",
-  "icon": "word-count",
+  "slug": "line-counter",
+  "icon": "text",
   "publishedAt": "2026-08-03",
   "updatedAt": "2026-08-03",
-  "featured": true,
-  "popularity": 100,
+  "featured": false,
+  "popularity": 0,
   "estimatedTime": "instant",
   "status": "published",
   "entry": "./index.js",
   "category": "text",
-  "tags": ["words", "characters", "sentences", "writing"],
-  "aliases": ["word count", "character count", "text counter"],
-  "components": ["field.textarea", "result.stats", "action.button"],
+  "tags": [
+    "text",
+    "line",
+    "counter"
+  ],
+  "aliases": [
+    "line counter",
+    "line counter online"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
   "capabilities": {
     "offline": true,
     "fileAccess": false,
@@ -25,6 +36,6 @@
     "webWorker": false
   },
   "discovery": {
-    "priority": 190
+    "priority": 187
   }
 }

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "html-encoder",
+  "version": "1.0.0",
+  "type": "converter",
+  "family": "text-tools",
+  "variant": "converter",
+  "slug": "html-encoder",
+  "icon": "text",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 50,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "text",
+  "tags": [
+    "text",
+    "html",
+    "encoder"
+  ],
+  "aliases": [
+    "html encoder",
+    "html encoder online"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 175
+  }
+}

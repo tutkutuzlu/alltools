@@ -7,6 +7,7 @@ Bu klasör, platformun ürün vizyonu ile kabul edilmiş mimari kararlarının a
 - [Proje vizyonu](./vision.md)
 - [Nihai mimari](./architecture.md)
 - [Sürüm planı](./roadmap.md)
+- [Design backlog](./design-backlog.md)
 - [Design System](./design-system.md)
 - [Component contract](./component-contract.md)
 - [Icon library](./icon-library.md)

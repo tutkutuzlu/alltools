@@ -144,7 +144,9 @@ export function renderHome(project) {
 
 export function renderCategory(project, category) {
   const { site } = project;
-  const tools = project.tools.filter((tool) => tool.status === "published" && tool.category === category.id);
+  const tools = project.tools
+    .filter((tool) => tool.status === "published" && tool.category === category.id)
+    .sort((a, b) => (b.discovery?.priority ?? 0) - (a.discovery?.priority ?? 0));
   const canonicalPath = `categories/${category.slug}`;
   const body = `<div class="container"><nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="${joinPath(site.basePath)}/">Home</a></li><li aria-current="page">${escapeHtml(category.title)}</li></ol></nav></div>
   <section class="hero hero--compact"><div class="container"><span class="hero-category-icon">${iconMarkup(category.icon)}</span><p class="eyebrow">${tools.length} ${tools.length === 1 ? "tool" : "tools"}</p><h1>${escapeHtml(category.title)}</h1><p class="lead">${escapeHtml(category.shortDescription)}</p>${searchForm(project.categories.filter((item) => item.status === "published"))}</div></section>

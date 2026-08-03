@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "rot13-converter",
+  "version": "1.0.0",
+  "type": "converter",
+  "family": "text-tools",
+  "variant": "converter",
+  "slug": "rot13-converter",
+  "icon": "text",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 40,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "text",
+  "tags": [
+    "text",
+    "rot13",
+    "converter"
+  ],
+  "aliases": [
+    "rot13 converter",
+    "rot13 converter online"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 173
+  }
+}

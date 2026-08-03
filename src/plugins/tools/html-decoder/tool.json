@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "html-decoder",
+  "version": "1.0.0",
+  "type": "converter",
+  "family": "text-tools",
+  "variant": "converter",
+  "slug": "html-decoder",
+  "icon": "text",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 45,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "text",
+  "tags": [
+    "text",
+    "html",
+    "decoder"
+  ],
+  "aliases": [
+    "html decoder",
+    "html decoder online"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 174
+  }
+}

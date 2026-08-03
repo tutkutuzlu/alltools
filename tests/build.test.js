@@ -18,18 +18,31 @@ test("build generates discoverable static pages and indexes", async () => {
   const runtimeConfig = await readFile(path.join(root, "dist", "assets", "js", "config", "runtime-config.js"), "utf8");
   assert.match(home, /Word Counter/);
   assert.match(home, /The tool you need/);
-  assert.match(home, /Featured tool<\/h2>/);
-  assert.match(home, /1 tool and growing/);
+  assert.match(home, /Featured tools<\/h2>/);
+  assert.match(home, /19 tools and growing/);
   assert.match(home, /category-card/);
   assert.match(home, /tool-card/);
   assert.match(category, /Word Counter/);
+  const expectedCategoryOrder = ["Word Counter", "Character Counter", "Case Converter", "Line Counter", "Sentence Counter", "Paragraph Counter", "Remove Duplicate Lines", "Remove Empty Lines", "Whitespace Cleaner", "Text Sorter", "Text Reverser", "URL Encoder", "URL Decoder", "Base64 Encoder", "Base64 Decoder", "HTML Encoder", "HTML Decoder", "ROT13 Converter", "Lorem Ipsum Generator"];
+  const categoryPositions = expectedCategoryOrder.map((title) => category.indexOf(`<strong>${title}</strong>`));
+  assert.ok(categoryPositions.every((position) => position >= 0), "category should contain every Text Tool");
+  assert.deepEqual(categoryPositions, [...categoryPositions].sort((a, b) => a - b), "category should follow user-intent order");
   assert.match(tool, /data-tool-entry/);
   assert.match(tool, /Your text stays in your browser/);
   assert.match(tool, /faq-section/);
   assert.match(tool, /application\/ld\+json/);
   assert.equal(search.v, 2);
-  assert.equal(search.x[0].i, "word-counter");
-  assert.equal(search.x[0].c, "text");
+  assert.equal(search.x.find((item) => item.i === "word-counter").c, "text");
+  assert.equal(search.x.length, 19);
+  for (const id of ["character-counter","case-converter","remove-duplicate-lines","remove-empty-lines","text-sorter","text-reverser","whitespace-cleaner","line-counter","sentence-counter","paragraph-counter","url-encoder","url-decoder","base64-encoder","base64-decoder","html-encoder","html-decoder","rot13-converter","lorem-ipsum-generator"]) {
+    assert.ok(search.x.some((item) => item.i === id), `${id} should be searchable`);
+    assert.match(sitemap, new RegExp(`tools/${id}/`));
+    const generatedToolPage = await readFile(path.join(root, "dist", "tools", id, "index.html"), "utf8");
+    assert.match(generatedToolPage, /application\/ld\+json/);
+    assert.match(generatedToolPage, /Your text stays in your browser/);
+    assert.match(generatedToolPage, /Frequently asked questions/);
+    assert.match(generatedToolPage, /Related text tools/);
+  }
   assert.match(sitemap, /tools\/word-counter\//);
   assert.match(runtimeConfig, /"enabled":true/);
   assert.match(runtimeConfig, /G-JLNSC16GEQ/);
@@ -40,6 +53,11 @@ test("build generates discoverable static pages and indexes", async () => {
   await assert.rejects(access(path.join(root, "dist", "analytics", "index.html")));
   assert.doesNotMatch(sitemap, /\/analytics\//);
   assert.match(home, /href="\/alltools\//);
+  const homeSectionIds = [...home.matchAll(/<section class="section section--tools" id="([^"]+)"[\s\S]*?<\/section>/g)]
+    .map((match) => ({ section: match[1], ids: [...match[0].matchAll(/href="\/alltools\/tools\/([^/]+)\//g)].map((item) => item[1]) }));
+  assert.deepEqual(homeSectionIds.map((item) => [item.section, item.ids.length]), [["tools", 6], ["new", 6], ["popular", 6]]);
+  const homeToolIds = homeSectionIds.flatMap((item) => item.ids);
+  assert.equal(new Set(homeToolIds).size, homeToolIds.length, "home discovery sections must not repeat tools");
 });
 
 test("development build never renders the production Google tag", async () => {

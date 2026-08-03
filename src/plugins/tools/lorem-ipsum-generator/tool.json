@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "lorem-ipsum-generator",
+  "version": "1.0.0",
+  "type": "generator",
+  "family": "text-tools",
+  "variant": "generator",
+  "slug": "lorem-ipsum-generator",
+  "icon": "text",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": true,
+  "popularity": 0,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "text",
+  "tags": [
+    "text",
+    "lorem",
+    "ipsum",
+    "generator"
+  ],
+  "aliases": [
+    "lorem ipsum generator",
+    "lorem ipsum generator online"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 172
+  }
+}

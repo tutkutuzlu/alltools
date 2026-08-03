@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "base64-decoder",
+  "version": "1.0.0",
+  "type": "converter",
+  "family": "text-tools",
+  "variant": "converter",
+  "slug": "base64-decoder",
+  "icon": "text",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 55,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "text",
+  "tags": [
+    "text",
+    "base64",
+    "decoder"
+  ],
+  "aliases": [
+    "base64 decoder",
+    "base64 decoder online"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 176
+  }
+}

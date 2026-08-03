@@ -27,6 +27,9 @@ function fieldFactory(tagName) {
     if (props.placeholder) input.placeholder = props.placeholder;
     if (tagName === "textarea") input.rows = Number(props.rows) || 8;
     if (tagName === "input") input.type = props.type ?? "text";
+    if (props.value !== undefined) input.value = props.value;
+    if (props.min !== undefined) input.min = props.min;
+    if (props.max !== undefined) input.max = props.max;
     if (props.autofocus) input.autofocus = true;
     if (props.readonly) input.readOnly = true;
     group.append(label, input);
@@ -81,6 +84,18 @@ registerComponent("feedback.notice", (props) => {
 
 registerComponent("field.input", fieldFactory("input"));
 registerComponent("field.textarea", fieldFactory("textarea"));
+
+registerComponent("field.checkbox", (props) => {
+  required(props, ["id", "label"], "field.checkbox");
+  const label = document.createElement("label");
+  label.className = "checkbox-field";
+  const input = document.createElement("input");
+  input.type = "checkbox";
+  input.id = props.id;
+  input.checked = props.checked === true;
+  label.append(input, textElement("span", "", props.label));
+  return { element: label, input, label };
+});
 
 registerComponent("field.select", (props) => {
   required(props, ["id", "label"], "field.select");
@@ -252,13 +267,23 @@ registerComponent("tool.shell", (props) => {
   const element = document.createElement("div");
   element.className = "tool-shell";
   const toolbar = createComponent("layout.toolbar", { label: props.toolbarLabel, items: props.actions });
-  const editor = createComponent(props.editor?.component ?? "field.textarea", props.editor ?? {});
+  const controls = new Map();
+  const controlsElement = document.createElement("div");
+  controlsElement.className = "tool-controls";
+  for (const definition of props.controls ?? []) {
+    const control = createComponent(definition.component ?? "field.input", definition);
+    controlsElement.append(control.element);
+    controls.set(definition.id, control);
+  }
+  const editor = props.editor ? createComponent(props.editor.component ?? "field.textarea", props.editor) : null;
   const output = props.output ? createComponent(props.output.component ?? "field.textarea", { ...props.output, readonly: props.output.readonly ?? true }) : null;
   const results = props.metrics?.length ? createComponent("result.panel", { label: props.resultLabel, metrics: props.metrics }) : null;
   const notice = createComponent("feedback.notice", {});
-  element.append(toolbar.element, editor.element);
+  element.append(toolbar.element);
+  if (controls.size) element.append(controlsElement);
+  if (editor?.element) element.append(editor.element);
   if (output) element.append(output.element);
   if (results) element.append(results.element);
   element.append(notice.element);
-  return { element, input: editor.input, output: output?.input, actions: toolbar.items, results, notice };
+  return { element, input: editor?.input, output: output?.input, actions: toolbar.items, controls, results, notice };
 });
