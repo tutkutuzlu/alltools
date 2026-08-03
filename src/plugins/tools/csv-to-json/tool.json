@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "csv-to-json",
+  "version": "1.0.0",
+  "type": "converter",
+  "family": "developer-tools",
+  "variant": "converter",
+  "slug": "csv-to-json",
+  "icon": "developer",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 87,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "developer",
+  "tags": [
+    "csv",
+    "json",
+    "parse"
+  ],
+  "aliases": [
+    "convert csv to json",
+    "csv parser"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 246
+  }
+}

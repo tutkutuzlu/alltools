@@ -7,7 +7,7 @@ Production: [https://tutkutuzlu.github.io/alltools/](https://tutkutuzlu.github.i
 ## V1 architecture
 
 - Folder-discovered tool plugins
-- Reusable Text Tools family
+- Reusable Text Tools and Developer Tools families
 - Minimal Component Registry
 - Light, dark and system themes
 - Static HTML build with automatic category and tool discovery
@@ -15,7 +15,7 @@ Production: [https://tutkutuzlu.github.io/alltools/](https://tutkutuzlu.github.i
 - Static SEO metadata, structured data, sitemap and robots.txt
 - GitHub Actions validation and GitHub Pages deployment
 
-The first working plugin is Word Counter. Character Counter, Case Converter, Remove Duplicate Lines, Text Sorter and Whitespace Cleaner are planned as the next Text Tools plugins.
+The current catalog contains browser-local Text Tools and Developer Tools. New plugins are discovered from metadata and rendered into category pages, search and the sitemap automatically.
 
 ## Requirements
 

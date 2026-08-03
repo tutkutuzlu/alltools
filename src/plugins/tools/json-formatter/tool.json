@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "json-formatter",
+  "version": "1.0.0",
+  "type": "formatter",
+  "family": "developer-tools",
+  "variant": "formatter",
+  "slug": "json-formatter",
+  "icon": "developer",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": true,
+  "popularity": 95,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "developer",
+  "tags": [
+    "json",
+    "format",
+    "beautify"
+  ],
+  "aliases": [
+    "json beautifier",
+    "pretty print json"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 250
+  }
+}

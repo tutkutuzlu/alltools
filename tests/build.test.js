@@ -12,6 +12,7 @@ test("build generates discoverable static pages and indexes", async () => {
   await exec(process.execPath, [path.join(root, "scripts", "build.mjs")], { cwd: root });
   const home = await readFile(path.join(root, "dist", "index.html"), "utf8");
   const category = await readFile(path.join(root, "dist", "categories", "text-tools", "index.html"), "utf8");
+  const developerCategory = await readFile(path.join(root, "dist", "categories", "developer-tools", "index.html"), "utf8");
   const tool = await readFile(path.join(root, "dist", "tools", "word-counter", "index.html"), "utf8");
   const search = JSON.parse(await readFile(path.join(root, "dist", "search", "index.json"), "utf8"));
   const sitemap = await readFile(path.join(root, "dist", "sitemap.xml"), "utf8");
@@ -21,7 +22,7 @@ test("build generates discoverable static pages and indexes", async () => {
   assert.match(home, /Word Counter/);
   assert.match(home, /The tool you need/);
   assert.match(home, /Featured tools<\/h2>/);
-  assert.match(home, /19 tools and growing/);
+  assert.match(home, /44 tools and growing/);
   assert.match(home, /category-card/);
   assert.match(home, /tool-card/);
   assert.match(category, /Word Counter/);
@@ -35,7 +36,7 @@ test("build generates discoverable static pages and indexes", async () => {
   assert.match(tool, /application\/ld\+json/);
   assert.equal(search.v, 2);
   assert.equal(search.x.find((item) => item.i === "word-counter").c, "text");
-  assert.equal(search.x.length, 19);
+  assert.equal(search.x.length, 44);
   for (const id of ["character-counter","case-converter","remove-duplicate-lines","remove-empty-lines","text-sorter","text-reverser","whitespace-cleaner","line-counter","sentence-counter","paragraph-counter","url-encoder","url-decoder","base64-encoder","base64-decoder","html-encoder","html-decoder","rot13-converter","lorem-ipsum-generator"]) {
     assert.ok(search.x.some((item) => item.i === id), `${id} should be searchable`);
     assert.match(sitemap, new RegExp(`tools/${id}/`));
@@ -44,6 +45,13 @@ test("build generates discoverable static pages and indexes", async () => {
     assert.match(generatedToolPage, /Your text stays in your browser/);
     assert.match(generatedToolPage, /Frequently asked questions/);
     assert.match(generatedToolPage, /Related text tools/);
+  }
+  const developerOrder=["JSON Formatter","JSON Minifier","JSON Validator","JSON to CSV Converter","CSV to JSON Converter","XML Formatter","XML Minifier","HTML Formatter","HTML Minifier","CSS Formatter","CSS Minifier","SQL Formatter","JWT Decoder","UUID Generator","UUID Validator","Unix Timestamp Converter","URL Parser","Query String Parser","Regex Tester","Cron Expression Explainer","HTTP Status Code Lookup","MIME Type Lookup","Color Converter","Number Base Converter","JSON String Escape"];
+  const developerPositions=developerOrder.map(title=>developerCategory.indexOf(`<strong>${title}</strong>`));
+  assert.ok(developerPositions.every(position=>position>=0),"category should contain all Developer Tools");
+  assert.deepEqual(developerPositions,[...developerPositions].sort((a,b)=>a-b),"Developer Tools should follow catalog priority");
+  for(const id of ["json-formatter","json-minifier","json-validator","json-to-csv","csv-to-json","xml-formatter","xml-minifier","html-formatter","html-minifier","css-formatter","css-minifier","sql-formatter","jwt-decoder","uuid-generator","uuid-validator","unix-timestamp-converter","url-parser","query-string-parser","regex-tester","cron-expression-explainer","http-status-code-lookup","mime-type-lookup","color-converter","number-base-converter","json-string-escape"]){
+    const item=search.x.find(entry=>entry.i===id);assert.equal(item?.c,"developer",`${id} should be in Developer Tools search`);assert.match(sitemap,new RegExp(`tools/${id}/`));const page=await readFile(path.join(root,"dist","tools",id,"index.html"),"utf8");assert.match(page,/WebApplication/);assert.match(page,/BreadcrumbList/);assert.match(page,/This tool runs in your browser/);assert.match(page,/Related developer tools/);
   }
   assert.match(sitemap, /tools\/word-counter\//);
   assert.match(runtimeConfig, /"enabled":true/);

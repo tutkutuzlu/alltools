@@ -10,6 +10,10 @@ Word Counter is the analyzer reference plugin. Its pure `analyzeText` function i
 
 `src/plugins/families/text-tools/transformer.js` exports `createTextTransformerPlugin(definition)`. It provides the common input/output editors, Clear and Copy result actions, telemetry hooks and cleanup lifecycle.
 
+## Developer Tools
+
+Developer Tools share `src/plugins/families/developer-tools/universal-plugin.js`. Tool-specific pure operations live in `operations.js`, while controls, result metrics and action profiles are declared in `tool-definitions.js`. The runtime owns paste, clear, copy, download, validation notices and deduplicated `tool_use` telemetry with the `developer` category. Inputs and results remain browser-local.
+
 ```js
 const plugin = createTextTransformerPlugin({
   id: "example-transformer",

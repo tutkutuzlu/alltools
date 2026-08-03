@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "jwt-decoder",
+  "version": "1.0.0",
+  "type": "reference",
+  "family": "developer-tools",
+  "variant": "reference",
+  "slug": "jwt-decoder",
+  "icon": "developer",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": true,
+  "popularity": 71,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "developer",
+  "tags": [
+    "jwt",
+    "token",
+    "decode"
+  ],
+  "aliases": [
+    "json web token decoder",
+    "jwt claims"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 238
+  }
+}

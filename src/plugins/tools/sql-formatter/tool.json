@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "sql-formatter",
+  "version": "1.0.0",
+  "type": "formatter",
+  "family": "developer-tools",
+  "variant": "formatter",
+  "slug": "sql-formatter",
+  "icon": "developer",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 73,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "developer",
+  "tags": [
+    "sql",
+    "format",
+    "query"
+  ],
+  "aliases": [
+    "sql beautifier",
+    "pretty print sql"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 239
+  }
+}

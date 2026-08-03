@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "http-status-code-lookup",
+  "version": "1.0.0",
+  "type": "reference",
+  "family": "developer-tools",
+  "variant": "reference",
+  "slug": "http-status-code-lookup",
+  "icon": "developer",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 55,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "developer",
+  "tags": [
+    "http",
+    "status",
+    "response"
+  ],
+  "aliases": [
+    "http code lookup",
+    "status code meaning"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 230
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "cron-expression-explainer",
+  "version": "1.0.0",
+  "type": "reference",
+  "family": "developer-tools",
+  "variant": "reference",
+  "slug": "cron-expression-explainer",
+  "icon": "developer",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 57,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "developer",
+  "tags": [
+    "cron",
+    "schedule",
+    "explain"
+  ],
+  "aliases": [
+    "cron parser",
+    "cron translator"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 231
+  }
+}

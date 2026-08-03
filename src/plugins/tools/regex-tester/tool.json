@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "regex-tester",
+  "version": "1.0.0",
+  "type": "reference",
+  "family": "developer-tools",
+  "variant": "reference",
+  "slug": "regex-tester",
+  "icon": "developer",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": true,
+  "popularity": 59,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "developer",
+  "tags": [
+    "regex",
+    "javascript",
+    "pattern"
+  ],
+  "aliases": [
+    "regular expression tester",
+    "regex checker"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 232
+  }
+}

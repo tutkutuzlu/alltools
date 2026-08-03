@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "json-validator",
+  "version": "1.0.0",
+  "type": "reference",
+  "family": "developer-tools",
+  "variant": "reference",
+  "slug": "json-validator",
+  "icon": "developer",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": true,
+  "popularity": 91,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "developer",
+  "tags": [
+    "json",
+    "validate",
+    "syntax"
+  ],
+  "aliases": [
+    "json checker",
+    "validate json"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 248
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "xml-minifier",
+  "version": "1.0.0",
+  "type": "formatter",
+  "family": "developer-tools",
+  "variant": "formatter",
+  "slug": "xml-minifier",
+  "icon": "developer",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 83,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "developer",
+  "tags": [
+    "xml",
+    "minify",
+    "compact"
+  ],
+  "aliases": [
+    "compress xml",
+    "compact xml"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 244
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "color-converter",
+  "version": "1.0.0",
+  "type": "converter",
+  "family": "developer-tools",
+  "variant": "converter",
+  "slug": "color-converter",
+  "icon": "developer",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": true,
+  "popularity": 51,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "developer",
+  "tags": [
+    "color",
+    "hex",
+    "rgb",
+    "hsl"
+  ],
+  "aliases": [
+    "hex to rgb",
+    "rgb to hsl"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 228
+  }
+}

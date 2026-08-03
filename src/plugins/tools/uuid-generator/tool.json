@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "uuid-generator",
+  "version": "1.0.0",
+  "type": "generator",
+  "family": "developer-tools",
+  "variant": "generator",
+  "slug": "uuid-generator",
+  "icon": "developer",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": true,
+  "popularity": 69,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "developer",
+  "tags": [
+    "uuid",
+    "guid",
+    "generate"
+  ],
+  "aliases": [
+    "uuid v4 generator",
+    "guid generator"
+  ],
+  "components": [
+    "tool.shell",
+    "field.textarea",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 237
+  }
+}

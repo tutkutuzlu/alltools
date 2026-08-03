@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "developer",
+  "slug": "developer-tools",
+  "title": "Developer Tools",
+  "shortDescription": "Format, validate, parse and convert common developer data in your browser.",
+  "icon": "developer",
+  "order": 20,
+  "featured": true,
+  "accent": "blue",
+  "status": "published"
+}
