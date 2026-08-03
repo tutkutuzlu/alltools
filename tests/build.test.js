@@ -25,7 +25,7 @@ test("build generates discoverable static pages and indexes", async () => {
   assert.match(home, /Word Counter/);
   assert.match(home, /The tool you need/);
   assert.match(home, /Featured tools<\/h2>/);
-  assert.match(home, /104 tools and growing/);
+  assert.match(home, /104 free browser tools/);
   assert.match(home, /category-card/);
   assert.match(home, /tool-card/);
   assert.match(category, /Word Counter/);
@@ -92,11 +92,23 @@ test("build generates discoverable static pages and indexes", async () => {
     assert.equal((html.match(/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-8757964996370629/g) ?? []).length, 1);
     assert.match(html, /crossorigin="anonymous"><\/script>\s*<\/head>/);
   }
-  const homeSectionIds = [...home.matchAll(/<section class="section section--tools" id="([^"]+)"[\s\S]*?<\/section>/g)]
-    .map((match) => ({ section: match[1], ids: [...match[0].matchAll(/href="\/alltools\/tools\/([^/]+)\//g)].map((item) => item[1]) }));
-  assert.deepEqual(homeSectionIds.map((item) => [item.section, item.ids.length]), [["tools", 6], ["new", 6], ["popular", 6]]);
+  const homeSectionIds = [
+    ...[...home.matchAll(/<section class="section section--tools" id="([^"]+)"[\s\S]*?<\/section>/g)],
+    ...[...home.matchAll(/<section class="discovery-group" id="([^"]+)"[\s\S]*?<\/section>/g)]
+  ].map((match) => ({ section: match[1], ids: [...match[0].matchAll(/href="\/alltools\/tools\/([^/]+)\//g)].map((item) => item[1]) }));
+  assert.deepEqual(homeSectionIds.map((item) => [item.section, item.ids.length]), [["tools", 6], ["new", 3], ["popular", 3]]);
   const homeToolIds = homeSectionIds.flatMap((item) => item.ids);
   assert.equal(new Set(homeToolIds).size, homeToolIds.length, "home discovery sections must not repeat tools");
+  assert.deepEqual(new Set(homeSectionIds.find((item) => item.section === "tools").ids), new Set(["word-counter", "password-generator", "json-formatter", "length-converter", "color-picker", "case-converter"]));
+  assert.match(tool, /class="category-identity">Text Tool</);
+  assert.match(tool, /class="section related-tools" data-accent="violet"/);
+  const relatedBlock = tool.match(/<section class="section related-tools"[\s\S]*?<\/section>/)?.[0] ?? "";
+  const relatedIds = [...relatedBlock.matchAll(/href="\/alltools\/tools\/([^/]+)\//g)].map((item) => item[1]);
+  assert.ok(relatedIds.length >= 4 && relatedIds.length <= 6);
+  assert.equal(relatedIds.includes("word-counter"), false);
+  assert.equal(new Set(relatedIds).size, relatedIds.length);
+  assert.match(home, /data-accent="violet"/);
+  assert.match(home, /data-accent="amber"/);
 });
 
 test("development build never renders the production Google tag", async () => {

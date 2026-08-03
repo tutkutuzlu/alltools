@@ -38,6 +38,8 @@
   --color-card-hover: #fbfbff;
   --shadow-card: 0 1px 2px rgb(15 23 42 / .04), 0 8px 24px rgb(15 23 42 / .05);
   --shadow-card-hover: 0 2px 4px rgb(15 23 42 / .06), 0 18px 36px rgb(79 70 229 / .11);
+  --category-accent: var(--color-primary);
+  --category-accent-soft: var(--color-accent-soft);
 }
 
 :root[data-theme="dark"] {
@@ -58,4 +60,17 @@
   --color-card-hover: #1a2337;
   --shadow-card: 0 1px 2px rgb(0 0 0 / .25), 0 10px 30px rgb(0 0 0 / .16);
   --shadow-card-hover: 0 2px 4px rgb(0 0 0 / .3), 0 20px 40px rgb(0 0 0 / .22);
+  --category-accent: var(--color-primary);
+  --category-accent-soft: var(--color-accent-soft);
 }
+
+:root[data-theme="light"] [data-accent="violet"] { --category-accent: #6d28d9; --category-accent-soft: #f3e8ff; }
+:root[data-theme="light"] [data-accent="blue"] { --category-accent: #1d4ed8; --category-accent-soft: #dbeafe; }
+:root[data-theme="light"] [data-accent="green"] { --category-accent: #047857; --category-accent-soft: #d1fae5; }
+:root[data-theme="light"] [data-accent="rose"] { --category-accent: #be185d; --category-accent-soft: #fce7f3; }
+:root[data-theme="light"] [data-accent="amber"] { --category-accent: #a16207; --category-accent-soft: #fef3c7; }
+:root[data-theme="dark"] [data-accent="violet"] { --category-accent: #c4b5fd; --category-accent-soft: #302650; }
+:root[data-theme="dark"] [data-accent="blue"] { --category-accent: #93c5fd; --category-accent-soft: #1d3557; }
+:root[data-theme="dark"] [data-accent="green"] { --category-accent: #6ee7b7; --category-accent-soft: #173c36; }
+:root[data-theme="dark"] [data-accent="rose"] { --category-accent: #f9a8d4; --category-accent-soft: #4a2039; }
+:root[data-theme="dark"] [data-accent="amber"] { --category-accent: #fcd34d; --category-accent-soft: #493719; }

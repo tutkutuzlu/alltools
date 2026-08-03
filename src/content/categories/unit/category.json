@@ -8,5 +8,6 @@
   "order": 30,
   "featured": true,
   "accent": "green",
+  "toolLabel": "Unit Converter",
   "status": "published"
 }

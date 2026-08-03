@@ -92,7 +92,7 @@ function layout({ site, title, description, canonicalPath, body, structured = []
 
 export function renderToolCard(site, tool, category) {
   const badges = [tool.featured ? '<span class="card-badge">Featured</span>' : "", isNewTool(tool) ? '<span class="card-badge card-badge--new">New</span>' : ""].join("");
-  return `<a class="tool-card" href="${joinPath(site.basePath, `tools/${tool.slug}`)}/">
+  return `<a class="tool-card" data-accent="${escapeHtml(category?.accent ?? "default")}" href="${joinPath(site.basePath, `tools/${tool.slug}`)}/">
     <span class="card-icon">${iconMarkup(tool.icon ?? category.icon)}</span>
     <span class="tool-card__body"><span class="tool-card__meta"><span class="category-label">${escapeHtml(category.title)}</span>${badges}${tool.estimatedTime ? `<span class="estimated-time">${escapeHtml(tool.estimatedTime)}</span>` : ""}</span><strong>${escapeHtml(tool.title)}</strong><span class="tool-card__description">${escapeHtml(tool.shortDescription)}</span></span>
     <span class="card-arrow">${iconMarkup("arrow")}</span>
@@ -100,10 +100,11 @@ export function renderToolCard(site, tool, category) {
 }
 
 export function isNewTool(tool, today = new Date()) {
-  if (!tool.publishedAt) return false;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(tool.publishedAt ?? "")) return false;
   const published = new Date(`${tool.publishedAt}T00:00:00Z`);
+  if (Number.isNaN(published.getTime()) || published.toISOString().slice(0, 10) !== tool.publishedAt) return false;
   const age = today.getTime() - published.getTime();
-  return age >= 0 && age <= 45 * 24 * 60 * 60 * 1000;
+  return age >= 0 && age < 10 * 24 * 60 * 60 * 1000;
 }
 
 export function selectHomeSections(tools, today = new Date()) {
@@ -111,8 +112,8 @@ export function selectHomeSections(tools, today = new Date()) {
   const used = new Set();
   const take = (candidates, limit = 6) => candidates.filter((tool) => !used.has(tool.id)).slice(0, limit).map((tool) => { used.add(tool.id); return tool; });
   const featured = take(published.filter((tool) => tool.featured).sort((a, b) => (b.discovery?.priority ?? 0) - (a.discovery?.priority ?? 0)));
-  const newest = take(published.filter((tool) => isNewTool(tool, today)).sort((a, b) => String(b.publishedAt).localeCompare(String(a.publishedAt))));
-  const popular = take(published.filter((tool) => (tool.popularity ?? 0) > 0).sort((a, b) => (b.popularity ?? 0) - (a.popularity ?? 0)));
+  const newest = take(published.filter((tool) => isNewTool(tool, today)).sort((a, b) => String(b.publishedAt).localeCompare(String(a.publishedAt)) || (b.discovery?.priority ?? 0) - (a.discovery?.priority ?? 0)), 3);
+  const popular = take(published.filter((tool) => (tool.popularity ?? 0) > 0).sort((a, b) => (b.popularity ?? 0) - (a.popularity ?? 0) || (b.discovery?.priority ?? 0) - (a.discovery?.priority ?? 0)), 3);
   if (!featured.length && published.length) featured.push(...take([...published].sort((a, b) => (b.discovery?.priority ?? 0) - (a.discovery?.priority ?? 0))));
   return [
     { id: "featured", kicker: "Get things done", singular: "Featured tool", plural: "Featured tools", description: "Focused utilities, ready when you are.", tools: featured },
@@ -124,6 +125,30 @@ export function selectHomeSections(tools, today = new Date()) {
 function renderToolSection(site, section, categories) {
   const heading = section.tools.length === 1 ? section.singular : section.plural;
   return `<section class="section section--tools" id="${section.id === "featured" ? "tools" : section.id}"><div class="container"><div class="section-heading"><div><p class="section-kicker">${section.kicker}</p><h2>${heading}</h2></div><p>${section.description}</p></div><div class="tool-grid">${section.tools.map((tool) => renderToolCard(site, tool, categories.find((category) => category.id === tool.category))).join("")}</div></div></section>`;
+}
+
+function renderCompactToolSection(site, section, categories) {
+  const heading = section.tools.length === 1 ? section.singular : section.plural;
+  return `<section class="discovery-group" id="${section.id}"><div class="discovery-group__heading"><div><p class="section-kicker">${section.kicker}</p><h2>${heading}</h2></div><p>${section.description}</p></div><div class="tool-grid tool-grid--compact">${section.tools.map((tool) => renderToolCard(site, tool, categories.find((category) => category.id === tool.category))).join("")}</div></section>`;
+}
+
+const normalizedTerms = (values = []) => new Set(values.flatMap((value) => String(value).toLowerCase().split(/[^a-z0-9]+/)).filter((value) => value.length > 2));
+
+export function selectRelatedTools(tool, tools, limit = 6) {
+  const sourceTerms = normalizedTerms([...(tool.tags ?? []), ...(tool.aliases ?? [])]);
+  const candidates = tools.filter((candidate) => candidate.status === "published" && candidate.id !== tool.id).map((candidate) => {
+    const candidateTerms = normalizedTerms([...(candidate.tags ?? []), ...(candidate.aliases ?? [])]);
+    const sharedTerms = [...sourceTerms].filter((term) => candidateTerms.has(term)).length;
+    const sameCategory = Number(candidate.category === tool.category);
+    const sameFamily = Number(candidate.family === tool.family);
+    const sameIntent = Number(candidate.type === tool.type) + Number(Boolean(tool.variant) && candidate.variant === tool.variant);
+    return { candidate, rank: [sameCategory, sameFamily, sharedTerms, sameIntent, candidate.discovery?.priority ?? 0] };
+  }).filter(({ rank }) => rank.slice(0, 4).some(Boolean));
+  candidates.sort((a, b) => {
+    for (let index = 0; index < a.rank.length; index += 1) if (a.rank[index] !== b.rank[index]) return b.rank[index] - a.rank[index];
+    return a.candidate.title.localeCompare(b.candidate.title);
+  });
+  return candidates.slice(0, Math.max(0, Math.min(6, limit))).map(({ candidate }) => candidate);
 }
 
 export function renderCategoryCard(site, category, toolCount) {
@@ -147,8 +172,11 @@ export function renderHome(project) {
   const tools = project.tools.filter((tool) => tool.status === "published").sort((a, b) => (b.discovery?.priority ?? 0) - (a.discovery?.priority ?? 0));
   const categories = project.categories.filter((category) => category.status === "published" && tools.some((tool) => tool.category === category.id)).sort((a, b) => Number(b.featured) - Number(a.featured) || a.order - b.order);
   const homeSections = selectHomeSections(tools);
-  const body = `<section class="hero hero--home"><div class="container hero__inner"><p class="eyebrow">${tools.length} ${tools.length === 1 ? "tool" : "tools"} and growing</p><h1>The tool you need.<br><span>Right when you need it.</span></h1><p class="lead">Fast, free browser tools for images, text, files, calculations and more.</p>${searchForm(categories)}<ul class="trust-list" aria-label="AllTools benefits"><li>${iconMarkup("check")}Free to use</li><li>${iconMarkup("check")}No sign-up</li><li>${iconMarkup("check")}Runs in your browser</li></ul></div></section>
-  ${homeSections.map((section) => renderToolSection(site, section, categories)).join("\n")}
+  const featuredSection = homeSections.find((section) => section.id === "featured");
+  const compactSections = homeSections.filter((section) => section.id !== "featured");
+  const body = `<section class="hero hero--home"><div class="container hero__inner"><p class="eyebrow">${tools.length} free browser ${tools.length === 1 ? "tool" : "tools"}</p><h1>The tool you need.<br><span>Right when you need it.</span></h1><p class="lead">Fast, free browser tools for images, text, files, calculations and more.</p>${searchForm(categories)}<ul class="trust-list" aria-label="AllTools benefits"><li>${iconMarkup("check")}Free to use</li><li>${iconMarkup("check")}No sign-up</li><li>${iconMarkup("check")}Runs in your browser</li></ul></div></section>
+  ${featuredSection ? renderToolSection(site, featuredSection, categories) : ""}
+  ${compactSections.length ? `<section class="section section--discovery-compact"><div class="container discovery-compact-grid">${compactSections.map((section) => renderCompactToolSection(site, section, categories)).join("")}</div></section>` : ""}
   <section class="section section--categories" id="categories"><div class="container"><div class="section-heading"><div><p class="section-kicker">Explore</p><h2>Browse categories</h2></div><p>Find the right set of tools for your task.</p></div><div class="category-grid">${categories.map((category) => renderCategoryCard(site, category, tools.filter((tool) => tool.category === category.id).length)).join("")}</div></div></section>
   <section class="section section--why"><div class="container"><div class="why-panel"><div class="why-panel__intro"><p class="section-kicker">Why AllTools?</p><h2>Useful by design.</h2><p>No accounts, complicated menus or unnecessary steps. Open a tool and get to work.</p></div><div class="why-grid"><article>${iconMarkup("fast")}<h3>Fast</h3><p>Lightweight pages and focused interactions.</p></article><article>${iconMarkup("private")}<h3>Private</h3><p>Your content stays in your browser whenever possible.</p></article><article>${iconMarkup("simple")}<h3>Simple</h3><p>Clear tools that do one job well.</p></article></div></div></div></section>`;
   return layout({ site, title: `${site.name} – Free Online Tools`, description: site.description, canonicalPath: "", body, structured: [{ "@context": "https://schema.org", "@type": "WebSite", name: site.name, url: `${site.siteUrl}/` }] });
@@ -160,8 +188,8 @@ export function renderCategory(project, category) {
     .filter((tool) => tool.status === "published" && tool.category === category.id)
     .sort((a, b) => (b.discovery?.priority ?? 0) - (a.discovery?.priority ?? 0));
   const canonicalPath = `categories/${category.slug}`;
-  const body = `<div class="container"><nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="${joinPath(site.basePath)}/">Home</a></li><li aria-current="page">${escapeHtml(category.title)}</li></ol></nav></div>
-  <section class="hero hero--compact"><div class="container"><span class="hero-category-icon">${iconMarkup(category.icon)}</span><p class="eyebrow">${tools.length} ${tools.length === 1 ? "tool" : "tools"}</p><h1>${escapeHtml(category.title)}</h1><p class="lead">${escapeHtml(category.shortDescription)}</p>${searchForm(project.categories.filter((item) => item.status === "published"))}</div></section>
+  const body = `<div class="container"><nav class="breadcrumbs" data-accent="${escapeHtml(category.accent ?? "default")}" aria-label="Breadcrumb"><ol><li><a href="${joinPath(site.basePath)}/">Home</a></li><li aria-current="page">${escapeHtml(category.title)}</li></ol></nav></div>
+  <section class="hero hero--compact" data-accent="${escapeHtml(category.accent ?? "default")}"><div class="container"><span class="hero-category-icon">${iconMarkup(category.icon)}</span><p class="eyebrow">${tools.length} ${tools.length === 1 ? "tool" : "tools"}</p><h1>${escapeHtml(category.title)}</h1><p class="lead">${escapeHtml(category.shortDescription)}</p>${searchForm(project.categories.filter((item) => item.status === "published"))}</div></section>
   <section class="section"><div class="container"><div class="tool-grid">${tools.map((tool) => renderToolCard(site, tool, category)).join("")}</div><div class="content content--category">${markdownToHtml(category.markdown)}</div></div></section>`;
   return layout({ site, title: category.seoTitle, description: category.seoDescription, canonicalPath, body, structured: [{ "@context": "https://schema.org", "@type": "CollectionPage", name: category.title, description: category.shortDescription, url: `${absolute(site, canonicalPath)}/` }] });
 }
@@ -172,9 +200,12 @@ export function renderTool(project, tool) {
   const canonicalPath = `tools/${tool.slug}`;
   const entryUrl = joinPath(site.basePath, `assets/js/plugins/tools/${tool.id}/${tool.entry.replace(/^\.\//, "")}`);
   const privacyMessage = tool.capabilities?.networkAccess === false ? (tool.family === "text-tools" ? "Your text stays in your browser." : "This tool runs in your browser.") : "";
-  const body = `<div class="container"><nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="${joinPath(site.basePath)}/">Home</a></li><li><a href="${joinPath(site.basePath, `categories/${category.slug}`)}/">${escapeHtml(category.title)}</a></li><li aria-current="page">${escapeHtml(tool.title)}</li></ol></nav></div>
-  <section class="hero hero--tool"><div class="container"><span class="hero-tool-icon">${iconMarkup(tool.icon ?? category.icon)}</span><p class="eyebrow">${escapeHtml(category.title)}</p><h1>${escapeHtml(tool.title)}</h1><p class="lead">${escapeHtml(tool.shortDescription)}</p>${privacyMessage ? `<p class="privacy-note">${iconMarkup("shield")}${escapeHtml(privacyMessage)}</p>` : ""}</div></section>
-  <div class="container tool-layout"><section class="tool-panel" aria-label="${escapeHtml(tool.title)}" data-tool-root data-tool-id="${escapeHtml(tool.id)}" data-category="${escapeHtml(tool.category)}" data-tool-entry="${entryUrl}"><noscript>This tool requires JavaScript to run.</noscript></section><article class="content">${renderEditorialContent(tool.markdown)}</article></div>`;
+  const relatedTools = selectRelatedTools(tool, project.tools);
+  const related = relatedTools.length ? `<section class="section related-tools" data-accent="${escapeHtml(category.accent ?? "default")}" aria-labelledby="related-tools-heading"><div class="container"><div class="section-heading"><div><p class="section-kicker">Keep working</p><h2 id="related-tools-heading">Related Tools</h2></div><p>Useful next steps based on this tool.</p></div><div class="tool-grid related-tools__grid">${relatedTools.map((relatedTool) => renderToolCard(site, relatedTool, project.categories.find((item) => item.id === relatedTool.category))).join("")}</div></div></section>` : "";
+  const categoryLabel = category.toolLabel ?? category.title.replace(/s$/, "");
+  const body = `<div class="container"><nav class="breadcrumbs" data-accent="${escapeHtml(category.accent ?? "default")}" aria-label="Breadcrumb"><ol><li><a href="${joinPath(site.basePath)}/">Home</a></li><li class="breadcrumbs__category"><a href="${joinPath(site.basePath, `categories/${category.slug}`)}/">${escapeHtml(category.title)}</a></li><li aria-current="page">${escapeHtml(tool.title)}</li></ol></nav></div>
+  <section class="hero hero--tool" data-accent="${escapeHtml(category.accent ?? "default")}"><div class="container"><span class="hero-tool-icon">${iconMarkup(tool.icon ?? category.icon)}</span><p class="category-identity">${escapeHtml(categoryLabel)}</p><h1>${escapeHtml(tool.title)}</h1><p class="lead">${escapeHtml(tool.shortDescription)}</p>${privacyMessage ? `<p class="privacy-note">${iconMarkup("shield")}${escapeHtml(privacyMessage)}</p>` : ""}</div></section>
+  <div class="container tool-layout" data-accent="${escapeHtml(category.accent ?? "default")}"><section class="tool-panel" aria-label="${escapeHtml(tool.title)}" data-tool-root data-tool-id="${escapeHtml(tool.id)}" data-category="${escapeHtml(tool.category)}" data-tool-entry="${entryUrl}"><noscript>This tool requires JavaScript to run.</noscript></section><article class="content">${renderEditorialContent(tool.markdown)}</article></div>${related}`;
   return layout({ site, title: tool.seoTitle, description: tool.seoDescription, canonicalPath, body, structured: [
     { "@context": "https://schema.org", "@type": "WebApplication", name: tool.title, description: tool.shortDescription, applicationCategory: "UtilitiesApplication", operatingSystem: "Any", url: `${absolute(site, canonicalPath)}/`, offers: { "@type": "Offer", price: "0", priceCurrency: "USD" } },
     { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [

@@ -8,5 +8,6 @@
   "order": 10,
   "featured": true,
   "accent": "violet",
+  "toolLabel": "Text Tool",
   "status": "published"
 }
