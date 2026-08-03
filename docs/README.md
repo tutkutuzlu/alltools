@@ -33,5 +33,6 @@ Mimari kabul edilmiştir. Proje, V1 ve V2+ olmak üzere iki uygulama aşamasına
 - [GA4 event contract](./ga4-events.md)
 - [GA4 custom definitions and reports](./ga4-custom-dimensions.md)
 - [Analytics privacy](./analytics-privacy.md)
+- [AdSense readiness](./adsense-readiness.md)
 - [Popularity scoring](./popularity-scoring.md)
 - [Experimental Cloudflare analytics](./experimental/cloudflare-analytics/README.md)

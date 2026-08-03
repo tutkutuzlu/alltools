@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const node = process.execPath;
-const build = spawn(node, [path.join(root, "scripts", "build.mjs")], { stdio: "inherit" });
+const build = spawn(node, [path.join(root, "scripts", "build.mjs")], { stdio: "inherit", env: { ...process.env, ANALYTICS_ENV: "development" } });
 const code = await new Promise((resolve) => build.on("close", resolve));
 if (code !== 0) process.exit(code);
 

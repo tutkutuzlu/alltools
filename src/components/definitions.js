@@ -206,6 +206,8 @@ registerComponent("search.bar", (props) => {
   const input = document.createElement("input");
   input.className = "search-input";
   input.type = "search";
+  input.setAttribute("role", "combobox");
+  input.setAttribute("aria-autocomplete", "list");
   input.placeholder = props.placeholder ?? "What do you need to do?";
   input.setAttribute("aria-label", props.label ?? "Search tools");
   input.dataset.searchInput = "";

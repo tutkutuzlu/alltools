@@ -18,12 +18,20 @@ export async function pathExists(filePath) {
 export async function discoverProject() {
   const site = await readJson(path.join(srcDir, "config", "site.json"));
   const analytics = await readJson(path.join(srcDir, "config", "analytics.json"));
+  const ads = await readJson(path.join(srcDir, "config", "ads.json"));
   const categoriesRoot = path.join(srcDir, "content", "categories");
+  const pagesRoot = path.join(srcDir, "content", "pages");
   const toolsRoot = path.join(srcDir, "plugins", "tools");
   const categoryFolders = await readdir(categoriesRoot, { withFileTypes: true });
   const toolFolders = await readdir(toolsRoot, { withFileTypes: true });
   const categories = [];
+  const pages = [];
   const tools = [];
+
+  for (const fileName of (await readdir(pagesRoot)).filter((name) => name.endsWith(".md")).sort()) {
+    const content = parseContent(await readFile(path.join(pagesRoot, fileName), "utf8"), `pages/${fileName}`);
+    pages.push({ ...content.frontMatter, markdown: content.markdown, fileName });
+  }
 
   for (const folder of categoryFolders.filter((entry) => entry.isDirectory())) {
     const directory = path.join(categoriesRoot, folder.name);
@@ -37,7 +45,7 @@ export async function discoverProject() {
     const content = parseContent(await readFile(path.join(directory, "content.md"), "utf8"), `${folder.name}/content.md`);
     tools.push({ ...metadata, ...content.frontMatter, markdown: content.markdown, directory });
   }
-  return { site, analytics, categories, tools };
+  return { site, analytics, ads, pages, categories, tools };
 }
 
 export async function resetDist() {

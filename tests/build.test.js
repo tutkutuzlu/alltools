@@ -16,6 +16,8 @@ test("build generates discoverable static pages and indexes", async () => {
   const search = JSON.parse(await readFile(path.join(root, "dist", "search", "index.json"), "utf8"));
   const sitemap = await readFile(path.join(root, "dist", "sitemap.xml"), "utf8");
   const runtimeConfig = await readFile(path.join(root, "dist", "assets", "js", "config", "runtime-config.js"), "utf8");
+  const robots = await readFile(path.join(root, "dist", "robots.txt"), "utf8");
+  const adsText = await readFile(path.join(root, "dist", "ads.txt"), "utf8");
   assert.match(home, /Word Counter/);
   assert.match(home, /The tool you need/);
   assert.match(home, /Featured tools<\/h2>/);
@@ -53,6 +55,21 @@ test("build generates discoverable static pages and indexes", async () => {
   await assert.rejects(access(path.join(root, "dist", "analytics", "index.html")));
   assert.doesNotMatch(sitemap, /\/analytics\//);
   assert.match(home, /href="\/alltools\//);
+  for (const slug of ["about", "contact", "privacy", "terms"]) {
+    const page = await readFile(path.join(root, "dist", slug, "index.html"), "utf8");
+    assert.match(page, new RegExp(`href="/alltools/${slug}/"`));
+    assert.match(page, /aria-label="Legal and company"/);
+    assert.match(page, /application\/ld\+json/);
+    assert.match(sitemap, new RegExp(`/${slug}/`));
+  }
+  assert.match(robots, /User-agent: Mediapartners-Google\nAllow: \//);
+  assert.match(robots, /User-agent: Google-Display-Ads-Bot\nAllow: \//);
+  assert.match(robots, /\/alltools\/sitemap\.xml/);
+  assert.equal(adsText, "google.com, pub-8757964996370629, DIRECT, f08c47fec0942fa0\n");
+  for (const html of [home, category, tool]) {
+    assert.equal((html.match(/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-8757964996370629/g) ?? []).length, 1);
+    assert.match(html, /crossorigin="anonymous"><\/script>\s*<\/head>/);
+  }
   const homeSectionIds = [...home.matchAll(/<section class="section section--tools" id="([^"]+)"[\s\S]*?<\/section>/g)]
     .map((match) => ({ section: match[1], ids: [...match[0].matchAll(/href="\/alltools\/tools\/([^/]+)\//g)].map((item) => item[1]) }));
   assert.deepEqual(homeSectionIds.map((item) => [item.section, item.ids.length]), [["tools", 6], ["new", 6], ["popular", 6]]);
@@ -65,8 +82,18 @@ test("development build never renders the production Google tag", async () => {
   const developmentHome = await readFile(path.join(root, "dist", "index.html"), "utf8");
   const developmentConfig = await readFile(path.join(root, "dist", "assets", "js", "config", "runtime-config.js"), "utf8");
   assert.doesNotMatch(developmentHome, /googletagmanager/);
+  assert.doesNotMatch(developmentHome, /adsbygoogle|pagead2\.googlesyndication/);
   assert.match(developmentConfig, /"environment":"development"/);
   assert.match(developmentConfig, /"enabled":false/);
+});
+
+test("AdSense tag renders only for valid production configuration", async () => {
+  const { renderAdSenseTag } = await import("../scripts/lib/render.mjs");
+  const valid = { enabled: true, provider: "google", publisherId: "pub-8757964996370629", environment: "production" };
+  assert.match(renderAdSenseTag(valid), /client=ca-pub-8757964996370629/);
+  assert.equal(renderAdSenseTag({ ...valid, environment: "development" }), "");
+  assert.equal(renderAdSenseTag({ ...valid, publisherId: "" }), "");
+  assert.equal(renderAdSenseTag({ ...valid, enabled: false }), "");
 });
 
 test("Google tag renders only for valid enabled GA4 configuration", async () => {

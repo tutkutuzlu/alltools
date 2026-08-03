@@ -2,7 +2,7 @@ import path from "node:path";
 import { discoverProject, resetDist, copyDirectory, pathExists, readJson, rootDir, srcDir, writeOutput } from "./lib/project.mjs";
 import { readFile } from "node:fs/promises";
 import { validateProject } from "./lib/validate-project.mjs";
-import { renderCategory, renderHome, renderNotFound, renderTool } from "./lib/render.mjs";
+import { renderCategory, renderHome, renderNotFound, renderPage, renderTool } from "./lib/render.mjs";
 import { applyPopularityExport } from "./lib/popularity.mjs";
 
 const project = await discoverProject();
@@ -10,7 +10,9 @@ const popularityExport = path.join(rootDir, "analytics", "export", "popularity.j
 project.tools = applyPopularityExport(project.tools, await pathExists(popularityExport) ? await readJson(popularityExport) : null);
 const environment = process.env.ANALYTICS_ENV === "development" ? "development" : "production";
 project.analytics = { ...project.analytics, ...(project.analytics.environments?.[environment] ?? {}), environment };
+project.ads = { ...project.ads, environment };
 project.site.analytics = project.analytics;
+project.site.ads = project.ads;
 const errors = await validateProject(project);
 if (errors.length) throw new Error(`Build validation failed:\n- ${errors.join("\n- ")}`);
 
@@ -30,6 +32,7 @@ const tokens = await readFile(path.join(srcDir, "themes", "base", "tokens.css"),
 await writeOutput("assets/css/tokens.css", tokens);
 await writeOutput("index.html", renderHome(project));
 await writeOutput("404.html", renderNotFound(project.site));
+for (const page of project.pages) await writeOutput(path.join(page.slug, "index.html"), renderPage(project, page));
 
 for (const category of project.categories.filter((item) => item.status === "published")) {
   await writeOutput(path.join("categories", category.slug, "index.html"), renderCategory(project, category));
@@ -57,11 +60,14 @@ await writeOutput("search/index.json", `${JSON.stringify(searchIndex)}\n`);
 
 const urls = [
   { path: "" },
+  ...project.pages.map((item) => ({ path: `${item.slug}/`, updatedAt: item.updatedAt })),
   ...project.categories.filter((item) => item.status === "published").map((item) => ({ path: `categories/${item.slug}/` })),
   ...project.tools.filter((item) => item.status === "published").map((item) => ({ path: `tools/${item.slug}/`, updatedAt: item.updatedAt }))
 ];
 await writeOutput("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((item) => `  <url><loc>${project.site.siteUrl.replace(/\/$/, "")}/${item.path}</loc>${item.updatedAt ? `<lastmod>${item.updatedAt}</lastmod>` : ""}</url>`).join("\n")}\n</urlset>\n`);
-await writeOutput("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${project.site.siteUrl.replace(/\/$/, "")}/sitemap.xml\n`);
+await writeOutput("robots.txt", `User-agent: *\nAllow: /\n\nUser-agent: Mediapartners-Google\nAllow: /\n\nUser-agent: Google-Display-Ads-Bot\nAllow: /\n\nSitemap: ${project.site.siteUrl.replace(/\/$/, "")}/sitemap.xml\n`);
+const adsRecord = project.ads.publisherId ? `google.com, ${project.ads.publisherId}, DIRECT, ${project.ads.certificationAuthorityId}\n` : "# Google AdSense publisher ID pending.\n# When approved, set publisherId in src/config/ads.json to generate the authorized seller record.\n";
+await writeOutput("ads.txt", adsRecord);
 await writeOutput(".nojekyll", "");
 
 console.log(`Built ${project.tools.length} tool(s) and ${project.categories.length} category into dist/.`);

@@ -21,15 +21,26 @@ export function renderGoogleTag(analytics = {}) {
   return `<script async src="https://www.googletagmanager.com/gtag/js?id=${id}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;const cleanAnalyticsUrl=value=>{try{const url=new URL(value);return url.origin+url.pathname}catch{return""}};gtag("consent","default",{analytics_storage:"granted",ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied"});gtag("js",new Date());gtag("config","${id}",{send_page_view:false,allow_google_signals:false,allow_ad_personalization_signals:false,page_location:cleanAnalyticsUrl(location.href),page_referrer:cleanAnalyticsUrl(document.referrer)${debug}});</script>`;
 }
 
+export function renderAdSenseTag(ads = {}) {
+  if (!ads.enabled || ads.provider !== "google" || ads.environment !== "production" || !/^pub-\d{16}$/.test(ads.publisherId ?? "")) return "";
+  const client = `ca-${ads.publisherId}`;
+  return `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${client}" crossorigin="anonymous"></script>`;
+}
+
 function searchForm(categories = []) {
   return `<form class="search" role="search" data-search-form>
     <label class="visually-hidden" for="site-search">Search tools</label>
     <span class="search__icon">${iconMarkup("search")}</span>
-    <input class="search-input" id="site-search" type="search" autocomplete="off" placeholder="What do you need to do?" data-search-input>
+    <input class="search-input" id="site-search" type="search" role="combobox" aria-autocomplete="list" autocomplete="off" placeholder="What do you need to do?" data-search-input>
     <label class="visually-hidden" for="search-category">Filter by category</label>
     <select class="search-category" id="search-category" data-search-category><option value="">All categories</option>${categories.map((category) => `<option value="${escapeHtml(category.id)}">${escapeHtml(category.title)}</option>`).join("")}</select>
     <div class="search-results" id="search-results" role="status" data-search-results hidden></div>
   </form>`;
+}
+
+function footer(site) {
+  const links = [["About", "about"], ["Contact", "contact"], ["Privacy Policy", "privacy"], ["Terms of Service", "terms"]];
+  return `<footer class="site-footer"><div class="container footer-inner"><div class="footer-brand"><a class="brand brand--footer" href="${joinPath(site.basePath)}/"><span class="brand__mark">${iconMarkup("logo")}</span><span>${escapeHtml(site.name)}</span></a><p>© ${new Date().getUTCFullYear()} ${escapeHtml(site.name)}. Fast, free tools that respect your time.</p></div><nav class="footer-nav" aria-label="Legal and company">${links.map(([label, slug]) => `<a href="${joinPath(site.basePath, slug)}/">${label}</a>`).join("")}</nav></div></footer>`;
 }
 
 function layout({ site, title, description, canonicalPath, body, structured = [] }) {
@@ -53,6 +64,7 @@ function layout({ site, title, description, canonicalPath, body, structured = []
   <script>try{const p=localStorage.getItem("all-tools-theme")||"system";const r=p==="system"?(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):p;document.documentElement.dataset.themePreference=p;document.documentElement.dataset.theme=r;document.documentElement.style.colorScheme=r}catch{}</script>
   ${structured.map(structuredData).join("\n  ")}
   ${renderGoogleTag(site.analytics)}
+  ${renderAdSenseTag(site.ads)}
 </head>
 <body data-search-index="${joinPath(base, "search/index.json")}">
   <header class="site-header">
@@ -72,7 +84,7 @@ function layout({ site, title, description, canonicalPath, body, structured = []
     </div>
   </header>
   <main>${body}</main>
-  <footer class="site-footer"><div class="container footer-inner"><a class="brand brand--footer" href="${joinPath(base)}/"><span class="brand__mark">${iconMarkup("logo")}</span><span>${escapeHtml(site.name)}</span></a><p>© ${new Date().getUTCFullYear()} ${escapeHtml(site.name)}. Fast, free tools that respect your time.</p></div></footer>
+  ${footer(site)}
   <script type="module" src="${joinPath(base, "assets/js/core/runtime/bootstrap.js")}"></script>
 </body>
 </html>`;
@@ -175,6 +187,14 @@ export function renderTool(project, tool) {
 
 export function renderNotFound(site) {
   return layout({ site, title: `Page not found – ${site.name}`, description: "The requested page could not be found.", canonicalPath: "404", body: `<section class="hero"><div class="container"><p class="eyebrow">404</p><h1>Page not found</h1><p class="lead">The page may have moved or no longer exists.</p><p><a class="button button--secondary" href="${joinPath(site.basePath)}/">Return home</a></p></div></section>` });
+}
+
+export function renderPage(project, page) {
+  const { site } = project;
+  const body = `<div class="container"><nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="${joinPath(site.basePath)}/">Home</a></li><li aria-current="page">${escapeHtml(page.title)}</li></ol></nav></div>
+  <section class="hero hero--compact hero--page"><div class="container"><p class="eyebrow">AllTools</p><h1>${escapeHtml(page.title)}</h1><p class="lead">${escapeHtml(page.seoDescription)}</p></div></section>
+  <section class="section section--page"><div class="container"><article class="content content--page">${markdownToHtml(page.markdown)}</article></div></section>`;
+  return layout({ site, title: page.seoTitle, description: page.seoDescription, canonicalPath: page.slug, body, structured: [{ "@context": "https://schema.org", "@type": "WebPage", name: page.title, description: page.seoDescription, url: `${absolute(site, page.slug)}/`, dateModified: page.updatedAt }] });
 }
 
 

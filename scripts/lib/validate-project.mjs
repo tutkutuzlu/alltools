@@ -14,6 +14,17 @@ export async function validateProject(project) {
   required(project.site, ["name", "description", "language", "siteUrl", "basePath"], "site.json", errors);
   if (!/^https:\/\//.test(project.site.siteUrl)) errors.push("site.json: siteUrl must use https://");
   if (project.site.basePath !== "" && !/^\/[a-z0-9/_-]*$/.test(project.site.basePath)) errors.push("site.json: basePath is invalid");
+  if (project.ads.provider !== "google") errors.push("ads.json: provider must be google");
+  if (project.ads.publisherId && !/^pub-\d{16}$/.test(project.ads.publisherId)) errors.push("ads.json: publisherId must use pub- followed by 16 digits");
+
+  const pageSlugs = new Set();
+  for (const page of project.pages) {
+    required(page, ["slug", "title", "seoTitle", "seoDescription", "updatedAt"], `page:${page.slug ?? "unknown"}`, errors);
+    if (!slugPattern.test(page.slug ?? "")) errors.push(`page:${page.slug}: invalid slug`);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(page.updatedAt ?? "")) errors.push(`page:${page.slug}: updatedAt must use YYYY-MM-DD`);
+    if (pageSlugs.has(page.slug)) errors.push(`page:${page.slug}: duplicate slug`);
+    pageSlugs.add(page.slug);
+  }
 
   const categoryIds = new Set();
   const categorySlugs = new Set();
