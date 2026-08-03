@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "volume-converter",
+  "version": "1.0.0",
+  "type": "converter",
+  "family": "unit-converters",
+  "variant": "converter",
+  "slug": "volume-converter",
+  "icon": "converter",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 84,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "unit",
+  "tags": [
+    "volume",
+    "liters",
+    "gallons"
+  ],
+  "aliases": [
+    "liters to gallons",
+    "liquid volume converter"
+  ],
+  "components": [
+    "tool.shell",
+    "field.input",
+    "field.select",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 217
+  }
+}

@@ -14,6 +14,10 @@ Word Counter is the analyzer reference plugin. Its pure `analyzeText` function i
 
 Developer Tools share `src/plugins/families/developer-tools/universal-plugin.js`. Tool-specific pure operations live in `operations.js`, while controls, result metrics and action profiles are declared in `tool-definitions.js`. The runtime owns paste, clear, copy, download, validation notices and deduplicated `tool_use` telemetry with the `developer` category. Inputs and results remain browser-local.
 
+## Unit Converters
+
+Unit Converters use `src/plugins/families/unit-converters/catalog.js` for declarative factors and labels, `engine.js` for validated conversion strategies and `universal-plugin.js` for the shared UI lifecycle. The runtime provides source/target selectors, precision choices, unit swapping, clipboard actions and deduplicated `tool_use` telemetry with the `unit` category. Temperature and fuel economy use dedicated non-linear strategies; other domains use a documented base-unit factor.
+
 ```js
 const plugin = createTextTransformerPlugin({
   id: "example-transformer",

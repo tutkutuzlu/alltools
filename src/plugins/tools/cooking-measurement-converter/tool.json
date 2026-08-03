@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "cooking-measurement-converter",
+  "version": "1.0.0",
+  "type": "converter",
+  "family": "unit-converters",
+  "variant": "converter",
+  "slug": "cooking-measurement-converter",
+  "icon": "converter",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": true,
+  "popularity": 52,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "unit",
+  "tags": [
+    "cooking",
+    "cups",
+    "tablespoons",
+    "milliliters"
+  ],
+  "aliases": [
+    "cups to ml",
+    "kitchen measurement converter"
+  ],
+  "components": [
+    "tool.shell",
+    "field.input",
+    "field.select",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 201
+  }
+}

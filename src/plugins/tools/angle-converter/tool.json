@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "angle-converter",
+  "version": "1.0.0",
+  "type": "converter",
+  "family": "unit-converters",
+  "variant": "converter",
+  "slug": "angle-converter",
+  "icon": "converter",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 64,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "unit",
+  "tags": [
+    "angle",
+    "degrees",
+    "radians"
+  ],
+  "aliases": [
+    "degrees to radians",
+    "angle calculator"
+  ],
+  "components": [
+    "tool.shell",
+    "field.input",
+    "field.select",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 207
+  }
+}

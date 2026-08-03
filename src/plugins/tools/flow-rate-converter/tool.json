@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "flow-rate-converter",
+  "version": "1.0.0",
+  "type": "converter",
+  "family": "unit-converters",
+  "variant": "converter",
+  "slug": "flow-rate-converter",
+  "icon": "converter",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 48,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "unit",
+  "tags": [
+    "flow",
+    "rate",
+    "gpm",
+    "liters"
+  ],
+  "aliases": [
+    "lpm to gpm",
+    "flow calculator"
+  ],
+  "components": [
+    "tool.shell",
+    "field.input",
+    "field.select",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 199
+  }
+}

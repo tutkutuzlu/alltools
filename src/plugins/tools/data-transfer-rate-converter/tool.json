@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "data-transfer-rate-converter",
+  "version": "1.0.0",
+  "type": "converter",
+  "family": "unit-converters",
+  "variant": "converter",
+  "slug": "data-transfer-rate-converter",
+  "icon": "converter",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 58,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "unit",
+  "tags": [
+    "data",
+    "transfer",
+    "bandwidth",
+    "mbps"
+  ],
+  "aliases": [
+    "mbps to mb s",
+    "network speed converter"
+  ],
+  "components": [
+    "tool.shell",
+    "field.input",
+    "field.select",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 204
+  }
+}

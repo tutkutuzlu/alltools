@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "unit",
+  "slug": "unit-converters",
+  "title": "Unit Converters",
+  "shortDescription": "Convert measurements accurately across metric, imperial and technical units.",
+  "icon": "converter",
+  "order": 30,
+  "featured": true,
+  "accent": "green",
+  "status": "published"
+}

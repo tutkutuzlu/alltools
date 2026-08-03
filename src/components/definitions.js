@@ -27,6 +27,7 @@ function fieldFactory(tagName) {
     if (props.placeholder) input.placeholder = props.placeholder;
     if (tagName === "textarea") input.rows = Number(props.rows) || 8;
     if (tagName === "input") input.type = props.type ?? "text";
+    if (props.inputmode) input.inputMode = props.inputmode;
     if (props.value !== undefined) input.value = props.value;
     if (props.min !== undefined) input.min = props.min;
     if (props.max !== undefined) input.max = props.max;

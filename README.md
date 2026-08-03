@@ -7,7 +7,7 @@ Production: [https://tutkutuzlu.github.io/alltools/](https://tutkutuzlu.github.i
 ## V1 architecture
 
 - Folder-discovered tool plugins
-- Reusable Text Tools and Developer Tools families
+- Reusable Text Tools, Developer Tools and Unit Converters families
 - Minimal Component Registry
 - Light, dark and system themes
 - Static HTML build with automatic category and tool discovery
@@ -15,7 +15,7 @@ Production: [https://tutkutuzlu.github.io/alltools/](https://tutkutuzlu.github.i
 - Static SEO metadata, structured data, sitemap and robots.txt
 - GitHub Actions validation and GitHub Pages deployment
 
-The current catalog contains browser-local Text Tools and Developer Tools. New plugins are discovered from metadata and rendered into category pages, search and the sitemap automatically.
+The current catalog contains browser-local Text Tools, Developer Tools and Unit Converters. New plugins are discovered from metadata and rendered into category pages, search and the sitemap automatically.
 
 ## Requirements
 

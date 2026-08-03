@@ -13,6 +13,7 @@ test("build generates discoverable static pages and indexes", async () => {
   const home = await readFile(path.join(root, "dist", "index.html"), "utf8");
   const category = await readFile(path.join(root, "dist", "categories", "text-tools", "index.html"), "utf8");
   const developerCategory = await readFile(path.join(root, "dist", "categories", "developer-tools", "index.html"), "utf8");
+  const unitCategory = await readFile(path.join(root, "dist", "categories", "unit-converters", "index.html"), "utf8");
   const tool = await readFile(path.join(root, "dist", "tools", "word-counter", "index.html"), "utf8");
   const search = JSON.parse(await readFile(path.join(root, "dist", "search", "index.json"), "utf8"));
   const sitemap = await readFile(path.join(root, "dist", "sitemap.xml"), "utf8");
@@ -22,7 +23,7 @@ test("build generates discoverable static pages and indexes", async () => {
   assert.match(home, /Word Counter/);
   assert.match(home, /The tool you need/);
   assert.match(home, /Featured tools<\/h2>/);
-  assert.match(home, /44 tools and growing/);
+  assert.match(home, /69 tools and growing/);
   assert.match(home, /category-card/);
   assert.match(home, /tool-card/);
   assert.match(category, /Word Counter/);
@@ -36,7 +37,7 @@ test("build generates discoverable static pages and indexes", async () => {
   assert.match(tool, /application\/ld\+json/);
   assert.equal(search.v, 2);
   assert.equal(search.x.find((item) => item.i === "word-counter").c, "text");
-  assert.equal(search.x.length, 44);
+  assert.equal(search.x.length, 69);
   for (const id of ["character-counter","case-converter","remove-duplicate-lines","remove-empty-lines","text-sorter","text-reverser","whitespace-cleaner","line-counter","sentence-counter","paragraph-counter","url-encoder","url-decoder","base64-encoder","base64-decoder","html-encoder","html-decoder","rot13-converter","lorem-ipsum-generator"]) {
     assert.ok(search.x.some((item) => item.i === id), `${id} should be searchable`);
     assert.match(sitemap, new RegExp(`tools/${id}/`));
@@ -53,6 +54,11 @@ test("build generates discoverable static pages and indexes", async () => {
   for(const id of ["json-formatter","json-minifier","json-validator","json-to-csv","csv-to-json","xml-formatter","xml-minifier","html-formatter","html-minifier","css-formatter","css-minifier","sql-formatter","jwt-decoder","uuid-generator","uuid-validator","unix-timestamp-converter","url-parser","query-string-parser","regex-tester","cron-expression-explainer","http-status-code-lookup","mime-type-lookup","color-converter","number-base-converter","json-string-escape"]){
     const item=search.x.find(entry=>entry.i===id);assert.equal(item?.c,"developer",`${id} should be in Developer Tools search`);assert.match(sitemap,new RegExp(`tools/${id}/`));const page=await readFile(path.join(root,"dist","tools",id,"index.html"),"utf8");assert.match(page,/WebApplication/);assert.match(page,/BreadcrumbList/);assert.match(page,/This tool runs in your browser/);assert.match(page,/Related developer tools/);
   }
+  const unitOrder=["Length Converter","Weight Converter","Temperature Converter","Volume Converter","Area Converter","Speed Converter","Time Converter","Data Storage Converter","Pressure Converter","Energy Converter","Power Converter","Force Converter","Torque Converter","Angle Converter","Frequency Converter","Fuel Economy Converter","Data Transfer Rate Converter","Acceleration Converter","Density Converter","Cooking Measurement Converter","Font Size Converter","Flow Rate Converter","Voltage Converter","Electric Current Converter","Illuminance Converter"];
+  const unitPositions=unitOrder.map(title=>unitCategory.indexOf(`<strong>${title}</strong>`));
+  assert.ok(unitPositions.every(position=>position>=0),"category should contain all Unit Converters");
+  assert.deepEqual(unitPositions,[...unitPositions].sort((a,b)=>a-b),"Unit Converters should follow catalog priority");
+  for(const id of ["length-converter","weight-converter","temperature-converter","volume-converter","area-converter","speed-converter","time-converter","data-storage-converter","pressure-converter","energy-converter","power-converter","force-converter","torque-converter","angle-converter","frequency-converter","fuel-economy-converter","data-transfer-rate-converter","acceleration-converter","density-converter","cooking-measurement-converter","font-size-converter","flow-rate-converter","voltage-converter","electric-current-converter","illuminance-converter"]){const item=search.x.find(entry=>entry.i===id);assert.equal(item?.c,"unit",`${id} should be in Unit Converter search`);assert.match(sitemap,new RegExp(`tools/${id}/`));const page=await readFile(path.join(root,"dist","tools",id,"index.html"),"utf8");assert.match(page,/WebApplication/);assert.match(page,/BreadcrumbList/);assert.match(page,/This tool runs in your browser/);assert.match(page,/Related unit converters/);}
   assert.match(sitemap, /tools\/word-counter\//);
   assert.match(runtimeConfig, /"enabled":true/);
   assert.match(runtimeConfig, /G-JLNSC16GEQ/);
