@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "hsl-to-hex",
+  "version": "1.0.0",
+  "type": "converter",
+  "family": "color-tools",
+  "variant": "hsl-to-hex",
+  "slug": "hsl-to-hex",
+  "icon": "color",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 83,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "color",
+  "tags": [
+    "color",
+    "hsl",
+    "hex"
+  ],
+  "aliases": [
+    "hsl to hex",
+    "convert hsl and hsla colors to hex"
+  ],
+  "components": [
+    "tool.shell",
+    "field.input",
+    "field.color",
+    "field.select",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 297
+  }
+}

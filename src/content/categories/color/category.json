@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "color",
+  "slug": "color-tools",
+  "title": "Color Tools",
+  "shortDescription": "Convert, generate and evaluate colors with private browser-based utilities.",
+  "icon": "color",
+  "order": 40,
+  "featured": true,
+  "accent": "purple",
+  "status": "published"
+}

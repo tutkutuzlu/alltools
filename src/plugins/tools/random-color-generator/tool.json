@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "random-color-generator",
+  "version": "1.0.0",
+  "type": "generator",
+  "family": "color-tools",
+  "variant": "random-color-generator",
+  "slug": "random-color-generator",
+  "icon": "color",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 75,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "color",
+  "tags": [
+    "color",
+    "random",
+    "generator"
+  ],
+  "aliases": [
+    "random color generator",
+    "generate a repeatable set of colors from a seed"
+  ],
+  "components": [
+    "tool.shell",
+    "field.input",
+    "field.color",
+    "field.select",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 289
+  }
+}

@@ -86,6 +86,22 @@ registerComponent("feedback.notice", (props) => {
 registerComponent("field.input", fieldFactory("input"));
 registerComponent("field.textarea", fieldFactory("textarea"));
 
+registerComponent("field.color", (props) => {
+  required(props, ["id", "label"], "field.color");
+  const group = document.createElement("div");
+  group.className = "field-group color-input-group";
+  const label = textElement("label", "field-label", props.label);
+  label.htmlFor = props.id;
+  const input = document.createElement("input");
+  input.className = "color-native-input";
+  input.type = "color";
+  input.id = props.id;
+  input.name = props.name ?? props.id;
+  input.value = props.value ?? "#3366CC";
+  group.append(label, input);
+  return { element: group, input, label };
+});
+
 registerComponent("field.checkbox", (props) => {
   required(props, ["id", "label"], "field.checkbox");
   const label = document.createElement("label");

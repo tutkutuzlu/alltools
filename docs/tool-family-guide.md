@@ -18,6 +18,10 @@ Developer Tools share `src/plugins/families/developer-tools/universal-plugin.js`
 
 Unit Converters use `src/plugins/families/unit-converters/catalog.js` for declarative factors and labels, `engine.js` for validated conversion strategies and `universal-plugin.js` for the shared UI lifecycle. The runtime provides source/target selectors, precision choices, unit swapping, clipboard actions and deduplicated `tool_use` telemetry with the `unit` category. Temperature and fuel economy use dedicated non-linear strategies; other domains use a documented base-unit factor.
 
+## Color Tools
+
+Color Tools share `src/plugins/families/color-tools/engine.js` for safe HEX, RGB, HSL, HSV, CMYK and alpha parsing, conversion, WCAG contrast, deterministic palettes, gradients and compositing. `definitions.js` declares the 25 operations, while `universal-plugin.js` owns accessible inputs, live bordered previews, clipboard and optional CSS download actions, validation and deduplicated telemetry with the `color` category. User-entered colors and generated values never enter telemetry.
+
 ```js
 const plugin = createTextTransformerPlugin({
   id: "example-transformer",

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "hex-to-cmyk",
+  "version": "1.0.0",
+  "type": "converter",
+  "family": "color-tools",
+  "variant": "hex-to-cmyk",
+  "slug": "hex-to-cmyk",
+  "icon": "color",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": false,
+  "popularity": 80,
+  "estimatedTime": "instant",
+  "status": "published",
+  "entry": "./index.js",
+  "category": "color",
+  "tags": [
+    "color",
+    "hex",
+    "cmyk"
+  ],
+  "aliases": [
+    "hex to cmyk",
+    "convert hex colors to cmyk percentages"
+  ],
+  "components": [
+    "tool.shell",
+    "field.input",
+    "field.color",
+    "field.select",
+    "action.button"
+  ],
+  "capabilities": {
+    "offline": true,
+    "fileAccess": false,
+    "networkAccess": false,
+    "webWorker": false
+  },
+  "discovery": {
+    "priority": 294
+  }
+}
