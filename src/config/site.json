@@ -1,0 +1,9 @@
+{
+  "name": "AllTools",
+  "tagline": "Fast, private tools that work in your browser.",
+  "description": "Free online tools for text, data and everyday tasks.",
+  "language": "en",
+  "siteUrl": "https://tutkutuzlu.github.io/alltools",
+  "basePath": "/alltools",
+  "defaultTheme": "system"
+}

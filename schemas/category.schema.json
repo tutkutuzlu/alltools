@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://all-tools.local/schemas/category.schema.json",
+  "title": "Category Manifest",
+  "type": "object",
+  "required": ["schemaVersion", "id", "slug", "title", "shortDescription", "order", "status"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "title": { "type": "string", "minLength": 1 },
+    "shortDescription": { "type": "string", "minLength": 1 },
+    "icon": { "type": "string" },
+    "order": { "type": "integer" },
+    "status": { "enum": ["draft", "published"] }
+  },
+  "additionalProperties": false
+}

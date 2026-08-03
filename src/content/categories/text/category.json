@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "text",
+  "slug": "text-tools",
+  "title": "Text Tools",
+  "shortDescription": "Count, clean and transform text directly in your browser.",
+  "icon": "text",
+  "order": 10,
+  "status": "published"
+}
