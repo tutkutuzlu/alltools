@@ -1,0 +1,20 @@
+{
+  "enabled": true,
+  "provider": "ga4",
+  "measurementId": "G-JLNSC16GEQ",
+  "debug": false,
+  "consentRequired": false,
+  "anonymizedMode": true,
+  "environments": {
+    "development": {
+      "enabled": false,
+      "measurementId": "",
+      "debug": true
+    },
+    "production": {
+      "enabled": true,
+      "measurementId": "G-JLNSC16GEQ",
+      "debug": false
+    }
+  }
+}

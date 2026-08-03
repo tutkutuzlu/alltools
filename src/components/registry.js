@@ -12,4 +12,8 @@ export function createComponent(id, props = {}) {
   return factory(Object.freeze({ ...props }));
 }
 
+export function listComponents() {
+  return Object.freeze([...definitions.keys()].sort());
+}
+
 export const components = Object.freeze({ create: createComponent });

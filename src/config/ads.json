@@ -1,0 +1,9 @@
+{
+  "enabled": false,
+  "placements": {
+    "top": false,
+    "inline": false,
+    "sidebar": false,
+    "result": false
+  }
+}

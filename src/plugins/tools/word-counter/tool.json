@@ -6,6 +6,12 @@
   "family": "text-tools",
   "variant": "analyzer",
   "slug": "word-counter",
+  "icon": "word-count",
+  "publishedAt": "2026-08-03",
+  "updatedAt": "2026-08-03",
+  "featured": true,
+  "popularity": 100,
+  "estimatedTime": "instant",
   "status": "published",
   "entry": "./index.js",
   "category": "text",
@@ -19,7 +25,6 @@
     "webWorker": false
   },
   "discovery": {
-    "featured": true,
     "priority": 100
   }
 }

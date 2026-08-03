@@ -17,6 +17,7 @@ export async function pathExists(filePath) {
 
 export async function discoverProject() {
   const site = await readJson(path.join(srcDir, "config", "site.json"));
+  const analytics = await readJson(path.join(srcDir, "config", "analytics.json"));
   const categoriesRoot = path.join(srcDir, "content", "categories");
   const toolsRoot = path.join(srcDir, "plugins", "tools");
   const categoryFolders = await readdir(categoriesRoot, { withFileTypes: true });
@@ -36,7 +37,7 @@ export async function discoverProject() {
     const content = parseContent(await readFile(path.join(directory, "content.md"), "utf8"), `${folder.name}/content.md`);
     tools.push({ ...metadata, ...content.frontMatter, markdown: content.markdown, directory });
   }
-  return { site, categories, tools };
+  return { site, analytics, categories, tools };
 }
 
 export async function resetDist() {

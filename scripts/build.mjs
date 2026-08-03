@@ -1,10 +1,16 @@
 import path from "node:path";
-import { discoverProject, resetDist, copyDirectory, srcDir, writeOutput } from "./lib/project.mjs";
+import { discoverProject, resetDist, copyDirectory, pathExists, readJson, rootDir, srcDir, writeOutput } from "./lib/project.mjs";
 import { readFile } from "node:fs/promises";
 import { validateProject } from "./lib/validate-project.mjs";
 import { renderCategory, renderHome, renderNotFound, renderTool } from "./lib/render.mjs";
+import { applyPopularityExport } from "./lib/popularity.mjs";
 
 const project = await discoverProject();
+const popularityExport = path.join(rootDir, "analytics", "export", "popularity.json");
+project.tools = applyPopularityExport(project.tools, await pathExists(popularityExport) ? await readJson(popularityExport) : null);
+const environment = process.env.ANALYTICS_ENV === "development" ? "development" : "production";
+project.analytics = { ...project.analytics, ...(project.analytics.environments?.[environment] ?? {}), environment };
+project.site.analytics = project.analytics;
 const errors = await validateProject(project);
 if (errors.length) throw new Error(`Build validation failed:\n- ${errors.join("\n- ")}`);
 
@@ -13,9 +19,12 @@ await copyDirectory(path.join(srcDir, "static", "styles"), "assets/css");
 await copyDirectory(path.join(srcDir, "core"), "assets/js/core");
 await copyDirectory(path.join(srcDir, "components"), "assets/js/components");
 await copyDirectory(path.join(srcDir, "search"), "assets/js/search");
+await writeOutput("assets/js/config/runtime-config.js", `export const analyticsConfig = Object.freeze(${JSON.stringify(project.analytics).replace(/</g, "\\u003c")});\n`);
 await writeOutput("assets/js/themes/engine.js", await readFile(path.join(srcDir, "themes", "engine.js"), "utf8"));
-await writeOutput("assets/js/plugins/families/text-tools/metrics.js", await readFile(path.join(srcDir, "plugins", "families", "text-tools", "metrics.js"), "utf8"));
-await writeOutput("assets/js/plugins/tools/word-counter/index.js", await readFile(path.join(srcDir, "plugins", "tools", "word-counter", "index.js"), "utf8"));
+await copyDirectory(path.join(srcDir, "plugins", "families"), "assets/js/plugins/families");
+for (const tool of project.tools.filter((item) => item.status === "published")) {
+  await writeOutput(`assets/js/plugins/tools/${tool.id}/${tool.entry.replace(/^\.\//, "")}`, await readFile(path.resolve(tool.directory, tool.entry), "utf8"));
+}
 
 const tokens = await readFile(path.join(srcDir, "themes", "base", "tokens.css"), "utf8");
 await writeOutput("assets/css/tokens.css", tokens);
@@ -31,22 +40,27 @@ for (const tool of project.tools.filter((item) => item.status === "published")) 
 
 const base = project.site.basePath.replace(/\/$/, "");
 const searchIndex = {
-  version: 1,
-  language: project.site.language,
-  items: project.tools.filter((tool) => tool.status === "published").map((tool) => ({
-    id: tool.id,
-    title: tool.title,
-    description: tool.shortDescription,
-    category: tool.category,
-    tags: tool.tags,
-    aliases: tool.aliases,
-    url: `${base}/tools/${tool.slug}/`
+  v: 2,
+  l: project.site.language,
+  c: project.categories.filter((category) => category.status === "published").map((category) => ({ i: category.id, t: category.title })),
+  x: project.tools.filter((tool) => tool.status === "published").map((tool) => ({
+    i: tool.id,
+    t: tool.title,
+    d: tool.shortDescription,
+    c: tool.category,
+    g: tool.tags,
+    a: tool.aliases,
+    u: `${base}/tools/${tool.slug}/`
   }))
 };
 await writeOutput("search/index.json", `${JSON.stringify(searchIndex)}\n`);
 
-const urls = ["", ...project.categories.filter((item) => item.status === "published").map((item) => `categories/${item.slug}/`), ...project.tools.filter((item) => item.status === "published").map((item) => `tools/${item.slug}/`)];
-await writeOutput("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((item) => `  <url><loc>${project.site.siteUrl.replace(/\/$/, "")}/${item}</loc></url>`).join("\n")}\n</urlset>\n`);
+const urls = [
+  { path: "" },
+  ...project.categories.filter((item) => item.status === "published").map((item) => ({ path: `categories/${item.slug}/` })),
+  ...project.tools.filter((item) => item.status === "published").map((item) => ({ path: `tools/${item.slug}/`, updatedAt: item.updatedAt }))
+];
+await writeOutput("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((item) => `  <url><loc>${project.site.siteUrl.replace(/\/$/, "")}/${item.path}</loc>${item.updatedAt ? `<lastmod>${item.updatedAt}</lastmod>` : ""}</url>`).join("\n")}\n</urlset>\n`);
 await writeOutput("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${project.site.siteUrl.replace(/\/$/, "")}/sitemap.xml\n`);
 await writeOutput(".nojekyll", "");
 

@@ -1,5 +1,6 @@
 import path from "node:path";
 import { pathExists } from "./project.mjs";
+import { hasIcon } from "../../src/components/icons.js";
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const allowedTypes = new Set(["tool", "calculator", "converter", "generator", "formatter", "visualizer", "game", "reference"]);
@@ -19,6 +20,8 @@ export async function validateProject(project) {
   for (const category of project.categories) {
     required(category, ["schemaVersion", "id", "slug", "title", "shortDescription", "seoTitle", "seoDescription", "status"], `category:${category.id ?? "unknown"}`, errors);
     if (!slugPattern.test(category.slug ?? "")) errors.push(`category:${category.id}: invalid slug`);
+    if (category.icon && !hasIcon(category.icon)) errors.push(`category:${category.id}: unknown icon ${category.icon}`);
+    if (category.featured !== undefined && typeof category.featured !== "boolean") errors.push(`category:${category.id}: featured must be boolean`);
     if (categoryIds.has(category.id)) errors.push(`category:${category.id}: duplicate id`);
     if (categorySlugs.has(category.slug)) errors.push(`category:${category.id}: duplicate slug`);
     categoryIds.add(category.id);
@@ -31,6 +34,10 @@ export async function validateProject(project) {
     const label = `tool:${tool.id ?? "unknown"}`;
     required(tool, ["schemaVersion", "id", "version", "type", "family", "slug", "status", "entry", "category", "title", "shortDescription", "seoTitle", "seoDescription", "components", "capabilities"], label, errors);
     if (!slugPattern.test(tool.slug ?? "")) errors.push(`${label}: invalid slug`);
+    if (tool.icon && !hasIcon(tool.icon)) errors.push(`${label}: unknown icon ${tool.icon}`);
+    if (tool.featured !== undefined && typeof tool.featured !== "boolean") errors.push(`${label}: featured must be boolean`);
+    if (tool.popularity !== undefined && (!Number.isInteger(tool.popularity) || tool.popularity < 0)) errors.push(`${label}: popularity must be a non-negative integer`);
+    for (const field of ["publishedAt", "updatedAt"]) if (tool[field] && !/^\d{4}-\d{2}-\d{2}$/.test(tool[field])) errors.push(`${label}: ${field} must use YYYY-MM-DD`);
     if (!allowedTypes.has(tool.type)) errors.push(`${label}: unsupported type ${tool.type}`);
     if (!categoryIds.has(tool.category)) errors.push(`${label}: category ${tool.category} does not exist`);
     if (toolIds.has(tool.id)) errors.push(`${label}: duplicate id`);

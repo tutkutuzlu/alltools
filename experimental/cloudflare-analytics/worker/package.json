@@ -1,0 +1,7 @@
+{
+  "name": "alltools-analytics-worker",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test ../../../tests/analytics-worker.test.js", "dev": "wrangler dev", "deploy": "wrangler deploy" },
+  "devDependencies": { "wrangler": "^4.36.0" }
+}

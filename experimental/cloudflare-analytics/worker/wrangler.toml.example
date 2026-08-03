@@ -1,0 +1,19 @@
+name = "alltools-analytics"
+main = "src/index.js"
+compatibility_date = "2026-08-03"
+
+[vars]
+ALLOWED_ORIGINS = "https://tutkutuzlu.github.io,http://localhost:4173"
+ALLOWED_SITE_IDS = "alltools"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "alltools-analytics"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+# Optional after assigning an account-unique namespace id.
+# [[ratelimits]]
+# name = "ANALYTICS_RATE_LIMITER"
+# namespace_id = "1001"
+# simple = { limit = 60, period = 60 }

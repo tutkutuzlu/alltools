@@ -12,12 +12,23 @@
     "family": { "type": "string" },
     "variant": { "type": "string" },
     "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "icon": { "type": "string", "minLength": 1 },
+    "publishedAt": { "type": "string", "format": "date" },
+    "updatedAt": { "type": "string", "format": "date" },
+    "featured": { "type": "boolean" },
+    "popularity": { "type": "integer", "minimum": 0 },
+    "estimatedTime": { "type": "string", "minLength": 1 },
     "status": { "enum": ["draft", "published", "deprecated"] },
     "entry": { "type": "string", "pattern": "^\\./" },
     "category": { "type": "string" },
     "tags": { "type": "array", "minItems": 1, "items": { "type": "string" }, "uniqueItems": true },
     "aliases": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
     "components": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "discovery": {
+      "type": "object",
+      "properties": { "priority": { "type": "integer" } },
+      "additionalProperties": false
+    },
     "capabilities": {
       "type": "object",
       "required": ["offline", "fileAccess", "networkAccess", "webWorker"],
@@ -30,5 +41,5 @@
       "additionalProperties": false
     }
   },
-  "additionalProperties": true
+  "additionalProperties": false
 }

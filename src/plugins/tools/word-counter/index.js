@@ -1,60 +1,88 @@
 import { analyzeText } from "../../families/text-tools/metrics.js";
+import { createToolUseTracker } from "../../../core/telemetry/tool-use.js";
 
-let cleanup = null;
+let cleanup;
 
 export function mount(root, context) {
-  const editor = context.components.create("field.textarea", {
-    id: "word-counter-input",
-    label: "Enter your text",
-    placeholder: "Type or paste your text here…",
-    rows: 10,
-    autofocus: true
-  });
-  const stats = context.components.create("result.stats", {
-    label: "Text statistics",
-    items: [
+  const useTracker = createToolUseTracker({ telemetry: context.telemetry, toolId: context.toolId, category: "text" });
+  const shell = context.components.create("tool.shell", {
+    toolbarLabel: "Word Counter actions",
+    actions: [
+      { id: "paste", label: "Paste", icon: "paste", variant: "secondary" },
+      { id: "clear", label: "Clear", icon: "clear", variant: "secondary" },
+      { id: "copy", label: "Copy text", icon: "copy", variant: "secondary" }
+    ],
+    editor: {
+      id: "word-counter-input",
+      label: "Enter your text",
+      placeholder: "Type or paste your text here…",
+      rows: 10,
+      autofocus: true
+    },
+    resultLabel: "Text statistics",
+    metrics: [
       { id: "words", label: "Words", value: 0 },
       { id: "characters", label: "Characters", value: 0 },
-      { id: "charactersWithoutSpaces", label: "Without spaces", value: 0 },
+      { id: "charactersWithoutSpaces", label: "Characters without spaces", value: 0 },
       { id: "sentences", label: "Sentences", value: 0 },
       { id: "readingTimeMinutes", label: "Reading time", value: "0 min" }
     ]
   });
-  const clearButton = context.components.create("action.button", {
-    label: "Clear text",
-    variant: "secondary",
-    type: "button"
-  });
-
-  const actions = document.createElement("div");
-  actions.className = "tool-actions";
-  actions.append(clearButton.element);
-  root.replaceChildren(editor.element, actions, stats.element);
+  root.replaceChildren(shell.element);
 
   const update = () => {
-    const result = analyzeText(editor.input.value);
-    stats.update({
-      ...result,
-      readingTimeMinutes: `${result.readingTimeMinutes} min`
-    });
+    const result = analyzeText(shell.input.value);
+    shell.results.update({ ...result, readingTimeMinutes: `${result.readingTimeMinutes} min` });
+    useTracker.observe(result.charactersWithoutSpaces > 0);
   };
   const clear = () => {
-    editor.input.value = "";
+    shell.input.value = "";
     update();
-    editor.input.focus();
+    shell.input.focus();
+    context.telemetry.trackClear({ toolId: context.toolId });
+  };
+  const paste = async () => {
+    try {
+      shell.input.value = await context.clipboard.readText();
+      update();
+      shell.input.focus();
+      shell.notice.show("Text pasted.");
+      context.telemetry.trackPaste({ toolId: context.toolId });
+    } catch {
+      shell.notice.show("Paste permission was not available. Use your browser's paste command.");
+    }
+  };
+  const copy = async () => {
+    if (!shell.input.value) return shell.notice.show("There is no text to copy.");
+    try {
+      await context.clipboard.writeText(shell.input.value);
+      shell.notice.show("Text copied.");
+      context.telemetry.trackCopy({ toolId: context.toolId });
+    } catch {
+      shell.notice.show("Copy was not available. Select the text and copy it manually.");
+    }
   };
 
-  editor.input.addEventListener("input", update);
-  clearButton.element.addEventListener("click", clear);
+  const pasteButton = shell.actions.get("paste").element;
+  const clearButton = shell.actions.get("clear").element;
+  const copyButton = shell.actions.get("copy").element;
+  shell.input.addEventListener("input", update);
+  pasteButton.addEventListener("click", paste);
+  clearButton.addEventListener("click", clear);
+  copyButton.addEventListener("click", copy);
   update();
 
   cleanup = () => {
-    editor.input.removeEventListener("input", update);
-    clearButton.element.removeEventListener("click", clear);
+    shell.input.removeEventListener("input", update);
+    pasteButton.removeEventListener("click", paste);
+    clearButton.removeEventListener("click", clear);
+    copyButton.removeEventListener("click", copy);
+    shell.notice.clear();
+    useTracker.cancel();
   };
 }
 
 export function unmount() {
   cleanup?.();
-  cleanup = null;
+  cleanup = undefined;
 }

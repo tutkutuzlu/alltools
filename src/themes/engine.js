@@ -1,3 +1,5 @@
+import { telemetry } from "../core/telemetry/telemetry.js";
+
 const STORAGE_KEY = "all-tools-theme";
 const supportedThemes = new Set(["light", "dark", "system"]);
 const listeners = new Set();
@@ -26,6 +28,7 @@ export const theme = {
     if (!supportedThemes.has(preference)) throw new Error(`Unsupported theme: ${preference}`);
     localStorage.setItem(STORAGE_KEY, preference);
     apply(preference);
+    telemetry.trackThemeChange({ theme: preference });
   },
   getPreference() {
     return document.documentElement.dataset.themePreference ?? "system";

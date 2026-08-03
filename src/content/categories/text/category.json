@@ -6,5 +6,7 @@
   "shortDescription": "Count, clean and transform text directly in your browser.",
   "icon": "text",
   "order": 10,
+  "featured": true,
+  "accent": "violet",
   "status": "published"
 }
