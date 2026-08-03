@@ -2,7 +2,7 @@
 
 AllTools sends only allowlisted operational events to GA4. Allowed parameters are `tool_id`, `category`, `source`, `placement`, `theme`, `query_length`, and `result_count`.
 
-The following are prohibited in telemetry: tool input or output, search strings, clipboard content, file content or names, URL query parameters, e-mail addresses, personal information, arbitrary payloads, user identifiers, and fingerprinting data. The central telemetry facade strips unknown fields before the GA4 adapter applies its own parameter allowlist.
+The following are prohibited in telemetry: tool input or output, search strings, clipboard content, file content or names, URL query parameters, e-mail addresses, personal information, arbitrary payloads, user identifiers, and fingerprinting data. The central telemetry facade strips unknown fields before the GA4 adapter applies its own parameter allowlist. GA4 `page_location` and `page_referrer` are explicitly reduced to origin plus pathname so query strings and fragments cannot be collected.
 
 Search sends only query length and result count. The page URL is not passed as a custom event parameter. Do not add user IDs, user properties, advertising IDs, URL passthrough, or cross-domain identity features without a separate privacy review.
 

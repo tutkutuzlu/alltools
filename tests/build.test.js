@@ -35,6 +35,8 @@ test("build generates discoverable static pages and indexes", async () => {
   assert.match(runtimeConfig, /G-JLNSC16GEQ/);
   assert.match(home, /googletagmanager\.com\/gtag\/js\?id=G-JLNSC16GEQ/);
   assert.match(home, /send_page_view:false/);
+  assert.match(home, /page_location:cleanAnalyticsUrl\(location\.href\)/);
+  assert.match(home, /page_referrer:cleanAnalyticsUrl\(document\.referrer\)/);
   await assert.rejects(access(path.join(root, "dist", "analytics", "index.html")));
   assert.doesNotMatch(sitemap, /\/analytics\//);
   assert.match(home, /href="\/alltools\//);

@@ -18,7 +18,7 @@ export function renderGoogleTag(analytics = {}) {
   if (!analytics.enabled || analytics.provider !== "ga4" || !/^G-[A-Z0-9]{6,20}$/i.test(analytics.measurementId ?? "") || analytics.consentRequired) return "";
   const id = analytics.measurementId.toUpperCase();
   const debug = analytics.debug ? ",debug_mode:true" : "";
-  return `<script async src="https://www.googletagmanager.com/gtag/js?id=${id}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag("consent","default",{analytics_storage:"granted",ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied"});gtag("js",new Date());gtag("config","${id}",{send_page_view:false,allow_google_signals:false,allow_ad_personalization_signals:false${debug}});</script>`;
+  return `<script async src="https://www.googletagmanager.com/gtag/js?id=${id}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;const cleanAnalyticsUrl=value=>{try{const url=new URL(value);return url.origin+url.pathname}catch{return""}};gtag("consent","default",{analytics_storage:"granted",ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied"});gtag("js",new Date());gtag("config","${id}",{send_page_view:false,allow_google_signals:false,allow_ad_personalization_signals:false,page_location:cleanAnalyticsUrl(location.href),page_referrer:cleanAnalyticsUrl(document.referrer)${debug}});</script>`;
 }
 
 function searchForm(categories = []) {

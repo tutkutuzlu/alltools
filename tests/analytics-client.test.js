@@ -57,13 +57,15 @@ test("consentRequired does not load Google tag before an explicit grant", () => 
 test("Google tag startup disables automatic page views and advertising signals", () => {
   const calls = [], appended = [];
   const script = { addEventListener() {} };
-  const transport = { dataLayer: [], document: { createElement: () => script, head: { append: (node) => appended.push(node) } }, dispatchEvent() {} };
+  const transport = { dataLayer: [], location: { href: "https://example.test/alltools/?private=value#fragment" }, document: { referrer: "https://referrer.test/path/?secret=value", createElement: () => script, head: { append: (node) => appended.push(node) } }, dispatchEvent() {} };
   assert.equal(startGoogleTag(config, transport), true);
   for (const args of transport.dataLayer) calls.push([...args]);
   const configCall = calls.find((args) => args[0] === "config");
   assert.equal(configCall[2].send_page_view, false);
   assert.equal(configCall[2].allow_google_signals, false);
   assert.equal(configCall[2].allow_ad_personalization_signals, false);
+  assert.equal(configCall[2].page_location, "https://example.test/alltools/");
+  assert.equal(configCall[2].page_referrer, "https://referrer.test/path/");
 });
 
 test("Word Counter meaningful use is debounced and deduplicated", () => {
