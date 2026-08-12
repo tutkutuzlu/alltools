@@ -132,6 +132,20 @@ function renderCompactToolSection(site, section, categories) {
   return `<section class="discovery-group" id="${section.id}"><div class="discovery-group__heading"><div><p class="section-kicker">${section.kicker}</p><h2>${heading}</h2></div><p>${section.description}</p></div><div class="tool-grid tool-grid--compact">${section.tools.map((tool) => renderToolCard(site, tool, categories.find((category) => category.id === tool.category))).join("")}</div></section>`;
 }
 
+function renderAllToolsDirectory(site, categories, tools) {
+  const groups = categories.map((category) => {
+    const categoryTools = tools
+      .filter((tool) => tool.category === category.id)
+      .sort((a, b) => (b.discovery?.priority ?? 0) - (a.discovery?.priority ?? 0) || a.title.localeCompare(b.title));
+    if (!categoryTools.length) return "";
+    return `<section class="tool-directory__group" data-accent="${escapeHtml(category.accent ?? "default")}" aria-labelledby="directory-${escapeHtml(category.id)}">
+      <h3 id="directory-${escapeHtml(category.id)}"><a href="${joinPath(site.basePath, `categories/${category.slug}`)}/">${escapeHtml(category.title)}</a></h3>
+      <ul>${categoryTools.map((tool) => `<li><a href="${joinPath(site.basePath, `tools/${tool.slug}`)}/">${escapeHtml(tool.title)}</a></li>`).join("")}</ul>
+    </section>`;
+  }).join("");
+  return `<section class="section section--tool-directory" id="all-tools"><div class="container"><div class="section-heading"><div><p class="section-kicker">Complete directory</p><h2>Browse all tools</h2></div><p>Every AllTools utility, organized by category.</p></div><div class="tool-directory">${groups}</div></div></section>`;
+}
+
 const normalizedTerms = (values = []) => new Set(values.flatMap((value) => String(value).toLowerCase().split(/[^a-z0-9]+/)).filter((value) => value.length > 2));
 
 export function selectRelatedTools(tool, tools, limit = 6) {
@@ -178,6 +192,7 @@ export function renderHome(project) {
   ${featuredSection ? renderToolSection(site, featuredSection, categories) : ""}
   ${compactSections.length ? `<section class="section section--discovery-compact"><div class="container discovery-compact-grid">${compactSections.map((section) => renderCompactToolSection(site, section, categories)).join("")}</div></section>` : ""}
   <section class="section section--categories" id="categories"><div class="container"><div class="section-heading"><div><p class="section-kicker">Explore</p><h2>Browse categories</h2></div><p>Find the right set of tools for your task.</p></div><div class="category-grid">${categories.map((category) => renderCategoryCard(site, category, tools.filter((tool) => tool.category === category.id).length)).join("")}</div></div></section>
+  ${renderAllToolsDirectory(site, categories, tools)}
   <section class="section section--why"><div class="container"><div class="why-panel"><div class="why-panel__intro"><p class="section-kicker">Why AllTools?</p><h2>Useful by design.</h2><p>No accounts, complicated menus or unnecessary steps. Open a tool and get to work.</p></div><div class="why-grid"><article>${iconMarkup("fast")}<h3>Fast</h3><p>Lightweight pages and focused interactions.</p></article><article>${iconMarkup("private")}<h3>Private</h3><p>Your content stays in your browser whenever possible.</p></article><article>${iconMarkup("simple")}<h3>Simple</h3><p>Clear tools that do one job well.</p></article></div></div></div></section>`;
   return layout({ site, title: `${site.name} – Free Online Tools`, description: site.description, canonicalPath: "", body, structured: [{ "@context": "https://schema.org", "@type": "WebSite", name: site.name, url: `${site.siteUrl}/` }] });
 }

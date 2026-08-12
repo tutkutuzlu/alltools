@@ -91,6 +91,16 @@ h1 { margin: var(--space-3) 0 var(--space-4); font-size: clamp(2.35rem, 8vw, 4.8
 .discovery-group__heading > p { margin: var(--space-1) 0 0; color: var(--color-muted); font-size: .85rem; }
 .tool-grid--compact { gap: var(--space-3); }
 .tool-grid--compact .tool-card { padding: var(--space-4); }
+.section--tool-directory { border-bottom: 1px solid var(--color-border); }
+.tool-directory { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
+.tool-directory__group { min-width: 0; border-top: 2px solid var(--category-accent); border-radius: var(--radius-lg); background: var(--color-surface); padding: var(--space-5); box-shadow: var(--shadow-card); }
+.tool-directory__group h3 { margin: 0 0 var(--space-3); font-size: 1rem; }
+.tool-directory__group h3 a { color: var(--category-accent); text-decoration: none; }
+.tool-directory__group h3 a:hover { text-decoration: underline; }
+.tool-directory__group ul { display: grid; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+.tool-directory__group li { min-width: 0; }
+.tool-directory__group li a { display: inline-block; max-width: 100%; color: var(--color-muted); font-size: .85rem; line-height: 1.35; overflow-wrap: anywhere; text-decoration: none; }
+.tool-directory__group li a:hover { color: var(--category-accent); text-decoration: underline; }
 .why-panel { display: grid; gap: var(--space-8); border: 1px solid var(--color-border); border-radius: var(--radius-xl); background: var(--color-surface); padding: clamp(1.5rem, 5vw, 3rem); box-shadow: var(--shadow-card); }
 .why-panel__intro h2 { margin: 0 0 var(--space-3); font-size: clamp(1.6rem, 4vw, 2.4rem); letter-spacing: -.035em; }
 .why-panel__intro > p:last-child { max-width: 31rem; margin: 0; color: var(--color-muted); }
@@ -158,6 +168,7 @@ h1 { margin: var(--space-3) 0 var(--space-4); font-size: clamp(2.35rem, 8vw, 4.8
   .tool-grid, .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .discovery-compact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .tool-grid--compact { grid-template-columns: 1fr; }
+  .tool-directory { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .why-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .why-grid article { border-top: 0; border-left: 1px solid var(--color-border); padding: 0 0 0 var(--space-4); }
   .footer-inner { flex-direction: row; align-items: flex-end; justify-content: space-between; }
@@ -176,6 +187,7 @@ h1 { margin: var(--space-3) 0 var(--space-4); font-size: clamp(2.35rem, 8vw, 4.8
 @media (min-width: 64rem) {
   .section { padding: var(--space-16) 0; }
   .tool-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .tool-directory { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .why-panel { grid-template-columns: minmax(18rem, .8fr) minmax(0, 1.2fr); align-items: center; }
   .tool-layout { grid-template-columns: minmax(0, 1.15fr) minmax(22rem, .85fr); align-items: start; gap: clamp(2rem, 5vw, 4rem); }

@@ -114,6 +114,13 @@ test("build generates discoverable static pages and indexes", async () => {
   assert.equal(new Set(relatedIds).size, relatedIds.length);
   assert.match(home, /data-accent="violet"/);
   assert.match(home, /data-accent="amber"/);
+  assert.match(home, /<h2>Browse all tools<\/h2>/);
+  const directlyLinkedTools = [...home.matchAll(/<a\b[^>]*href="\/alltools\/tools\/([^/]+)\/"/g)].map((match) => match[1]);
+  assert.equal(new Set(directlyLinkedTools).size, 104, "home HTML must link directly to every published tool");
+  const directlyLinkedCategories = [...home.matchAll(/<a\b[^>]*href="\/alltools\/categories\/([^/]+)\/"/g)].map((match) => match[1]);
+  assert.equal(new Set(directlyLinkedCategories).size, 5, "home HTML must link to every published category");
+  assert.match(tool, /<nav class="breadcrumbs"[\s\S]*?<a href="\/alltools\/">Home<\/a>/);
+  assert.match(tool, /<a href="\/alltools\/categories\/text-tools\/">Text Tools<\/a>/);
 });
 
 test("development build never renders the production Google tag", async () => {
