@@ -68,6 +68,11 @@ test("build generates discoverable static pages and indexes", async () => {
   const securityPositions=securityIds.map(id=>securityCategory.indexOf(`href="/alltools/tools/${id}/"`));assert.ok(securityPositions.every(position=>position>=0),"category should contain all Security tools");assert.deepEqual(securityPositions,[...securityPositions].sort((a,b)=>a-b),"Security tools should follow metadata priority");
   for(const id of securityIds){const item=search.x.find(entry=>entry.i===id);assert.equal(item?.c,"security",`${id} should be in Security search`);assert.match(sitemap,new RegExp(`tools/${id}/`));const page=await readFile(path.join(root,"dist","tools",id,"index.html"),"utf8");assert.match(page,/WebApplication/);assert.match(page,/BreadcrumbList/);assert.match(page,/This tool runs in your browser/);assert.match(page,/Related security tools/);assert.equal((page.match(/googletagmanager\.com\/gtag\/js/g)??[]).length,1);assert.equal((page.match(/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/g)??[]).length,1);}
   assert.match(sitemap, /tools\/word-counter\//);
+  assert.ok(sitemap.startsWith('<?xml version="1.0" encoding="UTF-8"?>\n'));
+  assert.equal(sitemap.charCodeAt(0), 60, "sitemap must start with < and contain no UTF-8 BOM");
+  assert.equal((sitemap.match(/<url>/g) ?? []).length, 114);
+  assert.equal((sitemap.match(/<loc>https:\/\/tutkutuzlu\.github\.io\/alltools\/tools\//g) ?? []).length, 104);
+  assert.doesNotMatch(sitemap, /<loc>https:\/\/tutkutuzlu\.github\.io\/(?!alltools\/)/);
   assert.match(runtimeConfig, /"enabled":true/);
   assert.match(runtimeConfig, /G-JLNSC16GEQ/);
   assert.match(home, /googletagmanager\.com\/gtag\/js\?id=G-JLNSC16GEQ/);

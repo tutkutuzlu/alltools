@@ -64,7 +64,12 @@ const urls = [
   ...project.categories.filter((item) => item.status === "published").map((item) => ({ path: `categories/${item.slug}/` })),
   ...project.tools.filter((item) => item.status === "published").map((item) => ({ path: `tools/${item.slug}/`, updatedAt: item.updatedAt }))
 ];
-await writeOutput("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((item) => `  <url><loc>${project.site.siteUrl.replace(/\/$/, "")}/${item.path}</loc>${item.updatedAt ? `<lastmod>${item.updatedAt}</lastmod>` : ""}</url>`).join("\n")}\n</urlset>\n`);
+const escapeXml = (value) => String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+const sitemapEntries = urls.map((item) => {
+  const location = `${project.site.siteUrl.replace(/\/$/, "")}/${item.path}`;
+  return ["  <url>", `    <loc>${escapeXml(location)}</loc>`, item.updatedAt ? `    <lastmod>${escapeXml(item.updatedAt)}</lastmod>` : "", "  </url>"].filter(Boolean).join("\n");
+});
+await writeOutput("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapEntries.join("\n")}\n</urlset>\n`);
 await writeOutput("robots.txt", `User-agent: *\nAllow: /\n\nUser-agent: Mediapartners-Google\nAllow: /\n\nUser-agent: Google-Display-Ads-Bot\nAllow: /\n\nSitemap: ${project.site.siteUrl.replace(/\/$/, "")}/sitemap.xml\n`);
 const adsRecord = project.ads.publisherId ? `google.com, ${project.ads.publisherId}, DIRECT, ${project.ads.certificationAuthorityId}\n` : "# Google AdSense publisher ID pending.\n# When approved, set publisherId in src/config/ads.json to generate the authorized seller record.\n";
 await writeOutput("ads.txt", adsRecord);
