@@ -5,42 +5,14 @@ seoTitle: RGB to HSL Converter – Accurate CSS Colors
 seoDescription: Convert RGB channels to HSL while preserving valid alpha values.
 ---
 
-## RGB to HSL for reliable browser-based color work
+## Interpret RGB through hue and lightness
 
-Convert RGB and RGBA values to HSL. The shared AllTools color engine validates every channel before calculating the result and renders a bordered live preview that stays readable in Light and Dark themes.
+RGB records emitted screen channels; HSL describes a position around a hue wheel and how saturated and light that color appears within the HSL model. Choose this tool when numeric RGB from a screenshot, canvas sample or API needs HSL controls for CSS experimentation.
 
-## How to use RGB to HSL
+The input accepts three channels from 0 to 255, with optional alpha from 0 to 1 or as a percentage. `rgb(255, 127, 80)` produces an HSL value near `hsl(16, 100%, 66%)`. RGBA input becomes HSLA, retaining opacity separately from the color calculation.
 
-1. Enter or choose the required color value using the clearly labeled controls.
-2. Review the live result and preview; correct any validation message before using the value.
-3. Copy the generated output, or download CSS only when that action is available.
+Hue and percentages are rounded in the displayed result. Neutral colors have no meaningful hue, so a gray input is represented with 0% saturation and hue 0. This does not mean the gray is conceptually red; it is simply a stable numeric convention.
 
-## Practical example
+HSL lightness is a model coordinate, not a measurement of perceived brightness. Two colors with the same HSL lightness can have very different relative luminance and contrast. Check text combinations with [WCAG Color Accessibility Checker](../../wcag-color-accessibility-checker/) instead of relying on the lightness percentage.
 
-**Input:** rgb(255, 128, 0)
-
-**Result:** hsl(30.12, 100%, 50%)
-
-## Accuracy and formats
-
-Calculations use standard sRGB, HSL, HSV, CMYK and alpha formulas where relevant. Display rounding is kept separate from input validation so valid channels remain predictable across modern browsers.
-
-## Privacy
-
-Your colors stay in your browser. Entered values, generated palettes and copied output are never included in telemetry or sent to an external API.
-
-## Frequently asked questions
-
-### Is the conversion reversible?
-
-Rounded display values may vary slightly, but the underlying conversion follows standard formulas.
-
-### Can I copy the result?
-
-Yes. Use Copy result to place the generated text on your clipboard. Color values are not included in analytics events.
-
-## Related color tools
-
-- [HEX to RGB](../../hex-to-rgb/)
-- [Color Palette Generator](../../color-palette-generator/)
-- [Contrast Checker](../../contrast-checker/)
+[RGB to HSV](../../rgb-to-hsv/) offers a value-based alternative commonly used in picker workflows.

@@ -5,35 +5,12 @@ seoTitle: URL Decoder – Decode Percent-Encoded UTF-8 Text
 seoDescription: Decode UTF-8 percent sequences in URL components or full URLs with clear error feedback.
 ---
 
-## URL Decoder for focused text work
+## Decode with component-aware rules
 
-Decode percent-encoded components or complete URLs. All processing happens immediately on this page, so the result is available without an account or upload.
+Component mode runs `decodeURIComponent` and decodes all valid percent escapes in the supplied value. Full URL mode uses `decodeURI`, which preserves escapes for characters that carry URL structure when decoding them could change the address.
 
-## How to use URL Decoder
+`coffee%20%26%20tea` becomes `coffee & tea` in component mode. This is useful when debugging a captured query value or log entry. A malformed sequence such as `%E0%A4` produces a validation error instead of replacement text because it is not valid encoded UTF-8.
 
-1. Type or paste the source text into the input editor.
-2. Choose any available mode or comparison options.
-3. Review the result, then copy or download it when available.
+The operation does not treat `+` as a space; that convention belongs to form-style query parsing. Decoding untrusted text can reveal delimiters or markup, and decoding twice can transform deliberately escaped percent sequences, so use one layer that matches the producer.
 
-## Practical example
-
-Turn `%E2%9C%93` into its readable check mark when debugging an encoded parameter.
-
-## Privacy
-
-Your text stays in your browser. The input and result are processed locally and are never included in analytics events.
-
-## Frequently asked questions
-
-### What happens with a broken percent sequence?
-
-The result stays empty and an accessible message explains that the encoded value is invalid.
-
-### Does it work on mobile devices?
-
-Yes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.
-
-## Related text tools
-
-- [URL Encoder](../url-encoder/)
-- [HTML Decoder](../html-decoder/)
+[URL Encoder](../../url-encoder/) creates percent escapes. [Query String Parser](../../query-string-parser/) applies form-query decoding and preserves repeated keys.

@@ -1,46 +1,16 @@
 ---
 title: Random String Generator
-shortDescription: Generate secure strings from selected or custom characters.
-seoTitle: Secure Random String Generator – Custom Alphabet
+shortDescription: Generate random strings from selected or custom characters.
+seoTitle: Random String Generator – Custom Alphabet
 seoDescription: Generate cryptographically random strings with length, character-group and custom-alphabet controls.
 ---
 
-## Random String Generator for private browser workflows
+## Uniform characters from a chosen alphabet
 
-Sample exactly from the alphabet your integration expects. All processing uses local browser capabilities and the result is never sent to an external service.
+Set a length from 1 to 4096 and combine lowercase, uppercase, digits and optionally symbols. A custom alphabet replaces those groups; duplicate characters are removed and the final alphabet must contain 2–256 unique characters. Each output position is sampled independently with `crypto.getRandomValues`, using rejection sampling so awkward alphabet sizes do not favor some characters.
 
-## How to use Random String Generator
+This is useful for test identifiers, invite codes or fixtures constrained to a particular alphabet—for example, 12 characters drawn only from `ABCDEFGHJKLMNPQRSTUVWXYZ23456789`. Collision remains possible, and a small alphabet or short length sharply reduces the number of possible strings.
 
-1. Choose the controls that match your intended format or security requirement.
-2. Enter local input when required, then generate or review the calculated result.
-3. Copy the output and handle any secret according to the policy of the system where it will be used.
+Unlike [Password Generator](../../password-generator/), this tool does not guarantee one character from every selected class. Unlike [Secure Token Generator](../../secure-token-generator/), its length describes visible characters rather than random bytes and its custom alphabet may have limited security. A UUID has a standardized structure; this output does not.
 
-## Practical example
-
-**Input:** 32 characters using letters and numbers
-
-**Result:** A securely sampled 32-character string
-
-## Security boundaries
-
-This utility provides a focused primitive, not a complete security guarantee. Review algorithm warnings, protect copied secrets from clipboard history and never reuse credentials across unrelated services.
-
-## Privacy
-
-Passwords, keys, tokens, source text and generated values stay in the active page. They are not stored in localStorage, written to the console or included in telemetry.
-
-## Frequently asked questions
-
-### Can I use a custom alphabet?
-
-Yes. Provide between 2 and 256 unique characters; it replaces the selected standard groups.
-
-### Does the tool remove modulo bias?
-
-Yes. Rejection sampling avoids favoring characters when the alphabet does not divide the byte range evenly.
-
-## Related security tools
-
-- [Password Generator](../../password-generator/)
-- [Secure Token Generator](../../secure-token-generator/)
-- [Hash Generator](../../hash-generator/)
+Decide whether the generated value is merely an identifier or a secret before using it. Authentication tokens also require appropriate length, server-side storage, comparison, expiry and revocation—not just random-looking text.

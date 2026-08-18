@@ -5,35 +5,12 @@ seoTitle: Paragraph Counter – Count Paragraphs, Words and Sentences
 seoDescription: Count paragraphs, words and sentences and see average words per paragraph instantly.
 ---
 
-## Paragraph Counter for focused text work
+## Paragraphs are separated by blank lines
 
-Measure paragraphs, sentences and words in prose. All processing happens immediately on this page, so the result is available without an account or upload.
+After trimming the document edges, the runtime splits paragraphs where a newline is followed by optional whitespace and another newline. Wrapped lines without an intervening blank row remain in the same paragraph. Whitespace-only blocks are ignored.
 
-## How to use Paragraph Counter
+The page also reports words, punctuation-based sentence segments and average words per paragraph. A draft with two prose blocks separated by one blank line reports two paragraphs even if each block wraps across several editor lines.
 
-1. Type or paste the source text into the input editor.
-2. Read the live measurements as the content changes.
-3. Clear the editor when you are finished.
+This definition fits plain-text prose but not every publishing format. Indented paragraphs without blank separators count as one, while list items separated by blank lines count as separate paragraphs. Sentence totals inherit the heuristic limitations of Sentence Counter.
 
-## Practical example
-
-Confirm that an essay draft meets a requested paragraph structure without sending it to a server.
-
-## Privacy
-
-Your text stays in your browser. The input and result are processed locally and are never included in analytics events.
-
-## Frequently asked questions
-
-### What separates paragraphs?
-
-One or more blank lines separate paragraphs; wrapped lines inside a paragraph remain together.
-
-### Does it work on mobile devices?
-
-Yes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.
-
-## Related text tools
-
-- [Sentence Counter](../sentence-counter/)
-- [word-counter](../word-counter/)
+Choose [Line Counter](../../line-counter/) when every newline matters as a record boundary. [Sentence Counter](../../sentence-counter/) explains the abbreviation-aware sentence estimate in more detail.

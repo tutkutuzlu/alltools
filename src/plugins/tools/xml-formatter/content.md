@@ -5,38 +5,12 @@ seoTitle: XML Formatter Online – Beautify XML
 seoDescription: Format XML online with tag validation and consistent two-space indentation.
 ---
 
-## XML Formatter for focused development work
+## Indent markup after a matching-tag check
 
-Validate matching XML tags and add readable indentation. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+The formatter tokenizes tags, comments, CDATA and text, checks opening and closing tag names with a stack, then places each trimmed token on a line with two-space nesting. Self-closing tags, declarations and `<!...>` tokens do not increase depth.
 
-## How to use XML Formatter
+`<catalog><item id="1">Book</item></catalog>` becomes a visibly nested catalog, useful when inspecting a compact service response. A mismatched closing tag or unclosed element is rejected.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+This is not a standards-complete XML parser. The check does not validate attributes, namespaces, entity references, document type rules or the requirement for exactly one root element. Text is trimmed and tokenized, so whitespace significant to mixed-content XML may change.
 
-## Practical example
-
-**Input:** <root><item id="1">Value</item></root>
-
-**Result:** A multi-line, indented XML document.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Does it validate tag structure?
-
-Yes. The formatter rejects mismatched or unclosed element tags before producing output.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [CSV to JSON Converter](../../csv-to-json/)
-- [XML Minifier](../../xml-minifier/)
-- [HTML Formatter](../../html-formatter/)
+Choose it for quick structural inspection of simple XML. [XML Minifier](../../xml-minifier/) removes inter-tag spacing and comments from similarly checked markup.

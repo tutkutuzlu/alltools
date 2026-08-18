@@ -1,6 +1,10 @@
 import path from "node:path";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir } from "node:fs/promises";
 import { rootDir } from "./lib/project.mjs";
+import { editorialScaffold, seedFile, seedOptions } from "./lib/seed-files.mjs";
+
+const { force } = seedOptions();
+const publish = process.argv.includes("--publish");
 
 const tools=[
 ["hex-to-rgb","HEX to RGB","Convert HEX colors to RGB or RGBA values.","HEX to RGB Converter – Free Online Color Tool","Convert 3, 4, 6 or 8 digit HEX colors to accurate RGB and RGBA values locally.","#3366CC","rgb(51, 102, 204)","Does it support alpha HEX?","Yes. Four and eight digit HEX values preserve alpha in the RGBA result."],
@@ -33,9 +37,9 @@ const tools=[
 const related=["hex-to-rgb","color-palette-generator","contrast-checker"];
 for(const [index,[id,title,shortDescription,seoTitle,seoDescription,exampleInput,exampleOutput,question,answer]]of tools.entries()){
  const directory=path.join(rootDir,"src","plugins","tools",id);await mkdir(directory,{recursive:true});
- const metadata={schemaVersion:1,id,version:"1.0.0",type:id.includes("generator")?"generator":"converter",family:"color-tools",variant:id,slug:id,icon:"color",publishedAt:"2026-08-03",updatedAt:"2026-08-03",featured:index<3,popularity:86-index,estimatedTime:"instant",status:"published",entry:"./index.js",category:"color",tags:["color",...id.split("-").filter(word=>!["to","color"].includes(word)).slice(0,3)],aliases:[title.toLowerCase(),shortDescription.toLowerCase().replace(/\.$/,"")],components:["tool.shell","field.input","field.color","field.select","action.button"],capabilities:{offline:true,fileAccess:false,networkAccess:false,webWorker:false},discovery:{priority:300-index}};
+ const metadata={schemaVersion:1,id,version:"1.0.0",type:id.includes("generator")?"generator":"converter",family:"color-tools",variant:id,slug:id,icon:"color",publishedAt:"2026-08-03",updatedAt:"2026-08-03",featured:index<3,popularity:86-index,estimatedTime:"instant",status:publish?"published":"draft",entry:"./index.js",category:"color",tags:["color",...id.split("-").filter(word=>!["to","color"].includes(word)).slice(0,3)],aliases:[title.toLowerCase(),shortDescription.toLowerCase().replace(/\.$/,"")],components:["tool.shell","field.input","field.color","field.select","action.button"],capabilities:{offline:true,fileAccess:false,networkAccess:false,webWorker:false},discovery:{priority:300-index}};
  const links=related.filter(item=>item!==id).slice(0,3).map(item=>{const match=tools.find(tool=>tool[0]===item);return`- [${match[1]}](../../${item}/)`;}).join("\n");
  const content=`---\ntitle: ${title}\nshortDescription: ${shortDescription}\nseoTitle: ${seoTitle}\nseoDescription: ${seoDescription}\n---\n\n## ${title} for reliable browser-based color work\n\n${shortDescription} The shared AllTools color engine validates every channel before calculating the result and renders a bordered live preview that stays readable in Light and Dark themes.\n\n## How to use ${title}\n\n1. Enter or choose the required color value using the clearly labeled controls.\n2. Review the live result and preview; correct any validation message before using the value.\n3. Copy the generated output, or download CSS only when that action is available.\n\n## Practical example\n\n**Input:** ${exampleInput}\n\n**Result:** ${exampleOutput}\n\n## Accuracy and formats\n\nCalculations use standard sRGB, HSL, HSV, CMYK and alpha formulas where relevant. Display rounding is kept separate from input validation so valid channels remain predictable across modern browsers.\n\n## Privacy\n\nYour colors stay in your browser. Entered values, generated palettes and copied output are never included in telemetry or sent to an external API.\n\n## Frequently asked questions\n\n### ${question}\n\n${answer}\n\n### Can I copy the result?\n\nYes. Use Copy result to place the generated text on your clipboard. Color values are not included in analytics events.\n\n## Related color tools\n\n${links}`;
- await writeFile(path.join(directory,"tool.json"),JSON.stringify(metadata,null,2)+"\n");await writeFile(path.join(directory,"index.js"),'export { mount, unmount } from "../../families/color-tools/universal-plugin.js";\n');await writeFile(path.join(directory,"content.md"),content+"\n");
+ await seedFile(path.join(directory,"tool.json"),JSON.stringify(metadata,null,2)+"\n",{force});await seedFile(path.join(directory,"index.js"),'export { mount, unmount } from "../../families/color-tools/universal-plugin.js";\n',{force});await seedFile(path.join(directory,"content.md"),editorialScaffold({title,shortDescription,seoTitle,seoDescription}),{force});
 }
-console.log(`Seeded ${tools.length} Color Tools.`);
+console.log(`Processed ${tools.length} Color Tool scaffolds. Existing files were ${force ? "deliberately replaceable" : "preserved"}.`);

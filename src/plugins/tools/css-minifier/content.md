@@ -5,38 +5,12 @@ seoTitle: CSS Minifier Online – Compress CSS
 seoDescription: Minify CSS online by removing comments, extra whitespace and redundant semicolons.
 ---
 
-## CSS Minifier for focused development work
+## Compact common CSS syntax
 
-Remove comments and unnecessary CSS whitespace. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+The minifier removes `/* ... */` comments, collapses whitespace, removes spaces around braces, colons, separators and combinators, then drops a final semicolon before `}`. A rule such as `.card { color: red; margin: 0; }` becomes `.card{color:red;margin:0}`.
 
-## How to use CSS Minifier
+This can reduce a simple snippet for an example, embedded style block or manual comparison. It does not rename identifiers, merge rules, optimize values or produce compression statistics.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+The implementation uses regular expressions rather than a CSS parser. Comment markers or punctuation inside strings, URLs and custom properties can be altered, and modern syntax is not semantically validated. Do not assume output equivalence for complex production stylesheets without running project-specific tests.
 
-## Practical example
-
-**Input:** body { color: red; margin: 0; }
-
-**Result:** A compact CSS rule suitable for copying.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Are string values changed?
-
-The tool focuses on comments and structural whitespace and does not rewrite property values.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [CSS Formatter](../../css-formatter/)
-- [SQL Formatter](../../sql-formatter/)
-- [JWT Decoder](../../jwt-decoder/)
+Use [CSS Formatter](../../css-formatter/) to inspect straightforward compact rules. [HTML Minifier](../../html-minifier/) handles surrounding markup separately and has its own whitespace risks.

@@ -1,6 +1,6 @@
 # Google AdSense readiness
 
-AllTools contains no AdSense tag or ad unit. This document records the remaining one-time steps without enabling advertising.
+AllTools includes the production AdSense verification script and a configured publisher record. It does not currently render first-party ad placements. This document records the implemented state and the remaining operational checks.
 
 ## Current implementation
 
@@ -8,18 +8,19 @@ AllTools contains no AdSense tag or ad unit. This document records the remaining
 - Every generated page uses the same header and legal footer.
 - `robots.txt` allows Google, Mediapartners-Google and Google-Display-Ads-Bot.
 - The four policy pages are included in `sitemap.xml`.
-- `src/config/ads.json` is the single source for the future Google publisher ID.
-- When `publisherId` is empty, `ads.txt` contains comments only and does not claim a placeholder seller account.
+- `src/config/ads.json` is the source for publisher ID `pub-8757964996370629`; the production build renders the AdSense script once per page.
+- Development builds do not load the production AdSense script.
+- The generated project `ads.txt` record is `google.com, pub-8757964996370629, DIRECT, f08c47fec0942fa0`. Because AllTools is hosted below `/alltools/`, the root-domain `https://tutkutuzlu.github.io/ads.txt` is managed by the separate portal repository and must remain consistent.
+- No ad-slot component is currently rendered, so pages do not reserve empty advertising space.
 
-## Before requesting review
+## Operational review checklist
 
-1. Use a domain that can be added and verified as a site in AdSense. The current GitHub Pages project URL is a path under `tutkutuzlu.github.io`; AdSense site management and ads.txt discovery operate at the registrable/root-domain level. Prefer a custom domain, or ensure that the root `https://tutkutuzlu.github.io/ads.txt` and verification surface are under the same owner's control.
-2. Add the site in AdSense and obtain its 16-digit publisher ID.
-3. Set `publisherId` in `src/config/ads.json` using `pub-0000000000000000` format, then rebuild. The generated record will use `google.com, pub-..., DIRECT, f08c47fec0942fa0`.
-4. Publish `ads.txt` at the root of the exact domain submitted to AdSense and verify it returns HTTP 200 as plain text.
-5. Choose an AdSense ownership verification method. A publisher-specific meta tag can be added without enabling ad units; do not insert a fake publisher ID.
-6. Configure a Google-certified CMP or Google's Privacy & messaging solution before sending advertising requests to users in the EEA, UK or Switzerland where required.
-7. Recheck the Privacy Policy when advertising is enabled and confirm that the live consent behavior matches the disclosures.
+1. Verify that the site registered in AdSense matches the GitHub Pages host and that ownership verification remains successful.
+2. Confirm `https://tutkutuzlu.github.io/ads.txt` returns HTTP 200 as plain text and contains the configured publisher record exactly once.
+3. Confirm production pages load the publisher script once and development pages do not load it.
+4. Configure a Google-certified CMP or Google's Privacy & messaging solution before serving ads where consent is required, including applicable EEA, UK or Swiss traffic.
+5. Recheck the Privacy Policy and consent behavior before enabling ad placements or personalized advertising.
+6. Re-run content, navigation, accessibility and policy-page checks before a new AdSense review request.
 
 ## Official references
 

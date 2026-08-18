@@ -5,38 +5,12 @@ seoTitle: Regex Tester Online – Test JavaScript Patterns
 seoDescription: Test JavaScript regex patterns and flags, list matches and inspect their positions.
 ---
 
-## Regex Tester for focused development work
+## Run JavaScript RegExp against sample text
 
-Test a JavaScript regular expression against sample text. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+Enter pattern source without surrounding slashes and any flags accepted by the current JavaScript engine, such as `g`, `i`, `m`, `s`, `u` or `y`. The runtime creates `RegExp` directly. If `g` is absent, it adds global matching for the test so every match can be listed.
 
-## How to use Regex Tester
+With pattern `\b\w{4,}\b`, flags `gi` and text `Test small tools`, output lists `Test`, `small` and `tools` with their zero-based indexes. Metrics show count, first index and normalized `/pattern/flags`.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+This is JavaScript regex, not PCRE: unsupported constructs depend on the browser engine. Backslashes often need extra escaping when copied from a programming-language string literal, because the field expects regex source rather than the surrounding string syntax.
 
-## Practical example
-
-**Input:** Pattern: \d+; Text: Order 42
-
-**Result:** A match list with captured text and character index.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Which regex syntax is supported?
-
-Patterns use the JavaScript regular expression engine available in your browser.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [Query String Parser](../../query-string-parser/)
-- [Cron Expression Explainer](../../cron-expression-explainer/)
-- [HTTP Status Code Lookup](../../http-status-code-lookup/)
+Pathological patterns can trigger heavy backtracking and freeze the page on large input; no timeout or worker interruption is implemented. Use focused sample text and review performance before deploying a pattern.

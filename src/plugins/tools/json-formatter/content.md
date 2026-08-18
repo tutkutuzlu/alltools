@@ -5,38 +5,12 @@ seoTitle: JSON Formatter Online – Beautify JSON
 seoDescription: Format and beautify JSON online with selectable indentation and clear syntax errors.
 ---
 
-## JSON Formatter for focused development work
+## Re-serialize valid JSON with chosen indentation
 
-Format JSON with readable indentation and validate its syntax. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+The formatter parses the complete input with `JSON.parse`, then serializes it with two spaces, four spaces or tabs. Objects, arrays and primitive roots are accepted. Property order follows the parsed JavaScript object's enumeration order; whitespace outside strings is replaced, while values and string contents remain semantically unchanged.
 
-## How to use JSON Formatter
+Turn `{"name":"Ada","active":true}` into a reviewable multi-line object before debugging an API response. Invalid syntax—including comments, trailing commas, single-quoted strings or unquoted keys—produces the parser's error instead of partial output.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+Formatting is not schema validation and does not prove that required fields or value types satisfy an API contract. Parsing and re-serialization can also normalize number spelling, and duplicate object keys are already collapsed by the JSON parser.
 
-## Practical example
-
-**Input:** {"name":"Ada","active":true}
-
-**Result:** Indented JSON that is easier to review.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Does formatting change JSON values?
-
-No. It changes whitespace only; parsed keys and values remain the same.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [JSON Minifier](../../json-minifier/)
-- [JSON Validator](../../json-validator/)
-- [JSON to CSV Converter](../../json-to-csv/)
+Use [JSON Validator](../../json-validator/) for structural metrics or [JSON Minifier](../../json-minifier/) for compact output.

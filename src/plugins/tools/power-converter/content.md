@@ -5,42 +5,12 @@ seoTitle: Power Converter Online – Watts kW Horsepower
 seoDescription: Convert milliwatts, watts, kilowatts, megawatts, horsepower and BTU per hour.
 ---
 
-## Power Converter for quick, accurate results
+## Convert rates of energy transfer
 
-Convert watts, kilowatts and horsepower units. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+The watt is the reference. Mechanical horsepower is `745.699871582 W`, metric horsepower is `735.49875 W`, and BTU per hour uses `0.293071070172 W`. The two horsepower options are deliberately separate.
 
-## How to use Power Converter
+A `100 kW` motor rating converts to about `134.102 mechanical hp` or `135.962 metric PS`. This distinction matters when comparing European and US equipment specifications that both use a “horsepower” label.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+Power is a rate, not an energy amount. A 100 kW machine running for two hours uses 200 kWh only under the assumed constant load; this converter does not combine power with time or efficiency. Rated input, output and peak power may also describe different conditions.
 
-## Practical example
-
-**Input:** 1 mechanical horsepower to watts
-
-**Result:** 745.699871582 Watts (W)
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### Are metric and mechanical horsepower separate?
-
-Yes. Mechanical horsepower and metric horsepower use distinct standard factors.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Energy Converter](../../energy-converter/)
-- [Force Converter](../../force-converter/)
-- [Torque Converter](../../torque-converter/)
+Use [Energy Converter](../../energy-converter/) for joules, kWh and BTU quantities. [Torque Converter](../../torque-converter/) converts rotational moment, but calculating motor power from torque also requires rotational speed.

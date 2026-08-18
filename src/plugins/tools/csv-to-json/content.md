@@ -5,39 +5,12 @@ seoTitle: CSV to JSON Converter Online
 seoDescription: Convert comma, semicolon, tab or pipe-delimited CSV into structured JSON.
 ---
 
-## CSV to JSON Converter for focused development work
+## Use the first row as JSON property names
 
-Parse CSV with quoted fields and convert rows to JSON. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+Select comma, semicolon, tab or pipe as the delimiter. The parser supports quoted fields, embedded delimiters, line breaks inside quotes and doubled quotes. The first row becomes the header; each later non-empty row becomes an object whose values are strings.
 
-## How to use CSV to JSON Converter
+For `name,city\n"Ada","London"`, output is a two-space-indented array containing `{ "name": "Ada", "city": "London" }`. Duplicate header names are rejected. Short rows receive empty strings for missing columns, while extra fields beyond the header are ignored.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+The implementation is a focused parser rather than a complete CSV dialect detector. It does not infer delimiter, encoding or types, and a quote is recognized as opening syntax only at the start of a field. Blank-only rows are discarded.
 
-## Practical example
-
-**Input:** name,role
-Ada,admin
-
-**Result:** A JSON array containing an object for each data row.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Are quoted commas supported?
-
-Yes. Quoted fields, escaped quotes and line endings are handled by the CSV parser.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [JSON to CSV Converter](../../json-to-csv/)
-- [XML Formatter](../../xml-formatter/)
-- [XML Minifier](../../xml-minifier/)
+Choose [JSON to CSV Converter](../../json-to-csv/) when starting with object records, or [JSON Validator](../../json-validator/) to inspect the generated document afterward.

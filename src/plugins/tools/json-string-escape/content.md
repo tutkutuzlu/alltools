@@ -5,36 +5,12 @@ seoTitle: JSON String Escape and Unescape Online
 seoDescription: Escape quotes, control characters and backslashes or decode a JSON-escaped string.
 ---
 
-## JSON String Escape for focused development work
+## Prepare string contents, not a complete JSON document
 
-Escape or unescape text for use inside a JSON string. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+Escape mode applies JSON string serialization and removes the surrounding quotes. A line break becomes `\n`, a quote becomes `\"`, and backslashes are escaped. For text `She said "yes"`, the result can be inserted between JSON quotes without terminating the string.
 
-## How to use JSON String Escape
+Unescape mode wraps the supplied escape sequence as a JSON string and parses it, recovering control characters and Unicode escapes accepted by `JSON.parse`. Invalid escape syntax is rejected.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+The tool operates on the contents of one string. It does not format or validate an object, add the outer quotation marks, or URL/HTML-encode the value. Repeated escape operations add another layer, so double-escaping can produce visible backslashes in the receiving application. Unescape behavior around already quoted input can also differ from parsing a complete JSON document.
 
-## Practical example
-
-**Input:** Line 1 followed by a newline and quotes
-
-**Result:** A JSON-safe string with newline and quote escape sequences.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Does escape mode include surrounding quotes?
-
-No. It returns the escaped string content so it can be inserted where needed.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [Number Base Converter](../../number-base-converter/)
+Use [JSON Formatter](../../json-formatter/) for whole documents, or the Text Tools [HTML Encoder](../../html-encoder/) when the destination is HTML rather than JSON syntax.

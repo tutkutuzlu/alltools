@@ -5,42 +5,12 @@ seoTitle: Weight Converter Online – Kg, Lb, Oz
 seoDescription: Convert milligrams, grams, kilograms, ounces, pounds, stone and tonnes in your browser.
 ---
 
-## Weight Converter for quick, accurate results
+## Convert mass units used on scales and specifications
 
-Convert mass values between metric and imperial units. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+Kilograms are the reference. The pound is exactly `0.45359237 kg`; the catalog also includes ounces, stone, metric tonnes and US short tons. `1 stone` is `6.35029318 kg`, while a short ton is about `907.18474 kg` and must not be confused with a 1,000 kg metric tonne.
 
-## How to use Weight Converter
+A checked-baggage limit of `50 lb` converts to `22.6796 kg`. For a UK body-mass reading, `12 stone` becomes about `76.2035 kg`. Milligrams and grams cover smaller laboratory or product quantities.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+The page is titled Weight Converter for familiar usage, but these entries are mass units. Physical weight is a force that depends on gravitational acceleration. The tool does not convert to newtons, estimate local gravity or distinguish avoirdupois units from every historical ounce or ton convention.
 
-## Practical example
-
-**Input:** 10 kilograms to pounds
-
-**Result:** 22.0462262185 Pounds (lb)
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### Is this technically mass or weight?
-
-The units represent mass in everyday usage; standard conversion factors are used without applying local gravity.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Length Converter](../../length-converter/)
-- [Temperature Converter](../../temperature-converter/)
-- [Volume Converter](../../volume-converter/)
+Use [Force Converter](../../force-converter/) for newtons, lbf and kgf, or [Density Converter](../../density-converter/) for mass per volume.

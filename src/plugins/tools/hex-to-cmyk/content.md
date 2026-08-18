@@ -5,42 +5,12 @@ seoTitle: HEX to CMYK Converter – Screen to Print Values
 seoDescription: Estimate CMYK channel percentages from a HEX screen color in your browser.
 ---
 
-## HEX to CMYK for reliable browser-based color work
+## Estimate process-color percentages from HEX
 
-Convert HEX colors to CMYK percentages. The shared AllTools color engine validates every channel before calculating the result and renders a bordered live preview that stays readable in Light and Dark themes.
+HEX represents an additive RGB screen color. CMYK describes subtractive cyan, magenta, yellow and black components used in print workflows. This tool mathematically converts the RGB bytes behind a HEX value into four percentages; for `#FF8000`, the estimate is approximately `cmyk(0%, 50%, 100%, 0%)`.
 
-## How to use HEX to CMYK
+The converter accepts ordinary 3- or 6-digit HEX. Although the shared parser can read alpha-bearing HEX, CMYK output has no alpha channel, so transparency is not represented in the result. Pure black is handled as the special case `0%, 0%, 0%, 100%`.
 
-1. Enter or choose the required color value using the clearly labeled controls.
-2. Review the live result and preview; correct any validation message before using the value.
-3. Copy the generated output, or download CSS only when that action is available.
+Choose this tool for an initial discussion with a print workflow or to understand how a screen color decomposes mathematically. It is not a press-ready color separation. Real printed output depends on ink, paper, ICC profiles, rendering intent and the printer's gamut; vivid RGB colors may not be reproducible in CMYK.
 
-## Practical example
-
-**Input:** #FF8000
-
-**Result:** cmyk(0%, 49.8%, 100%, 0%)
-
-## Accuracy and formats
-
-Calculations use standard sRGB, HSL, HSV, CMYK and alpha formulas where relevant. Display rounding is kept separate from input validation so valid channels remain predictable across modern browsers.
-
-## Privacy
-
-Your colors stay in your browser. Entered values, generated palettes and copied output are never included in telemetry or sent to an external API.
-
-## Frequently asked questions
-
-### Is this a print profile conversion?
-
-No. It is a mathematical device-independent estimate, not an ICC color-profile conversion.
-
-### Can I copy the result?
-
-Yes. Use Copy result to place the generated text on your clipboard. Color values are not included in analytics events.
-
-## Related color tools
-
-- [HEX to RGB](../../hex-to-rgb/)
-- [Color Palette Generator](../../color-palette-generator/)
-- [Contrast Checker](../../contrast-checker/)
+Percentages are rounded for display, so [CMYK to HEX](../../cmyk-to-hex/) may return a nearby rather than byte-identical value after a round trip. Always use a managed design application and printer proof for production color decisions.

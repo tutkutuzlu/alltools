@@ -5,38 +5,12 @@ seoTitle: MIME Type Lookup Online
 seoDescription: Look up common file extensions and Internet media types directly in your browser.
 ---
 
-## MIME Type Lookup for focused development work
+## Map common extensions and media types
 
-Find a common MIME type from an extension or vice versa. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+Enter an extension with or without its leading dot to receive the stored MIME type, or enter an exact MIME type to list matching extensions. `json` returns `application/json`; `image/jpeg` returns both `.jpg` and `.jpeg`.
 
-## How to use MIME Type Lookup
+The lookup is case-insensitive and covers a curated table of 30 common web, document, image, audio, video, archive, font and WebAssembly extensions. It does not inspect file bytes, names with multiple suffixes or server response headers.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+MIME mappings are conventions rather than proof of content. A server can configure another type, some formats have aliases, and an extension can be misleading. The list is not the complete IANA registry and does not include MIME parameters such as `charset=utf-8`.
 
-## Practical example
-
-**Input:** .json
-
-**Result:** application/json and its matching extension.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Can I enter a MIME type?
-
-Yes. Enter a known MIME type to list matching common extensions.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [HTTP Status Code Lookup](../../http-status-code-lookup/)
-- [Color Converter](../../color-converter/)
-- [Number Base Converter](../../number-base-converter/)
+Use this reference when setting a familiar `Content-Type` or reviewing a static asset configuration. [HTTP Status Code Lookup](../../http-status-code-lookup/) covers response status rather than representation metadata.

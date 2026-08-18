@@ -5,35 +5,12 @@ seoTitle: Whitespace Cleaner – Remove Extra Spaces and Tabs
 seoDescription: Clean extra spaces, trailing whitespace, tabs and repeated blank lines with an instant preview.
 ---
 
-## Whitespace Cleaner for focused text work
+## Normalize several kinds of whitespace at once
 
-Normalize repeated spaces, tabs and blank lines. All processing happens immediately on this page, so the result is available without an account or upload.
+Trailing spaces and tabs are removed from every line. Tabs optionally become one space, then every run of two or more ordinary spaces becomes one. When blank-line reduction is enabled, three or more newline-separated blank rows are reduced so only one blank line remains. Finally, whitespace at the beginning and end of the whole text is trimmed.
 
-## How to use Whitespace Cleaner
+This helps clean prose copied from a PDF or CMS where spacing is inconsistent. A tab-indented code sample, however, loses indentation when tab conversion is enabled, and repeated spaces used for alignment are always collapsed even if the Tabs option is off.
 
-1. Type or paste the source text into the input editor.
-2. Choose any available mode or comparison options.
-3. Review the result, then copy or download it when available.
+Single line breaks are preserved, and a normal paragraph separator remains. The algorithm does not normalize non-breaking spaces or every Unicode spacing character because its internal collapse targets ordinary spaces and tabs.
 
-## Practical example
-
-Prepare text copied from a PDF by reducing irregular spacing before pasting it into a CMS.
-
-## Privacy
-
-Your text stays in your browser. The input and result are processed locally and are never included in analytics events.
-
-## Frequently asked questions
-
-### Will paragraph breaks disappear?
-
-Single paragraph breaks remain; only excessive consecutive blank lines are reduced when enabled.
-
-### Does it work on mobile devices?
-
-Yes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.
-
-## Related text tools
-
-- [Remove Empty Lines](../remove-empty-lines/)
-- [Case Converter](../case-converter/)
+Choose [Remove Empty Lines](../../remove-empty-lines/) when all blank rows should disappear while populated-line spacing remains untouched. Use [Case Converter](../../case-converter/) only after cleanup if letter case also needs changing.

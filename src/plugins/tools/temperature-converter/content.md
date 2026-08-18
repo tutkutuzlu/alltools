@@ -5,42 +5,14 @@ seoTitle: Temperature Converter – Celsius Fahrenheit Kelvin
 seoDescription: Convert temperatures among Celsius, Fahrenheit and Kelvin with absolute-zero validation.
 ---
 
-## Temperature Converter for quick, accurate results
+## Temperature uses scale and offset
 
-Convert Celsius, Fahrenheit and Kelvin temperatures. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+Temperature conversion is affine, not a simple factor. The runtime first converts to Celsius: `(°F − 32) × 5/9` or `K − 273.15`; it then applies the target offset and scale. Thus `20°C` becomes `68°F` and `293.15 K`.
 
-## How to use Temperature Converter
+Absolute zero is `−273.15°C`, `−459.67°F` or `0 K`. Inputs below that physical boundary are rejected. Kelvin is labeled without a degree symbol.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+The offsets matter for temperature values but not in the same way for intervals. A change of 10 Celsius degrees equals a change of 18 Fahrenheit degrees, yet entering `10°C` as a temperature produces `50°F` because the runtime converts absolute scale values, not temperature differences.
 
-## Practical example
+Use this tool for weather, cooking equipment or scientific values after confirming whether the source is a temperature or an interval. It does not convert thermal energy, account for measurement uncertainty or interpret mixed text such as “room temperature.”
 
-**Input:** 100 Celsius to Fahrenheit
-
-**Result:** 212 Fahrenheit (°F)
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### Can I enter temperatures below zero?
-
-Yes for Celsius and Fahrenheit. Kelvin values and converted results cannot fall below absolute zero.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Weight Converter](../../weight-converter/)
-- [Volume Converter](../../volume-converter/)
-- [Area Converter](../../area-converter/)
+[Energy Converter](../../energy-converter/) handles energy units, which cannot be inferred from temperature alone.

@@ -5,35 +5,12 @@ seoTitle: Free Case Converter – Uppercase, Lowercase and Title Case
 seoDescription: Convert text to uppercase, lowercase, title case, sentence case, capitalized words or inverted case.
 ---
 
-## Case Converter for focused text work
+## Six English-locale case algorithms
 
-Switch text between uppercase, lowercase and five other case styles. All processing happens immediately on this page, so the result is available without an account or upload.
+Uppercase and lowercase apply the browser's English-locale case mapping. Invert tests each code point against its uppercase form and swaps it; characters without case remain unchanged. Capitalize Each Word finds Unicode letter/number words, including internal apostrophes or hyphens, then uppercases the first code point and lowercases the rest.
 
-## How to use Case Converter
+Title Case uses the same word pattern but leaves a small list of English minor words lowercase after the first matched word. It is a simple algorithm, not Chicago, APA or another editorial style guide. Sentence case lowercases everything, then capitalizes a letter at the start or after `.`, `!` or `?` followed by whitespace.
 
-1. Type or paste the source text into the input editor.
-2. Choose any available mode or comparison options.
-3. Review the result, then copy or download it when available.
+`THE RISE AND FALL OF APIs` becomes `The Rise and Fall of Apis` in Title Case, illustrating that acronyms are not preserved. Punctuation and original spacing are otherwise retained.
 
-## Practical example
-
-Turn an all-caps heading into readable sentence case, then download the corrected result.
-
-## Privacy
-
-Your text stays in your browser. The input and result are processed locally and are never included in analytics events.
-
-## Frequently asked questions
-
-### Will punctuation change?
-
-No. Case conversion changes letter casing while preserving punctuation and spacing.
-
-### Does it work on mobile devices?
-
-Yes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.
-
-## Related text tools
-
-- [Whitespace Cleaner](../whitespace-cleaner/)
-- [Text Reverser](../text-reverser/)
+Choose [Whitespace Cleaner](../../whitespace-cleaner/) separately if copied text also has spacing problems.

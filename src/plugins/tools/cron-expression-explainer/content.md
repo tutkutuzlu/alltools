@@ -5,38 +5,12 @@ seoTitle: Cron Expression Explainer Online
 seoDescription: Explain minute, hour, day, month and weekday fields in standard cron expressions.
 ---
 
-## Cron Expression Explainer for focused development work
+## Label a five-field cron expression
 
-Explain each field in a standard five-part cron expression. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+The explainer requires exactly five whitespace-separated fields in minute, hour, day-of-month, month and day-of-week order. `*/15 9 * * 1` is described as every 15 minutes, hour 9, every day of month, every month and Monday.
 
-## How to use Cron Expression Explainer
+It recognizes `*`, leading `*/step`, and comma-separated values. Numeric months 1–12 and weekdays 0–7 receive names, with both 0 and 7 labeled Sunday. Other text is echoed rather than deeply interpreted.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+This is an explainer, not a validator or scheduler. It does not check numeric ranges, calculate next run times, choose a timezone or fully explain ranges, names and advanced dialect syntax. Six- or seven-field formats, macros such as `@daily`, Quartz modifiers and seconds fields are rejected by the field-count rule.
 
-## Practical example
-
-**Input:** */15 9 * * 1-5
-
-**Result:** A field-by-field explanation of the schedule values.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Does it support seconds or vendor macros?
-
-V1 accepts portable five-field cron expressions; six-field formats and macros are intentionally rejected.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [Regex Tester](../../regex-tester/)
-- [HTTP Status Code Lookup](../../http-status-code-lookup/)
-- [MIME Type Lookup](../../mime-type-lookup/)
+Use it for a quick field-order check, then confirm behavior in the actual cron implementation that will execute the job. [Unix Timestamp Converter](../../unix-timestamp-converter/) handles instants, not recurring schedules.

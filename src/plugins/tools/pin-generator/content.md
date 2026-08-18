@@ -1,46 +1,16 @@
 ---
 title: PIN Generator
-shortDescription: Generate secure numeric PINs with pattern exclusions.
-seoTitle: Secure PIN Generator – 4 to 12 Digits
+shortDescription: Generate random numeric PINs with optional pattern exclusions.
+seoTitle: Random PIN Generator – 4 to 12 Digits
 seoDescription: Generate cryptographically random PINs and optionally reject all-repeated or simple sequential patterns.
 ---
 
-## PIN Generator for private browser workflows
+## Numeric output with optional pattern rejection
 
-Create numeric credentials while preserving leading zeros and optional pattern rules. All processing uses local browser capabilities and the result is never sent to an external service.
+Choose 4, 5, 6, 8, 10 or 12 digits. Every digit is independently sampled from `0`–`9` with `crypto.getRandomValues`, so leading zeros and repeated digits are possible. The full unconstrained output space is `10^length`, and collisions remain possible whenever multiple PINs are generated.
 
-## How to use PIN Generator
+“Exclude all-repeated” rejects values such as `777777`. “Exclude simple sequences” rejects only substrings found in ascending `0123456789` or descending `9876543210`; it is not a broad pattern detector. The generator tries up to 1,000 candidates before reporting that the selected constraints could not be met.
 
-1. Choose the controls that match your intended format or security requirement.
-2. Enter local input when required, then generate or review the calculated result.
-3. Copy the output and handle any secret according to the policy of the system where it will be used.
+A six-digit PIN is useful only where a system explicitly expects six numeric characters and applies appropriate attempt limits. It is not a cryptographic key, bearer token or strong general-purpose password. Excluding a few recognizable patterns does not change that narrow security boundary.
 
-## Practical example
-
-**Input:** 6 digits with exclusions enabled
-
-**Result:** A random six-digit PIN
-
-## Security boundaries
-
-This utility provides a focused primitive, not a complete security guarantee. Review algorithm warnings, protect copied secrets from clipboard history and never reuse credentials across unrelated services.
-
-## Privacy
-
-Passwords, keys, tokens, source text and generated values stay in the active page. They are not stored in localStorage, written to the console or included in telemetry.
-
-## Frequently asked questions
-
-### Does excluding patterns make a PIN unguessable?
-
-No. It removes a few weak-looking cases but digit length remains the main size of the search space.
-
-### Can I generate leading zeros?
-
-Yes. PINs are strings, so leading zeros are preserved.
-
-## Related security tools
-
-- [Password Generator](../../password-generator/)
-- [Secure Token Generator](../../secure-token-generator/)
-- [Hash Generator](../../hash-generator/)
+Choose [Password Generator](../../password-generator/) for account credentials that accept a larger alphabet, or [Random String Generator](../../random-string-generator/) for a custom code alphabet. The output is copied as text so its leading zeros are preserved.

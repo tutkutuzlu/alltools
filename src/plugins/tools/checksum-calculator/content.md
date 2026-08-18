@@ -5,42 +5,12 @@ seoTitle: Checksum Calculator – CRC32 Adler-32 Sum-8
 seoDescription: Calculate common non-cryptographic checksums for local text and clearly distinguish them from hashes.
 ---
 
-## Checksum Calculator for private browser workflows
+## Three non-cryptographic checksums
 
-Detect accidental data changes with lightweight, explicitly non-cryptographic algorithms. All processing uses local browser capabilities and the result is never sent to an external service.
+The input is first encoded as UTF-8. CRC32 uses the reflected `0xEDB88320` polynomial and returns eight lowercase HEX digits; Adler-32 maintains modulo-65521 running sums and also returns eight digits; Sum-8 adds all bytes modulo 256 and returns two digits. For the standard text `123456789`, CRC32 is `cbf43926`.
 
-## How to use Checksum Calculator
+These compact values are useful for file-format fields, protocol diagnostics, fixtures and detecting likely accidental corruption when both sides agree on the exact algorithm and byte encoding. Sum-8 is especially collision-prone; CRC32 and Adler-32 are stronger error-detection codes but still have many deliberate collisions.
 
-1. Choose the controls that match your intended format or security requirement.
-2. Enter local input when required, then generate or review the calculated result.
-3. Copy the output and handle any secret according to the policy of the system where it will be used.
+A checksum has no secret and is not designed to resist an attacker who can change both data and checksum. It must not be presented as authentication or used as a password fingerprint. Choose [Hash Generator](../../hash-generator/) when a cryptographic digest is specified, or [HMAC Generator](../../hmac-generator/) when a shared secret must authenticate the data.
 
-## Practical example
-
-**Input:** 123456789 with CRC32
-
-**Result:** cbf43926
-
-## Security boundaries
-
-This utility provides a focused primitive, not a complete security guarantee. Review algorithm warnings, protect copied secrets from clipboard history and never reuse credentials across unrelated services.
-
-## Privacy
-
-Passwords, keys, tokens, source text and generated values stay in the active page. They are not stored in localStorage, written to the console or included in telemetry.
-
-## Frequently asked questions
-
-### Can a checksum protect against attackers?
-
-No. Checksums detect accidental changes but are not designed to resist intentional manipulation.
-
-### When is CRC32 useful?
-
-It is useful for compatibility and corruption checks when cryptographic authenticity is not required.
-
-## Related security tools
-
-- [Password Generator](../../password-generator/)
-- [Secure Token Generator](../../secure-token-generator/)
-- [Hash Generator](../../hash-generator/)
+This calculator accepts text, not uploaded file bytes. Line-ending changes and Unicode normalization can therefore change the UTF-8 sequence and its checksum even when two renderings look similar.

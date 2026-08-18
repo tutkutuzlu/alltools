@@ -5,38 +5,12 @@ seoTitle: HEX RGB HSL Color Converter Online
 seoDescription: Convert HEX or RGB colors into normalized HEX, RGB and HSL values.
 ---
 
-## Color Converter for focused development work
+## A compact developer conversion for HEX and RGB
 
-Convert HEX and RGB colors to HEX, RGB and HSL. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+This developer-family tool accepts only 3- or 6-digit HEX and integer `rgb(r, g, b)` syntax. It normalizes the color to uppercase six-digit HEX, integer RGB and rounded HSL. `#369`, for example, expands to `#336699`, `rgb(51, 102, 153)` and its HSL representation.
 
-## How to use Color Converter
+RGB channel numbers outside 0–255 are clamped rather than rejected. Alpha, named colors, HSL input, modern CSS color spaces and space-separated RGB syntax are unsupported. HSL components are rounded to integers, so this is intended for quick code-oriented inspection rather than precision round trips.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+Choose this page when a developer has one basic HEX/RGB value and wants all three common outputs together. [CSS Color Converter](../../css-color-converter/) supports more input models and alpha, while [HEX to RGB](../../hex-to-rgb/) provides stricter one-direction behavior.
 
-## Practical example
-
-**Input:** #336699
-
-**Result:** Equivalent HEX, RGB and HSL color values.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Are shorthand HEX colors supported?
-
-Yes. Three-digit HEX values are expanded before conversion.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [MIME Type Lookup](../../mime-type-lookup/)
-- [Number Base Converter](../../number-base-converter/)
-- [JSON String Escape](../../json-string-escape/)
+The overlap is intentional at present, but the Color Tools converter is the broader option.

@@ -1,33 +1,21 @@
 ---
 slug: about
 title: About AllTools
-seoTitle: About AllTools – Fast, Private Browser Tools
-seoDescription: Learn why AllTools builds focused, free utilities that run quickly and keep your work in your browser whenever possible.
-updatedAt: 2026-08-03
+seoTitle: About AllTools – Independent Browser Utilities
+seoDescription: Learn what AllTools provides, who maintains it and how its browser-based utility catalog is organized.
+updatedAt: 2026-08-18
 ---
 
-## Tools that respect your time
+## What AllTools provides
 
-AllTools is an independent online utility platform built around a simple idea: common digital tasks should not require an account, a complicated workflow or a heavy application. Each tool is designed to solve one focused problem clearly and quickly.
+AllTools is an independently maintained utility website published by Tutku Tuzlu. It provides focused browser tools for common tasks without requiring an AllTools account.
 
-The platform currently includes browser-based text utilities for counting, cleaning, sorting, transforming, encoding and generating text. More tool families may be added as the platform grows, but every addition is expected to remain useful, understandable and easy to access on mobile and desktop devices.
+The current catalog contains 104 tools in five families: Text Tools, Developer Tools, Unit Converters, Color Tools, and Security & Generators. They cover text inspection and cleanup, developer data workflows, measurement conversion, color conversion and accessibility checks, and local generation or calculation tasks.
 
-## Privacy by design
+## Processing and privacy
 
-Whenever a tool can work locally, its input is processed in your browser. Text entered into the current Text Tools is not uploaded to an AllTools server and is not included in analytics events. Each tool page explains its processing model so you can make an informed choice before using it.
+Published tools run in the browser and do not require an AllTools application server to process tool input. Tool input and generated values are excluded from AllTools telemetry. The [Privacy Policy](../privacy/) explains the separate analytics and advertising services used on site pages.
 
-## How the platform is built
+## Maintenance
 
-AllTools is a static website built with HTML, CSS and JavaScript. Its shared plugin and component architecture keeps interactions consistent while allowing new utilities to be added without manually rebuilding the home page, category listings, search index or sitemap.
-
-The project prioritizes:
-
-- Fast page loads and mobile-first layouts.
-- Accessible controls and clear keyboard focus.
-- Original explanations and practical examples for every tool.
-- Transparent privacy and product policies.
-- A sustainable design that can support the platform without compromising usability.
-
-## Independent and continually improved
-
-AllTools is not affiliated with Google or any other third-party service mentioned on the site. Tool behavior, content and policies are reviewed as the platform evolves. Suggestions and reproducible problem reports are welcome through the contact options on the [Contact page](../contact/).
+AllTools is a static HTML, CSS and JavaScript project. Tutku Tuzlu maintains the catalog, shared runtime and editorial content. The project is not affiliated with Google or other third-party services named in its policies. Reproducible problem reports and suggestions are welcome through the [Contact page](../contact/).

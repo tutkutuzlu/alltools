@@ -5,42 +5,12 @@ seoTitle: Data Transfer Rate Converter – Mbps MB/s
 seoDescription: Convert bps, Kbps, Mbps, Gbps and decimal or binary bytes per second.
 ---
 
-## Data Transfer Rate Converter for quick, accurate results
+## Compare advertised bit rates with byte throughput
 
-Convert network bit rates and byte rates. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+The catalog references bytes per second. Eight bits make one byte, and the network prefixes are decimal: `1 Mbps = 125,000 B/s`, so a `100 Mbps` connection has a theoretical rate of `12.5 MB/s`. Byte-rate options include decimal KB/s, MB/s and GB/s plus binary MiB/s.
 
-## How to use Data Transfer Rate Converter
+This distinction is practical when an internet plan is advertised in megabits but a download application reports megabytes per second. For example, `1 Gbps` converts to `125 MB/s`, before protocol and network overhead.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+The conversion represents raw rate units, not observed performance. It does not calculate how long a file will take, and it does not account for headers, congestion, Wi-Fi conditions, storage speed or server limits. Only MiB/s is provided among binary byte-rate units; KiB/s and GiB/s are not in the current catalog.
 
-## Practical example
-
-**Input:** 100 megabits per second to MB/s
-
-**Result:** 12.5 Megabytes per second
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### Why does 8 Mbps equal 1 MB/s?
-
-A byte contains eight bits, while capitalization distinguishes bits from bytes.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Fuel Economy Converter](../../fuel-economy-converter/)
-- [Acceleration Converter](../../acceleration-converter/)
-- [Density Converter](../../density-converter/)
+Use [Data Storage Converter](../../data-storage-converter/) for file or device capacity. A time estimate requires combining a storage amount and an effective rate separately.

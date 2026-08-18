@@ -5,42 +5,12 @@ seoTitle: Voltage Converter – µV mV V kV MV
 seoDescription: Convert microvolts, millivolts, volts, kilovolts and megavolts.
 ---
 
-## Voltage Converter for quick, accurate results
+## Rescale electric potential difference
 
-Convert voltage across SI decimal prefixes. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+Volts are the reference. The supported prefixes are decimal: one microvolt is `10⁻⁶ V`, one millivolt is `10⁻³ V`, one kilovolt is `1,000 V` and one megavolt is `1,000,000 V`.
 
-## How to use Voltage Converter
+A sensor output of `2,500 mV` is `2.5 V`; a transmission value of `132 kV` is `132,000 V`. Prefix conversion is useful when a measurement instrument and a specification use different scales.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+Voltage alone does not imply current, resistance, power or stored energy. AC values may be described as RMS, peak or peak-to-peak, and converting units does not change or identify that convention. The tool also does not assess electrical safety or equipment compatibility.
 
-## Practical example
-
-**Input:** 5 volts to millivolts
-
-**Result:** 5000 Millivolts (mV)
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### Does this calculate electrical power?
-
-No. It converts voltage magnitude only; power calculations also require current or resistance.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Flow Rate Converter](../../flow-rate-converter/)
-- [Electric Current Converter](../../electric-current-converter/)
-- [Illuminance Converter](../../illuminance-converter/)
+Use [Electric Current Converter](../../electric-current-converter/) for amperes and [Power Converter](../../power-converter/) for an already-known watt value. Calculating between them requires circuit information that this converter does not request.

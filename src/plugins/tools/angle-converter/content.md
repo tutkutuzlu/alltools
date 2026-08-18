@@ -5,42 +5,12 @@ seoTitle: Angle Converter Online – Degrees Radians Turns
 seoDescription: Convert degrees, radians, gradians, turns, arcminutes and arcseconds.
 ---
 
-## Angle Converter for quick, accurate results
+## Relate angular systems through radians
 
-Convert degrees, radians, turns and angular subdivisions. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+The runtime uses radians as its reference. One full turn is `2π` radians, 360 degrees or 400 gradians; one degree contains 60 arcminutes and 3,600 arcseconds. These relationships let the tool convert navigation, geometry and engineering notation without treating angles as lengths.
 
-## How to use Angle Converter
+For example, a right angle of `90°` becomes approximately `1.57079632679 rad`, `100 grad` or `0.25 turn`. Astronomical coordinates can also be moved between decimal degrees and arcseconds.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+Conversions involving degrees and radians use the runtime's value of π, so decimal output is necessarily rounded. The converter accepts angles outside one revolution and does not normalize them: 450 degrees remains 1.25 turns rather than being reduced to 90 degrees.
 
-## Practical example
-
-**Input:** 180 degrees to radians
-
-**Result:** 3.14159265359 Radians (rad)
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### How many degrees are in one turn?
-
-One complete turn is exactly 360 degrees or two pi radians.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Torque Converter](../../torque-converter/)
-- [Frequency Converter](../../frequency-converter/)
-- [Fuel Economy Converter](../../fuel-economy-converter/)
+Choose this tool for angular position. [Frequency Converter](../../frequency-converter/) handles cycles per time but does not calculate angular frequency in radians per second, and [Torque Converter](../../torque-converter/) concerns rotational force rather than angle.

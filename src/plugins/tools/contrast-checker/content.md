@@ -5,41 +5,14 @@ seoTitle: Color Contrast Checker – WCAG AA and AAA
 seoDescription: Calculate an accurate WCAG contrast ratio and AA or AAA outcomes for normal and large text.
 ---
 
-## Contrast Checker for reliable browser-based color work
+## Check one text and background pair
 
-Calculate WCAG contrast between two colors. The shared AllTools color engine validates every channel before calculating the result and renders a bordered live preview that stays readable in Light and Dark themes.
+Use this page for a direct question: does this text color have enough contrast against this background color? Enter the text color first and the solid background second. The result reports their ratio plus AA and AAA pass/fail outcomes for normal and large text.
 
-## How to use Contrast Checker
+The calculation converts RGB channels to WCAG relative luminance, orders the lighter and darker values, then evaluates `(lighter + 0.05) / (darker + 0.05)`. Black against white produces the maximum `21:1`. For WCAG thresholds used here, normal text needs 4.5:1 for AA and 7:1 for AAA; large text needs 3:1 and 4.5:1 respectively.
 
-1. Enter or choose the required color value using the clearly labeled controls.
-2. Review the live result and preview; correct any validation message before using the value.
-3. Copy the generated output, or download CSS only when that action is available.
+For example, checking `#111827` text on `#FFFFFF` gives a strong ratio suitable for routine body-copy review. Choose this focused tool while adjusting a specific CSS foreground/background pair and copy the concise report into a design review.
 
-## Practical example
+The runtime compares the entered RGB colors as solid values. It does not composite alpha, sample gradients or images, determine font size/weight, or inspect an actual page. Contrast also does not cover focus visibility, color-only meaning, typography or interaction accessibility.
 
-**Input:** #111827 on #FFFFFF
-
-**Result:** 17.74:1 with AA and AAA passes
-
-## Accuracy and formats
-
-Calculations use standard sRGB, HSL, HSV, CMYK and alpha formulas where relevant. Display rounding is kept separate from input validation so valid channels remain predictable across modern browsers.
-
-## Privacy
-
-Your colors stay in your browser. Entered values, generated palettes and copied output are never included in telemetry or sent to an external API.
-
-## Frequently asked questions
-
-### Which WCAG formula is used?
-
-The tool uses sRGB linearization, relative luminance and the standard lighter-plus-0.05 ratio.
-
-### Can I copy the result?
-
-Yes. Use Copy result to place the generated text on your clipboard. Color values are not included in analytics events.
-
-## Related color tools
-
-- [HEX to RGB](../../hex-to-rgb/)
-- [Color Palette Generator](../../color-palette-generator/)
+For a more accessibility-oriented reading of the same current calculation, use [WCAG Color Accessibility Checker](../../wcag-color-accessibility-checker/). Composite transparency first with [Opacity / Alpha Calculator](../../opacity-alpha-calculator/).

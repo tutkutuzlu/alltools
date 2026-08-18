@@ -5,35 +5,12 @@ seoTitle: Remove Empty Lines Online – Clean Blank Rows
 seoDescription: Remove empty and whitespace-only lines from text and see the resulting line count instantly.
 ---
 
-## Remove Empty Lines for focused text work
+## Remove blank rows without changing populated lines
 
-Strip blank or whitespace-only lines from multiline text. All processing happens immediately on this page, so the result is available without an account or upload.
+With the default option, a line is removed when trimming it leaves no characters, so rows containing only spaces or tabs disappear. Disable “Remove whitespace-only lines” to remove only zero-length lines and retain rows that contain whitespace.
 
-## How to use Remove Empty Lines
+Remaining lines are joined with LF in their original order. Their leading spaces, internal spacing and trailing spaces are not edited. A list such as `alpha`, blank row, `beta` becomes two adjacent lines, and the result metric reports two.
 
-1. Type or paste the source text into the input editor.
-2. Choose any available mode or comparison options.
-3. Review the result, then copy or download it when available.
+This is useful after copying spreadsheet or terminal output that contains unwanted separators. It does not collapse duplicate populated records or reduce multiple spaces inside a line. An empty input produces an empty result and zero result lines.
 
-## Practical example
-
-Compact copied spreadsheet values that contain unwanted blank rows between records.
-
-## Privacy
-
-Your text stays in your browser. The input and result are processed locally and are never included in analytics events.
-
-## Frequently asked questions
-
-### Can I keep lines that contain spaces?
-
-Yes. Disable the whitespace-only option to remove only lines with zero characters.
-
-### Does it work on mobile devices?
-
-Yes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.
-
-## Related text tools
-
-- [Remove Duplicate Lines](../remove-duplicate-lines/)
-- [Whitespace Cleaner](../whitespace-cleaner/)
+Choose [Remove Duplicate Lines](../../remove-duplicate-lines/) for repeated values. [Whitespace Cleaner](../../whitespace-cleaner/) performs broader trimming and spacing normalization, so use it only when those additional changes are intended.

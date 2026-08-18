@@ -5,35 +5,12 @@ seoTitle: Base64 Decoder – Decode UTF-8 Text Safely
 seoDescription: Decode Base64 into Unicode text in your browser with validation and understandable errors.
 ---
 
-## Base64 Decoder for focused text work
+## Require standard Base64 and valid UTF-8
 
-Decode valid Base64 back into readable UTF-8 text. All processing happens immediately on this page, so the result is available without an account or upload.
+Input is trimmed, checked against the standard Base64 alphabet and required to have a length divisible by four with at most two trailing `=` characters. After `atob`, the bytes are decoded with a fatal UTF-8 decoder, so invalid UTF-8 is rejected rather than replaced.
 
-## How to use Base64 Decoder
+For example, `SGVsbG8sIHdvcmxkIQ==` becomes `Hello, world!`. This is useful when inspecting a text payload known to have been encoded from UTF-8.
 
-1. Type or paste the source text into the input editor.
-2. Choose any available mode or comparison options.
-3. Review the result, then copy or download it when available.
+Unpadded Base64, Base64URL using `-` or `_`, embedded whitespace and arbitrary binary that is not UTF-8 are unsupported. Decoding also does not verify the origin or safety of the resulting text; Base64 carries no authenticity or encryption.
 
-## Practical example
-
-Inspect a Base64-encoded configuration value without submitting it to an online service.
-
-## Privacy
-
-Your text stays in your browser. The input and result are processed locally and are never included in analytics events.
-
-## Frequently asked questions
-
-### How are invalid bytes handled?
-
-Invalid Base64 or non-UTF-8 byte sequences produce a clear error instead of corrupted output.
-
-### Does it work on mobile devices?
-
-Yes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.
-
-## Related text tools
-
-- [Base64 Encoder](../base64-encoder/)
-- [URL Decoder](../url-decoder/)
+Choose [Base64 Encoder](../../base64-encoder/) for the exact inverse format. If the source is a JWT segment, [JWT Decoder](../../jwt-decoder/) understands Base64URL and token structure separately.

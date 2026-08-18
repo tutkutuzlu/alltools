@@ -5,40 +5,12 @@ seoTitle: Illuminance Converter – Lux Foot-candles
 seoDescription: Convert illuminance between lux, foot-candles, phot and nox.
 ---
 
-## Illuminance Converter for quick, accurate results
+## Compare light arriving at a surface
 
-Convert lux, foot-candles, phot and nox. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+Illuminance measures luminous flux per area. Lux is the reference; one foot-candle equals approximately `10.76391041671 lux`, one phot is `10,000 lux`, and one nox is `0.001 lux`.
 
-## How to use Illuminance Converter
+An office target of `500 lux` converts to about `46.45 foot-candles`. This is useful when a lighting recommendation and a meter use different units. Very low nighttime levels may be more readable in nox, while phot represents much higher illuminance.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+Illuminance is not luminance. Lux describes light falling on a surface; it does not directly state how bright the surface or a display appears to an observer. Reflectance, distance, angle, sensor response and spatial uniformity remain outside the unit conversion.
 
-## Practical example
-
-**Input:** 100 lux to foot-candles
-
-**Result:** 9.290304 Foot-candles (fc)
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### Is illuminance the same as luminous flux?
-
-No. Illuminance measures luminous flux per unit area; this tool converts illuminance units only.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Electric Current Converter](../../electric-current-converter/)
+The tool converts a measured magnitude and cannot design a lighting layout or account for fixture distribution. [Power Converter](../../power-converter/) converts electrical or mechanical power units, but watts cannot be converted to lux without source efficacy and geometry.

@@ -5,35 +5,12 @@ seoTitle: URL Encoder – Encode UTF-8 Components or Full URLs
 seoDescription: Percent-encode UTF-8 text safely with separate URL component and full URL modes.
 ---
 
-## URL Encoder for focused text work
+## Encode a component or preserve URL separators
 
-Percent-encode Unicode text as a component or full URL. All processing happens immediately on this page, so the result is available without an account or upload.
+Component mode uses `encodeURIComponent`, escaping characters that would otherwise act as query or path syntax. Full URL mode uses `encodeURI`, preserving structural characters such as `:`, `/`, `?`, `#` and `&` while encoding Unicode and unsafe text.
 
-## How to use URL Encoder
+Encode `coffee & tea` as a query-parameter value and component mode produces `coffee%20%26%20tea`, preventing the ampersand from starting another parameter. For an already assembled URL, full mode keeps its separators readable.
 
-1. Type or paste the source text into the input editor.
-2. Choose any available mode or comparison options.
-3. Review the result, then copy or download it when available.
+Percent encoding represents UTF-8 bytes; it is neither encryption nor access control. Applying the tool twice encodes existing percent signs, so `%20` can become `%2520`. Full mode is not appropriate for an untrusted parameter value because it deliberately leaves delimiters intact.
 
-## Practical example
-
-Encode a search value for insertion into a query parameter without altering the surrounding URL.
-
-## Privacy
-
-Your text stays in your browser. The input and result are processed locally and are never included in analytics events.
-
-## Frequently asked questions
-
-### Which mode should I use?
-
-Use component mode for parameter values and full URL mode when preserving URL separators such as slashes.
-
-### Does it work on mobile devices?
-
-Yes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.
-
-## Related text tools
-
-- [URL Decoder](../url-decoder/)
-- [Base64 Encoder](../base64-encoder/)
+Use [URL Decoder](../../url-decoder/) for the reverse operation, or [URL Parser](../../url-parser/) to inspect a complete absolute address.

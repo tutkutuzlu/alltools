@@ -2,17 +2,17 @@
 slug: privacy
 title: Privacy Policy
 seoTitle: AllTools Privacy Policy
-seoDescription: Understand what AllTools processes locally, what limited analytics data is collected and how advertising privacy will be handled.
-updatedAt: 2026-08-03
+seoDescription: Understand local tool processing and the limited analytics and advertising services used by AllTools.
+updatedAt: 2026-08-18
 ---
 
 ## Overview
 
 This Privacy Policy explains how AllTools handles information when you visit the website or use its browser tools. AllTools is designed to minimize data collection and to process tool input locally whenever practical.
 
-## Tool input and files
+## Tool input and generated values
 
-The current Text Tools process their input in your browser. AllTools does not intentionally transmit or store the text you enter, clipboard contents you paste, generated results or downloaded output. Clipboard access occurs only after you select an action such as Paste or Copy and remains subject to your browser permissions.
+The published Text, Developer, Unit, Color, and Security & Generators tools run their operations in your browser without an external tool-processing API. AllTools does not intentionally transmit or store tool input, clipboard contents, generated results or downloaded output. Clipboard access occurs only after you select an action such as Paste or Copy and remains subject to browser permissions.
 
 Do not enter information into any online service unless you are authorized to process it. Browser extensions, managed devices, network software and third-party software outside AllTools may operate under their own policies.
 
@@ -35,15 +35,13 @@ Google processes Analytics data under its own terms and policies. Learn more in 
 
 ## Local storage and cookies
 
-AllTools uses browser local storage to remember your light, dark or system theme preference. Google Analytics may use browser storage or cookies according to the configured consent settings and applicable law.
+AllTools uses browser local storage to remember your light, dark or system theme preference. Google Analytics may use browser storage or cookies under the current site configuration and applicable browser controls.
 
-AllTools does not currently load Google AdSense advertising code or serve personalized advertisements. If advertising is activated, this policy will continue to disclose the use of advertising cookies, web beacons, IP addresses and other identifiers by Google and its partners. Required consent controls will be enabled before advertising requests are made in regions where consent is required.
+## Advertising
 
-## Advertising preparation
+AllTools loads the Google AdSense script on production pages. Google and its advertising partners may place or read cookies, use web beacons, process IP addresses and collect information as a consequence of ad serving. The current AllTools configuration does not render first-party ad placements, but the AdSense script is present for site verification and advertising readiness. Tool input and generated output are not intentionally included in advertising requests.
 
-AllTools may use Google AdSense in the future. Google and its advertising partners may place or read cookies, use web beacons, process IP addresses and collect information as a consequence of ad serving. Advertising will remain separate from tool input, and AllTools will not intentionally include private tool content in advertising requests.
-
-Where required, users will be offered appropriate privacy choices through a consent management platform. You can learn about Google's advertising technologies and controls at [Google's advertising policies and technologies page](https://policies.google.com/technologies/ads).
+Google Signals, ads personalization and advertising-related analytics consent values are not enabled by the AllTools GA4 configuration. The site does not currently provide its own consent banner. Consent requirements vary by location, so this implementation and policy must be reviewed before personalized advertising or ad placements are enabled. You can learn about Google's advertising technologies and controls at [Google's advertising policies and technologies page](https://policies.google.com/technologies/ads).
 
 ## Data retention
 
@@ -51,7 +49,7 @@ AllTools does not maintain an application account database or server-side store 
 
 ## Your choices
 
-You can limit storage and analytics through browser privacy settings, content blockers or controls made available by Google. Blocking scripts may affect analytics but should not prevent the core text tools from operating. You may clear AllTools local storage through your browser settings.
+You can limit storage and analytics through browser privacy settings, content blockers or controls made available by Google. Blocking third-party scripts may affect analytics or advertising but should not prevent the browser tools from operating. You may clear AllTools local storage through your browser settings.
 
 ## Children's privacy
 

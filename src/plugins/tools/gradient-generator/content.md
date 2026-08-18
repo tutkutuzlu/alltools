@@ -5,42 +5,12 @@ seoTitle: CSS Gradient Generator – Multiple Color Stops
 seoDescription: Build a three-stop linear gradient with direction controls, preview, copy and CSS download.
 ---
 
-## Gradient Generator for reliable browser-based color work
+## Produce a three-stop CSS linear gradient
 
-Create multi-stop CSS linear gradients. The shared AllTools color engine validates every channel before calculating the result and renders a bordered live preview that stays readable in Light and Dark themes.
+Enter first, middle and final colors, then select an angle or keyword direction. The runtime normalizes each supported color to HEX, preserving alpha when present, and places the stops at 0%, 50% and 100%. The result is a complete value such as `linear-gradient(90deg, #3366CC 0%, #FFCC00 50%, #CC33FF 100%)`.
 
-## How to use Gradient Generator
+Use the generated text as a CSS `background` or `background-image` value. Copy places the value on the clipboard; Download CSS saves the same single gradient declaration value in `alltools-gradient.css`. The file is not a full selector or stylesheet rule, so insert it into the property your project needs.
 
-1. Enter or choose the required color value using the clearly labeled controls.
-2. Review the live result and preview; correct any validation message before using the value.
-3. Copy the generated output, or download CSS only when that action is available.
+Directions are limited to the provided options: five degree angles plus `to right` and `to bottom`. Stop positions are evenly fixed and cannot be added, removed or dragged. Browser interpolation happens when CSS renders the gradient; the tool itself does not calculate intermediate swatches or choose a color space.
 
-## Practical example
-
-**Input:** #3366CC, #FFCC00, #CC33FF at 90deg
-
-**Result:** linear-gradient CSS
-
-## Accuracy and formats
-
-Calculations use standard sRGB, HSL, HSV, CMYK and alpha formulas where relevant. Display rounding is kept separate from input validation so valid channels remain predictable across modern browsers.
-
-## Privacy
-
-Your colors stay in your browser. Entered values, generated palettes and copied output are never included in telemetry or sent to an external API.
-
-## Frequently asked questions
-
-### Can I download the result?
-
-Yes. The generated CSS declaration can be copied or downloaded as a small CSS file.
-
-### Can I copy the result?
-
-Yes. Use Copy result to place the generated text on your clipboard. Color values are not included in analytics events.
-
-## Related color tools
-
-- [HEX to RGB](../../hex-to-rgb/)
-- [Color Palette Generator](../../color-palette-generator/)
-- [Contrast Checker](../../contrast-checker/)
+Choose this tool for implementation-ready CSS. If you need only one midpoint between two colors, [Color Mixer](../../color-mixer/) provides explicit channel weighting. Check text placed over a gradient at its relevant positions rather than assuming one endpoint ratio is sufficient.

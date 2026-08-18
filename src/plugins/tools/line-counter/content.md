@@ -5,35 +5,12 @@ seoTitle: Free Line Counter – Count Empty and Non-Empty Lines
 seoDescription: Count lines, empty rows, longest line and average line length locally in your browser.
 ---
 
-## Line Counter for focused text work
+## Inspect row structure and length
 
-Count total, empty and non-empty lines plus line length. All processing happens immediately on this page, so the result is available without an account or upload.
+The counter splits on LF or CRLF. A completely empty editor has zero lines; otherwise a trailing newline creates a final empty line. A line is considered empty when trimming leaves nothing, so spaces and tabs alone count as an empty row.
 
-## How to use Line Counter
+Longest and average line length count Unicode code points, including whitespace and punctuation. Average includes empty lines and is displayed with one decimal place. In `alpha\n\nbeta`, there are three total lines, two non-empty lines, one empty line and a longest length of five.
 
-1. Type or paste the source text into the input editor.
-2. Read the live measurements as the content changes.
-3. Clear the editor when you are finished.
+Use this for generated lists, configuration snippets or data exports where record count and unusually long rows matter. It does not detect visual wrapping: a long line shown across several screen rows remains one logical line.
 
-## Practical example
-
-Check whether a generated configuration list has the expected number of non-empty records.
-
-## Privacy
-
-Your text stays in your browser. The input and result are processed locally and are never included in analytics events.
-
-## Frequently asked questions
-
-### How is an empty editor counted?
-
-An editor with no characters reports zero lines rather than one blank line.
-
-### Does it work on mobile devices?
-
-Yes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.
-
-## Related text tools
-
-- [Character Counter](../character-counter/)
-- [Paragraph Counter](../paragraph-counter/)
+[Character Counter](../../character-counter/) provides aggregate characters and words. [Remove Empty Lines](../../remove-empty-lines/) changes the text rather than only measuring it.

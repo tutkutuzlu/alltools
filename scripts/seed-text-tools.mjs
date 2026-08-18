@@ -1,7 +1,9 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir } from "node:fs/promises";
 import path from "node:path";
 import { rootDir } from "./lib/project.mjs";
+import { editorialScaffold, seedFile, seedOptions } from "./lib/seed-files.mjs";
 
+const { force } = seedOptions();
 const publish = process.argv.includes("--publish");
 const catalogOrder = [
   "word-counter", "character-counter", "case-converter", "line-counter", "sentence-counter", "paragraph-counter",
@@ -39,9 +41,9 @@ for (const [id,title,variant,shortDescription,seoTitle,seoDescription,example,fa
   const directory = path.join(rootDir, "src", "plugins", "tools", id);
   await mkdir(directory, { recursive: true });
   const manifest = { schemaVersion:1,id,version:"1.0.0",type:variant === "generator" ? "generator" : variant === "converter" ? "converter" : variant === "formatter" ? "formatter" : "tool",family:"text-tools",variant,slug:id,icon:"text",publishedAt:"2026-08-03",updatedAt:"2026-08-03",featured:featuredTools.has(id),popularity:popularScores.get(id) ?? 0,estimatedTime:"instant",status:publish?"published":"draft",entry:"./index.js",category:"text",tags:["text",...id.split("-").filter((value)=>value!=="text")],aliases:[title.toLowerCase(),`${title.toLowerCase()} online`],components:["tool.shell","field.textarea","action.button"],capabilities:{offline:true,fileAccess:false,networkAccess:false,webWorker:false},discovery:{priority:190-catalogOrder.indexOf(id)} };
-  await writeFile(path.join(directory,"tool.json"),`${JSON.stringify(manifest,null,2)}\n`);
-  await writeFile(path.join(directory,"index.js"),`export { mount, unmount } from "../../families/text-tools/universal-plugin.js";\n`);
+  await seedFile(path.join(directory,"tool.json"),`${JSON.stringify(manifest,null,2)}\n`, { force });
+  await seedFile(path.join(directory,"index.js"),`export { mount, unmount } from "../../families/text-tools/universal-plugin.js";\n`, { force });
   const content = `---\ntitle: ${title}\nshortDescription: ${shortDescription}\nseoTitle: ${seoTitle}\nseoDescription: ${seoDescription}\n---\n\n## ${title} for focused text work\n\n${shortDescription} All processing happens immediately on this page, so the result is available without an account or upload.\n\n## How to use ${title}\n\n1. ${variant === "generator" ? "Choose the output unit and amount." : "Type or paste the source text into the input editor."}\n2. ${variant === "analyzer" ? "Read the live measurements as the content changes." : variant === "generator" ? "Select Generate to create a fresh result." : "Choose any available mode or comparison options."}\n3. ${variant === "analyzer" ? "Clear the editor when you are finished." : "Review the result, then copy or download it when available."}\n\n## Practical example\n\n${example}\n\n## Privacy\n\nYour text stays in your browser. The input and result are processed locally and are never included in analytics events.\n\n## Frequently asked questions\n\n### ${faqQuestion}\n\n${faqAnswer}\n\n### Does it work on mobile devices?\n\nYes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.\n\n## Related text tools\n\n${related.map((slug)=>`- [${tools.find((item)=>item[0]===slug)?.[1] ?? slug}](../../${slug}/)`).join("\n")}\n`;
-  await writeFile(path.join(directory,"content.md"),content.replaceAll("](../../", "](../"));
+  await seedFile(path.join(directory,"content.md"),editorialScaffold({ title, shortDescription, seoTitle, seoDescription }), { force });
 }
-console.log(`${publish ? "Published" : "Created draft"} ${tools.length} text tools.`);
+console.log(`Processed ${tools.length} Text Tool scaffolds. Existing files were ${force ? "deliberately replaceable" : "preserved"}.`);

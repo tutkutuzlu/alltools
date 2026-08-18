@@ -5,35 +5,12 @@ seoTitle: Base64 Encoder – Encode Unicode Text Online
 seoDescription: Encode Unicode and UTF-8 text as Base64 locally without uploading the source content.
 ---
 
-## Base64 Encoder for focused text work
+## Encode UTF-8 bytes as Base64
 
-Convert Unicode text to Base64 entirely in your browser. All processing happens immediately on this page, so the result is available without an account or upload.
+The runtime first converts the text to UTF-8 with `TextEncoder`, then applies standard Base64 using the `A–Z`, `a–z`, `0–9`, `+` and `/` alphabet with `=` padding. This means non-ASCII text is encoded by its UTF-8 bytes rather than by UTF-16 code units.
 
-## How to use Base64 Encoder
+`Merhaba 🌍` can therefore be copied into a JSON field, basic protocol fixture or data-interchange test as ASCII Base64. The output is standard Base64, not URL-safe Base64URL; `+`, `/` and padding may need another representation in URL contexts.
 
-1. Type or paste the source text into the input editor.
-2. Choose any available mode or comparison options.
-3. Review the result, then copy or download it when available.
+Base64 is reversible encoding, not encryption, hashing or compression. It generally increases byte length and offers no confidentiality. The tool accepts text, not arbitrary uploaded binary files.
 
-## Practical example
-
-Represent a short JSON example as Base64 for a development fixture or documentation sample.
-
-## Privacy
-
-Your text stays in your browser. The input and result are processed locally and are never included in analytics events.
-
-## Frequently asked questions
-
-### Is Base64 encryption?
-
-No. Base64 is a reversible text representation and does not protect confidential information.
-
-### Does it work on mobile devices?
-
-Yes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.
-
-## Related text tools
-
-- [Base64 Decoder](../base64-decoder/)
-- [URL Encoder](../url-encoder/)
+Use [Base64 Decoder](../../base64-decoder/) to recover UTF-8 text. [URL Encoder](../../url-encoder/) solves percent encoding for URL syntax rather than binary-to-text representation.

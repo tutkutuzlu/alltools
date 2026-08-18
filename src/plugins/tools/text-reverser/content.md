@@ -5,35 +5,12 @@ seoTitle: Text Reverser Online – Reverse Words, Lines or Characters
 seoDescription: Reverse an entire text, each line, line order or word order without uploading your content.
 ---
 
-## Text Reverser for focused text work
+## Choose what “reverse” applies to
 
-Reverse characters, words or line order in several ways. All processing happens immediately on this page, so the result is available without an account or upload.
+Reverse all characters iterates Unicode code points across the entire text, so line breaks move too. “Characters in each line” preserves line order and separators but reverses each line independently. “Line order” moves complete lines, while “word order” trims the input, splits on any whitespace and rejoins tokens with single spaces.
 
-## How to use Text Reverser
+For a three-line checklist, line-order mode puts the last item first without changing its characters. Word mode turns `one   two\nthree` into `three two one`, deliberately discarding the original spacing and line break.
 
-1. Type or paste the source text into the input editor.
-2. Choose any available mode or comparison options.
-3. Review the result, then copy or download it when available.
+Code-point reversal is safer than reversing UTF-16 units but can still separate combining marks or multi-code-point emoji sequences, so visible graphemes are not guaranteed to stay intact. None of the modes understands sentence grammar or right-to-left text layout.
 
-## Practical example
-
-Reverse the order of checklist items while keeping the text inside each item readable.
-
-## Privacy
-
-Your text stays in your browser. The input and result are processed locally and are never included in analytics events.
-
-## Frequently asked questions
-
-### Are emoji preserved?
-
-The tool reverses Unicode code points and leaves non-text formatting outside the editor untouched.
-
-### Does it work on mobile devices?
-
-Yes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.
-
-## Related text tools
-
-- [ROT13 Converter](../rot13-converter/)
-- [Case Converter](../case-converter/)
+Use [Text Sorter](../../text-sorter/) for ordered rather than reversed lines, or [ROT13 Converter](../../rot13-converter/) for reversible ASCII-letter substitution.

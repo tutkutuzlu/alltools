@@ -5,42 +5,12 @@ seoTitle: Density Converter – kg/m³ g/cm³ lb/ft³
 seoDescription: Convert kilograms per cubic meter, grams per cubic centimeter and imperial density units.
 ---
 
-## Density Converter for quick, accurate results
+## Convert mass per unit volume
 
-Convert common mass-per-volume density units. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+Density relates mass to occupied volume. Kilograms per cubic meter are the reference; the catalog also supports g/cm³, kg/L, g/L, lb/ft³ and lb/in³. Because one cubic centimeter is much smaller than one cubic meter, `1 g/cm³` equals `1,000 kg/m³`.
 
-## How to use Density Converter
+Water near ordinary reference conditions is often approximated as `1 g/cm³`, which the tool expresses as `1,000 kg/m³` or about `62.428 lb/ft³`. This helps compare material datasheets written in metric and imperial conventions.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+Conversion does not determine a material's density. Real density can vary with temperature, pressure, composition, moisture or packing, and the water example is an approximation rather than a universal constant. The tool also handles mass density, not relative density or specific gravity.
 
-## Practical example
-
-**Input:** 1000 kg/m³ to g/cm³
-
-**Result:** 1 Grams per cubic centimeter
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### Why does water have values near 1000 and 1?
-
-A density of 1 g/cm³ is numerically equal to 1,000 kg/m³.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Acceleration Converter](../../acceleration-converter/)
-- [Cooking Measurement Converter](../../cooking-measurement-converter/)
-- [Font Size Converter](../../font-size-converter/)
+Use [Weight Converter](../../weight-converter/) and [Volume Converter](../../volume-converter/) for the component quantities, but provide a known density if you need to move between mass and volume.

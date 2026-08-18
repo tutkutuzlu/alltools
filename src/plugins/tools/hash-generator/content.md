@@ -5,42 +5,12 @@ seoTitle: SHA Hash Generator – SHA-1 SHA-256 SHA-384 SHA-512
 seoDescription: Calculate SHA-1, SHA-256, SHA-384 or SHA-512 digests in HEX or Base64 with Web Crypto.
 ---
 
-## Hash Generator for private browser workflows
+## Deterministic SHA digests of UTF-8 text
 
-Compare text digests for development and integrity workflows without confusing hashing with encryption. All processing uses local browser capabilities and the result is never sent to an external service.
+The tool encodes the entered text as UTF-8 and asks Web Crypto for SHA-1, SHA-256, SHA-384 or SHA-512. The digest can be rendered as lowercase HEX or standard padded Base64. Identical input bytes and algorithm produce the same digest; even a small input change normally produces a different value.
 
-## How to use Hash Generator
+For example, SHA-256 of `hello` begins `2cf24dba`. That makes hashes useful for comparing known text, test vectors and integrity fingerprints when a trusted expected digest already exists. A digest is one-way, not encrypted text, and the output cannot be “decoded” back to the source.
 
-1. Choose the controls that match your intended format or security requirement.
-2. Enter local input when required, then generate or review the calculated result.
-3. Copy the output and handle any secret according to the policy of the system where it will be used.
+SHA-1 remains available for legacy compatibility and triggers a warning, but collision attacks make it unsuitable for new collision-sensitive security designs. None of these plain fast hashes is a password-storage scheme; password databases need a purpose-built salted, deliberately expensive password-hashing function.
 
-## Practical example
-
-**Input:** hello with SHA-256
-
-**Result:** 2cf24dba… digest
-
-## Security boundaries
-
-This utility provides a focused primitive, not a complete security guarantee. Review algorithm warnings, protect copied secrets from clipboard history and never reuse credentials across unrelated services.
-
-## Privacy
-
-Passwords, keys, tokens, source text and generated values stay in the active page. They are not stored in localStorage, written to the console or included in telemetry.
-
-## Frequently asked questions
-
-### Is hashing encryption?
-
-No. A cryptographic hash is one-way and cannot be decrypted to recover the original text.
-
-### Why is SHA-1 available?
-
-It supports compatibility checks but is marked legacy and should not protect new security-sensitive data.
-
-## Related security tools
-
-- [Password Generator](../../password-generator/)
-- [Secure Token Generator](../../secure-token-generator/)
-- [UUID v7 Generator](../../uuid-v7-generator/)
+Choose [HMAC Generator](../../hmac-generator/) when integrity must be authenticated with a secret key. Choose [Checksum Calculator](../../checksum-calculator/) for lightweight accidental-corruption checks where resistance to deliberate manipulation is not required.

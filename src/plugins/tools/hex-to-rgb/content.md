@@ -5,41 +5,14 @@ seoTitle: HEX to RGB Converter – Free Online Color Tool
 seoDescription: Convert 3, 4, 6 or 8 digit HEX colors to accurate RGB and RGBA values locally.
 ---
 
-## HEX to RGB for reliable browser-based color work
+## Read a HEX color as channels
 
-Convert HEX colors to RGB or RGBA values. The shared AllTools color engine validates every channel before calculating the result and renders a bordered live preview that stays readable in Light and Dark themes.
+HEX stores red, green and blue as hexadecimal byte pairs. `#3366CC` therefore becomes `rgb(51, 102, 204)`: `33`, `66` and `CC` are base-16 versions of those three channel values. This is useful when a design token is supplied in HEX but an API, canvas operation or CSS calculation expects numeric RGB.
 
-## How to use HEX to RGB
+The parser accepts 3- and 6-digit colors plus 4- and 8-digit forms with alpha. Short notation is expanded one digit at a time, so `#3AC8` is interpreted as `#33AACC88`. Alpha is reported on a 0–1 scale in RGBA output.
 
-1. Enter or choose the required color value using the clearly labeled controls.
-2. Review the live result and preview; correct any validation message before using the value.
-3. Copy the generated output, or download CSS only when that action is available.
+RGB channels are exact for a valid HEX input; only the displayed alpha fraction may be rounded. The conversion does not infer a color profile, and it treats the value as an sRGB-style web color.
 
-## Practical example
+Try `#FF7F5080` when translating a half-transparent coral overlay. The result exposes the channel values needed for code while the preview confirms the source color.
 
-**Input:** #3366CC
-
-**Result:** rgb(51, 102, 204)
-
-## Accuracy and formats
-
-Calculations use standard sRGB, HSL, HSV, CMYK and alpha formulas where relevant. Display rounding is kept separate from input validation so valid channels remain predictable across modern browsers.
-
-## Privacy
-
-Your colors stay in your browser. Entered values, generated palettes and copied output are never included in telemetry or sent to an external API.
-
-## Frequently asked questions
-
-### Does it support alpha HEX?
-
-Yes. Four and eight digit HEX values preserve alpha in the RGBA result.
-
-### Can I copy the result?
-
-Yes. Use Copy result to place the generated text on your clipboard. Color values are not included in analytics events.
-
-## Related color tools
-
-- [Color Palette Generator](../../color-palette-generator/)
-- [Contrast Checker](../../contrast-checker/)
+For the reverse representation, use [RGB to HEX](../../rgb-to-hex/). To describe the same color through hue and lightness, use [HEX to HSL](../../hex-to-hsl/).

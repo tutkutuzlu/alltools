@@ -5,42 +5,12 @@ seoTitle: Secure Passphrase Generator – Local Word List
 seoDescription: Generate 4–8 word passphrases with separators, capitalization and an optional number using secure randomness.
 ---
 
-## Passphrase Generator for private browser workflows
+## Independently sampled words from a small list
 
-Combine independently selected words into a more memorable secret. All processing uses local browser capabilities and the result is never sent to an external service.
+Select 4–8 words and a hyphen, underscore, space or period separator. Every word is independently chosen with `crypto.getRandomValues` and unbiased rejection sampling from an embedded list of 72 lowercase English words. Capitalization changes the presentation of every chosen word; “Append number” adds one independently selected digit after another separator.
 
-## How to use Passphrase Generator
+A passphrase is a sequence of words intended to be easier to remember or transcribe than a dense character password. For example, five hyphen-separated words can suit an account that permits long credentials. A conventional password instead samples characters and is usually more compact for a comparable output-space target.
 
-1. Choose the controls that match your intended format or security requirement.
-2. Enter local input when required, then generate or review the calculated result.
-3. Copy the output and handle any secret according to the policy of the system where it will be used.
+The 72-word list is much smaller than specialist diceware lists, repeated words are allowed, and capitalization or one appended digit should not be treated as a substitute for selecting more random words. This page deliberately makes no entropy promise; service rate limits, uniqueness, storage and the list’s public nature all matter.
 
-## Practical example
-
-**Input:** 5 words separated by hyphens
-
-**Result:** amber-river-lunar-forest-cedar
-
-## Security boundaries
-
-This utility provides a focused primitive, not a complete security guarantee. Review algorithm warnings, protect copied secrets from clipboard history and never reuse credentials across unrelated services.
-
-## Privacy
-
-Passwords, keys, tokens, source text and generated values stay in the active page. They are not stored in localStorage, written to the console or included in telemetry.
-
-## Frequently asked questions
-
-### Does it require a word-list download?
-
-No. A curated list is embedded in the tool, so generation has no network dependency.
-
-### Are short passphrases always safe?
-
-No. More randomly selected words generally increase resistance; service policies and uniqueness still matter.
-
-## Related security tools
-
-- [Password Generator](../../password-generator/)
-- [Secure Token Generator](../../secure-token-generator/)
-- [Hash Generator](../../hash-generator/)
+Use [Password Generator](../../password-generator/) where a site favors mixed characters, or [PIN Generator](../../pin-generator/) only for numeric fields. Store a chosen passphrase with the same care as any other credential.

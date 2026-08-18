@@ -5,38 +5,12 @@ seoTitle: JSON to CSV Converter Online
 seoDescription: Convert JSON arrays and objects to properly escaped CSV directly in your browser.
 ---
 
-## JSON to CSV Converter for focused development work
+## Flatten top-level object rows into columns
 
-Convert an object or array of objects into CSV. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+The converter accepts one JSON object or an array of objects. It builds headers from the union of top-level keys in first-seen order, then writes one comma-delimited row per object. Missing values become empty fields; strings containing commas, quotes or line breaks are quoted and internal quotes are doubled.
 
-## How to use JSON to CSV Converter
+An array such as `[{'name':'Ada'}]` is not valid JSON because of single quotes; use `[{"name":"Ada","team":"Core"},{"name":"Lin"}]`. The CSV has `name,team` headers and leaves Lin's missing team cell empty.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+Nested objects and arrays are not expanded into multiple columns: they are serialized as JSON text inside a cell. Primitive rows and nested arrays as rows are rejected. CSV has no native type information, so numbers, booleans and null-like empty cells may not round-trip with their original types.
 
-## Practical example
-
-**Input:** [{"name":"Ada","role":"admin"}]
-
-**Result:** A CSV header row followed by one data row.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### How are nested values handled?
-
-Nested arrays and objects are preserved as JSON strings inside their CSV fields.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [JSON Validator](../../json-validator/)
-- [CSV to JSON Converter](../../csv-to-json/)
-- [XML Formatter](../../xml-formatter/)
+Use [CSV to JSON Converter](../../csv-to-json/) for the opposite direction, noting its rows become strings.

@@ -5,42 +5,12 @@ seoTitle: Password Strength Checker – Local and Private
 seoDescription: Check password length, character diversity, repetition and common patterns without transmitting or storing it.
 ---
 
-## Password Strength Checker for private browser workflows
+## What the score actually tests
 
-Review visible weaknesses before deciding whether a password is suitable for a particular account. All processing uses local browser capabilities and the result is never sent to an external service.
+The checker awards up to five points for reaching 12 and 16 characters, using at least three broad character classes, avoiding triples of the same character, and avoiding a short built-in list of strings such as `password`, `qwerty` and `1234`. It reports the corresponding label and specific suggestions for failed checks.
 
-## How to use Password Strength Checker
+“Estimated search space” multiplies the password length by the logarithm of a presumed character pool. That is a coarse upper-bound-style estimate, not measured entropy: it does not model dictionary words, substitutions, leaked-password databases, keyboard patterns beyond the small list, or how a person chose the password. A strong label therefore cannot establish that a credential is safe or unique.
 
-1. Choose the controls that match your intended format or security requirement.
-2. Enter local input when required, then generate or review the calculated result.
-3. Copy the output and handle any secret according to the policy of the system where it will be used.
+The entered value is evaluated in the page and cleared when the tool unmounts, but browser extensions, screen capture and clipboard actions are separate risks. Avoid testing a live high-value credential on a device you do not trust.
 
-## Practical example
-
-**Input:** Correct-Horse-7!
-
-**Result:** Strength label, estimated search space and suggestions
-
-## Security boundaries
-
-This utility provides a focused primitive, not a complete security guarantee. Review algorithm warnings, protect copied secrets from clipboard history and never reuse credentials across unrelated services.
-
-## Privacy
-
-Passwords, keys, tokens, source text and generated values stay in the active page. They are not stored in localStorage, written to the console or included in telemetry.
-
-## Frequently asked questions
-
-### Is my password uploaded?
-
-No. Analysis occurs only in the active browser page and the password is cleared when the tool unmounts.
-
-### Is the score a security guarantee?
-
-No. It is a practical local heuristic and cannot detect every breach, dictionary or targeted attack.
-
-## Related security tools
-
-- [Password Generator](../../password-generator/)
-- [Secure Token Generator](../../secure-token-generator/)
-- [Hash Generator](../../hash-generator/)
+Use this checker for quick feedback while drafting a policy-compatible secret. Prefer [Password Generator](../../password-generator/) for unbiased character selection or [Passphrase Generator](../../passphrase-generator/) for independently sampled words; neither replaces breach checking, secure storage or MFA.

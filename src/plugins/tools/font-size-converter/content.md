@@ -5,42 +5,12 @@ seoTitle: Font Size Converter – PX REM EM PT
 seoDescription: Convert pixels, points, picas, rem, em, inches, centimeters and millimeters using documented assumptions.
 ---
 
-## Font Size Converter for quick, accurate results
+## Convert typography under fixed assumptions
 
-Convert CSS and print typography length units. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+Pixels are the reference. The runtime assumes 96 px per inch, 72 points per inch, 16 px per pica, a 16 px root for `rem` and a 16 px context for `em`. Under those assumptions, `12 pt` becomes `16 px`, and `24 px` becomes `1.5 rem` or `1.5 em`.
 
-## How to use Font Size Converter
+This is useful when translating a print specification into a browser starting point or documenting a design system built on a 16 px root. Physical units such as inches, centimeters and millimeters are derived from the 96-DPI CSS reference relationship.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+Relative units are context-dependent in real pages. `1 rem` follows the document root size and `1 em` follows the relevant element context; either can differ from the fixed 16 px assumption used here. CSS physical units also describe reference pixels and may not match a screen's measured physical size.
 
-## Practical example
-
-**Input:** 16 pixels to rem
-
-**Result:** 1 rem (16 px root)
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### What root size is used for rem and em?
-
-This converter uses a 16 px root or context and 96 CSS pixels per inch; the labels make those assumptions explicit.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Cooking Measurement Converter](../../cooking-measurement-converter/)
-- [Flow Rate Converter](../../flow-rate-converter/)
-- [Voltage Converter](../../voltage-converter/)
+Choose this tool for numerical comparison, not for previewing rendered typography. [Length Converter](../../length-converter/) handles general physical lengths without typography-specific px, rem or em assumptions.

@@ -5,42 +5,12 @@ seoTitle: Random Color Generator – Repeatable HEX Colors
 seoDescription: Generate deterministic, copyable HEX colors from any local seed phrase.
 ---
 
-## Random Color Generator for reliable browser-based color work
+## Repeatable pseudo-random colors
 
-Generate a repeatable set of colors from a seed. The shared AllTools color engine validates every channel before calculating the result and renders a bordered live preview that stays readable in Light and Dark themes.
+This generator turns a text seed into five HEX colors. The seed is hashed into a 32-bit state, then a deterministic numeric sequence supplies the lower 24 bits for each color. Entering `AllTools` again produces the same five results, which is useful for reproducible mock data, avatar placeholders or test fixtures.
 
-## How to use Random Color Generator
+Change even one character in the seed to obtain a different sequence. The output is six-digit opaque HEX; it does not generate alpha values. Unlike cryptographic randomness, this algorithm is intentionally predictable and must not be used for secrets, tokens or security decisions.
 
-1. Enter or choose the required color value using the clearly labeled controls.
-2. Review the live result and preview; correct any validation message before using the value.
-3. Copy the generated output, or download CSS only when that action is available.
+The five colors are sampled independently from RGB space. They are not guaranteed to harmonize, meet contrast thresholds or be perceptually far apart. A generated group may contain colors that are too similar or unsuitable for text.
 
-## Practical example
-
-**Input:** Seed: AllTools
-
-**Result:** Five repeatable HEX colors
-
-## Accuracy and formats
-
-Calculations use standard sRGB, HSL, HSV, CMYK and alpha formulas where relevant. Display rounding is kept separate from input validation so valid channels remain predictable across modern browsers.
-
-## Privacy
-
-Your colors stay in your browser. Entered values, generated palettes and copied output are never included in telemetry or sent to an external API.
-
-## Frequently asked questions
-
-### Why use a seed?
-
-The same seed always produces the same set, making results reproducible and testable.
-
-### Can I copy the result?
-
-Yes. Use Copy result to place the generated text on your clipboard. Color values are not included in analytics events.
-
-## Related color tools
-
-- [HEX to RGB](../../hex-to-rgb/)
-- [Color Palette Generator](../../color-palette-generator/)
-- [Contrast Checker](../../contrast-checker/)
+Choose this tool when repeatability matters more than art direction. For a coordinated hue sequence based on one starting color, use [Color Palette Generator](../../color-palette-generator/). Validate any UI text pair with [WCAG Color Accessibility Checker](../../wcag-color-accessibility-checker/).

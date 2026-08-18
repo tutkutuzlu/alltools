@@ -5,35 +5,12 @@ seoTitle: Remove Duplicate Lines Online – Preserve Line Order
 seoDescription: Remove repeated text lines, choose case sensitivity and keep or discard empty lines privately.
 ---
 
-## Remove Duplicate Lines for focused text work
+## Keep the first exact line occurrence
 
-Delete repeated lines while preserving their original order. All processing happens immediately on this page, so the result is available without an account or upload.
+Lines are split on LF or CRLF and processed from top to bottom. The first nonblank occurrence stays in place; later matches are removed. By default comparison lowercases with the English locale, so `Alpha` and `alpha` collide. Case-sensitive mode keeps them separate.
 
-## How to use Remove Duplicate Lines
+No trimming or whitespace normalization is applied to nonblank lines. `item` and `item ` are different keys, which is useful when exact records matter but can surprise users cleaning messy pasted data. Blank or whitespace-only lines are never deduplicated; Preserve empty lines keeps every one, while disabling it removes all of them.
 
-1. Type or paste the source text into the input editor.
-2. Choose any available mode or comparison options.
-3. Review the result, then copy or download it when available.
+Use the tool to clean a keyword export while retaining the original priority order. The “Duplicates removed” metric counts repeated nonblank lines, not discarded empty rows.
 
-## Practical example
-
-Clean a pasted keyword list without alphabetically rearranging the first occurrence of each keyword.
-
-## Privacy
-
-Your text stays in your browser. The input and result are processed locally and are never included in analytics events.
-
-## Frequently asked questions
-
-### Is the first duplicate retained?
-
-Yes. The first occurrence stays in place and later matching lines are removed.
-
-### Does it work on mobile devices?
-
-Yes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.
-
-## Related text tools
-
-- [Remove Empty Lines](../remove-empty-lines/)
-- [Text Sorter](../text-sorter/)
+Run [Whitespace Cleaner](../../whitespace-cleaner/) first if insignificant spacing should be normalized, or [Text Sorter](../../text-sorter/) afterward when order should change.

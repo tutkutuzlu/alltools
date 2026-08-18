@@ -5,42 +5,12 @@ seoTitle: Opacity and Alpha Calculator – Composite Colors
 seoDescription: Calculate the visible HEX result when an alpha color is placed over a solid background.
 ---
 
-## Opacity / Alpha Calculator for reliable browser-based color work
+## Calculate the visible foreground-over-background color
 
-Composite a translucent color over a background. The shared AllTools color engine validates every channel before calculating the result and renders a bordered live preview that stays readable in Light and Dark themes.
+This tool performs alpha compositing, not simple color mixing. For each RGB channel it applies `foreground × alpha + background × (1 − alpha)`, rounds the visible channels to bytes and returns an opaque HEX result. The foreground must carry alpha for the background to influence the result.
 
-## How to use Opacity / Alpha Calculator
+For example, `#3366CC80` over `#FFFFFF` produces the approximate solid color a half-transparent blue overlay displays on white. This is useful before checking contrast or translating an overlay state into a fallback solid token.
 
-1. Enter or choose the required color value using the clearly labeled controls.
-2. Review the live result and preview; correct any validation message before using the value.
-3. Copy the generated output, or download CSS only when that action is available.
+The background is treated as solid even if its input contains alpha; nested transparency is not calculated. The arithmetic is performed directly on encoded RGB channels rather than linear-light values, matching a simple utility calculation but not every color-managed rendering pipeline. Rounding and the 8-bit alpha representation can produce one-byte differences near boundaries.
 
-## Practical example
-
-**Input:** #3366CC80 over #FFFFFF
-
-**Result:** The composited visible HEX color
-
-## Accuracy and formats
-
-Calculations use standard sRGB, HSL, HSV, CMYK and alpha formulas where relevant. Display rounding is kept separate from input validation so valid channels remain predictable across modern browsers.
-
-## Privacy
-
-Your colors stay in your browser. Entered values, generated palettes and copied output are never included in telemetry or sent to an external API.
-
-## Frequently asked questions
-
-### Which blending model is used?
-
-Standard source-over alpha compositing is used for a translucent foreground over an opaque background.
-
-### Can I copy the result?
-
-Yes. Use Copy result to place the generated text on your clipboard. Color values are not included in analytics events.
-
-## Related color tools
-
-- [HEX to RGB](../../hex-to-rgb/)
-- [Color Palette Generator](../../color-palette-generator/)
-- [Contrast Checker](../../contrast-checker/)
+Choose [Color Mixer](../../color-mixer/) when the goal is a weighted blend independent of foreground/background order. After compositing, paste the visible HEX into [Contrast Checker](../../contrast-checker/) to evaluate text readability. Opacity changes transparency; it is not the same operation as making a color lighter.

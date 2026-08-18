@@ -5,38 +5,12 @@ seoTitle: UUID Validator Online – Check UUID Version
 seoDescription: Validate a UUID and identify its RFC variant, version and normalized value.
 ---
 
-## UUID Validator for focused development work
+## Check layout, version nibble and RFC variant
 
-Validate UUID syntax and identify version and variant. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+The analyzer accepts the canonical hyphenated 8-4-4-4-12 hexadecimal layout. Its pattern recognizes version nibbles 1 through 8 and requires the variant nibble to begin with 8, 9, A or B. A matching value is normalized to lowercase and reported with its version.
 
-## How to use UUID Validator
+For `550e8400-e29b-41d4-a716-446655440000`, the result is valid, Version 4, RFC 4122. Braces, a `urn:uuid:` prefix, missing hyphens or non-hex characters are rejected rather than normalized.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+Pattern validity does not prove that an identifier was generated correctly, exists in a database or is unique. The label “RFC 4122” describes the recognized variant in the current output; newer UUID specifications may use updated terminology while retaining the bit layout.
 
-## Practical example
-
-**Input:** 550e8400-e29b-41d4-a716-446655440000
-
-**Result:** Valid UUID, Version 4, RFC 4122 variant.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Are uppercase UUIDs accepted?
-
-Yes. Matching is case-insensitive and the normalized result is lowercase.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [UUID Generator](../../uuid-generator/)
-- [Unix Timestamp Converter](../../unix-timestamp-converter/)
-- [URL Parser](../../url-parser/)
+Choose [UUID Generator](../../uuid-generator/) for new random v4 values or [UUID v7 Generator](../../uuid-v7-generator/) for chronological generation.

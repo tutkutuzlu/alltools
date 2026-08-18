@@ -5,42 +5,12 @@ seoTitle: WCAG Color Accessibility Checker – AA AAA
 seoDescription: Evaluate foreground and background colors against WCAG AA and AAA thresholds.
 ---
 
-## WCAG Color Accessibility Checker for reliable browser-based color work
+## Interpret color contrast in an accessibility review
 
-Check text contrast against WCAG thresholds. The shared AllTools color engine validates every channel before calculating the result and renders a bordered live preview that stays readable in Light and Dark themes.
+This checker evaluates a foreground and background with the same ratio calculation currently used by Contrast Checker. It reports AA and AAA outcomes for normal and large text; it does not scan a webpage or test additional WCAG success criteria. Choose this page when the numerical result needs to be considered as one step in a broader accessibility review.
 
-## How to use WCAG Color Accessibility Checker
+The thresholds are 4.5:1 (AA) and 7:1 (AAA) for normal text, and 3:1 (AA) and 4.5:1 (AAA) for large text. A pair such as `#767676` on white sits near a threshold, illustrating why exact entered values matter. “Large text” depends on rendered size and weight; the tool cannot determine that from colors alone.
 
-1. Enter or choose the required color value using the clearly labeled controls.
-2. Review the live result and preview; correct any validation message before using the value.
-3. Copy the generated output, or download CSS only when that action is available.
+A passing ratio does not prove that an interface is accessible. Review focus indicators, disabled and hover states, text over images or gradients, non-text graphical contrast, color-vision needs and whether information relies on color alone. Likewise, a failed pair may require a different color or a change in typography, but this page does not prescribe the design fix.
 
-## Practical example
-
-**Input:** #767676 on #FFFFFF
-
-**Result:** 4.54:1; normal AA passes
-
-## Accuracy and formats
-
-Calculations use standard sRGB, HSL, HSV, CMYK and alpha formulas where relevant. Display rounding is kept separate from input validation so valid channels remain predictable across modern browsers.
-
-## Privacy
-
-Your colors stay in your browser. Entered values, generated palettes and copied output are never included in telemetry or sent to an external API.
-
-## Frequently asked questions
-
-### What counts as large text?
-
-WCAG generally defines large text as at least 18pt, or 14pt when bold.
-
-### Can I copy the result?
-
-Yes. Use Copy result to place the generated text on your clipboard. Color values are not included in analytics events.
-
-## Related color tools
-
-- [HEX to RGB](../../hex-to-rgb/)
-- [Color Palette Generator](../../color-palette-generator/)
-- [Contrast Checker](../../contrast-checker/)
+Alpha colors are parsed, but this ratio calculation does not composite them onto the supplied background before evaluation. Use [Opacity / Alpha Calculator](../../opacity-alpha-calculator/) to find the visible solid result first. For a compact foreground/background report without the wider review context, use [Contrast Checker](../../contrast-checker/).

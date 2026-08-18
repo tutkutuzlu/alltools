@@ -5,35 +5,12 @@ seoTitle: Free Character Counter – Count Letters, Spaces and Lines
 seoDescription: Count characters with and without spaces, words and lines instantly in your browser.
 ---
 
-## Character Counter for focused text work
+## What the four measurements include
 
-Measure characters, words and lines while you type. All processing happens immediately on this page, so the result is available without an account or upload.
+Characters are counted as JavaScript Unicode code points, so an emoji represented by one code point counts once; a visible grapheme assembled from multiple code points may count more than once. “Characters without spaces” removes every Unicode whitespace match, including spaces, tabs and line breaks—not punctuation.
 
-## How to use Character Counter
+Words are runs of Unicode letters or numbers with internal apostrophes or hyphens. `don't`, `editor’s` and `well-made` each count as one word. Lines split on LF or CRLF; an empty editor reports zero lines, while a trailing newline creates a final empty line.
 
-1. Type or paste the source text into the input editor.
-2. Read the live measurements as the content changes.
-3. Clear the editor when you are finished.
+Use this tool to check a social post, database field or localization string where raw character length matters. For `Hello, world!`, punctuation contributes to 13 characters but the word metric is two.
 
-## Practical example
-
-A social post has a strict character limit and you need to check both its visible length and its word count.
-
-## Privacy
-
-Your text stays in your browser. The input and result are processed locally and are never included in analytics events.
-
-## Frequently asked questions
-
-### Does it count emoji?
-
-Yes. Emoji and other Unicode symbols are counted as individual code points whenever the browser represents them that way.
-
-### Does it work on mobile devices?
-
-Yes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.
-
-## Related text tools
-
-- [word-counter](../word-counter/)
-- [Line Counter](../line-counter/)
+The character result is not a byte count and may differ from user-perceived glyphs. [Line Counter](../../line-counter/) adds empty-line and line-length detail; [Word Counter](../../word-counter/) adds sentence and reading-time estimates.

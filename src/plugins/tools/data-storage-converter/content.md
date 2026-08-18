@@ -5,42 +5,12 @@ seoTitle: Data Storage Converter – MB MiB GB GiB
 seoDescription: Convert bits, bytes, decimal KB/MB/GB/TB and binary KiB/MiB/GiB/TiB units.
 ---
 
-## Data Storage Converter for quick, accurate results
+## Separate decimal and binary storage units
 
-Convert decimal and binary digital storage units. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+Bytes are the reference. Eight bits equal one byte. Decimal units use powers of 1,000: `1 MB = 1,000,000 bytes` and `1 GB = 1,000,000,000 bytes`. Binary IEC units use powers of 1,024: `1 MiB = 1,048,576 bytes` and `1 GiB = 1,073,741,824 bytes`.
 
-## How to use Data Storage Converter
+Consequently, `1 GB` is about `953.674 MiB`, while `1 GiB` is about `1.073742 GB`. This distinction helps explain why an operating system may display a drive or file with a different-looking number from the manufacturer's decimal specification.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+The singular `bit` option is supported, but decimal kilobits or binary kibibits are not part of this storage catalog. The tool converts capacity only; it does not estimate compression, filesystem overhead, usable disk space or transfer duration.
 
-## Practical example
-
-**Input:** 1 MiB to bytes
-
-**Result:** 1048576 Bytes
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### What is the difference between MB and MiB?
-
-MB uses powers of 1000, while MiB uses powers of 1024 as defined by IEC binary prefixes.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Time Converter](../../time-converter/)
-- [Pressure Converter](../../pressure-converter/)
-- [Energy Converter](../../energy-converter/)
+Choose [Data Transfer Rate Converter](../../data-transfer-rate-converter/) for per-second network and disk rates. Keep the `B` versus `b` distinction visible: uppercase B denotes bytes in the labels used here.

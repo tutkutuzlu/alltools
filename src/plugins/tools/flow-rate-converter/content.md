@@ -5,42 +5,12 @@ seoTitle: Flow Rate Converter – L/min GPM CFM
 seoDescription: Convert liters per second or minute, cubic meters per hour, GPM and CFM.
 ---
 
-## Flow Rate Converter for quick, accurate results
+## Convert volume delivered per time
 
-Convert liquid and volumetric flow rates. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+This converter uses liters per second as its reference. It supports L/min, m³/s, m³/h, US gallons per minute and cubic feet per minute. For example, a pump rated at `10 US gpm` delivers about `37.854 L/min`.
 
-## How to use Flow Rate Converter
+The conversion helps compare pump, fan or plumbing specifications that describe volumetric throughput in different systems. US gallons are used for gpm; an Imperial-gallon flow option is not included. CFM is a volume rate even when commonly used for air equipment.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+Volumetric flow is not mass flow. Converting liters per minute to kilograms per second requires the fluid's density, which can vary with temperature and pressure. The tool also does not calculate velocity through a pipe, pressure loss, pump head or actual system performance.
 
-## Practical example
-
-**Input:** 10 liters per minute to US GPM
-
-**Result:** 2.64172052358 US gallons per minute
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### Which gallon is used for GPM?
-
-GPM uses the US liquid gallon; the option is labeled to avoid confusion with imperial gallons.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Font Size Converter](../../font-size-converter/)
-- [Voltage Converter](../../voltage-converter/)
-- [Electric Current Converter](../../electric-current-converter/)
+[Volume Converter](../../volume-converter/) handles amounts without a time denominator. [Density Converter](../../density-converter/) can express a known material density, but the runtime does not combine the two calculations automatically.

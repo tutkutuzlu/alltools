@@ -1,6 +1,10 @@
 import path from "node:path";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir } from "node:fs/promises";
 import { rootDir } from "./lib/project.mjs";
+import { editorialScaffold, seedFile, seedOptions } from "./lib/seed-files.mjs";
+
+const { force } = seedOptions();
+const publish = process.argv.includes("--publish");
 
 const tools = [
   ["length-converter","Length Converter","Convert metric, imperial and nautical length units.","Length Converter Online – Metric and Imperial","Convert millimeters, meters, kilometers, inches, feet, miles and nautical miles accurately.","1 meter to feet","3.28083989501 Feet (ft)","Are exact international definitions used?","Yes. Inch, foot, yard, mile and nautical mile factors use their internationally defined metric values.",["length","distance","metric"],["meters to feet","distance converter"]],
@@ -32,17 +36,17 @@ const tools = [
 
 const categoryDir=path.join(rootDir,"src","content","categories","unit");
 await mkdir(categoryDir,{recursive:true});
-await writeFile(path.join(categoryDir,"category.json"),JSON.stringify({schemaVersion:1,id:"unit",slug:"unit-converters",title:"Unit Converters",shortDescription:"Convert measurements accurately across metric, imperial and technical units.",icon:"converter",order:30,featured:true,accent:"green",status:"published"},null,2)+"\n");
-await writeFile(path.join(categoryDir,"content.md"),`---\nseoTitle: Free Online Unit Converters\nseoDescription: Accurate browser-based converters for length, weight, temperature, data, engineering and everyday measurements.\n---\n\n## Accurate conversions without extra steps\n\nChoose a measurement, enter a value and switch between clearly labeled units. All calculations run locally in your browser using documented conversion factors, with no account or external API required.\n`);
+await seedFile(path.join(categoryDir,"category.json"),JSON.stringify({schemaVersion:1,id:"unit",slug:"unit-converters",title:"Unit Converters",shortDescription:"Convert measurements accurately across metric, imperial and technical units.",icon:"converter",order:30,featured:true,accent:"green",status:publish?"published":"draft"},null,2)+"\n", { force });
+await seedFile(path.join(categoryDir,"content.md"),`---\nseoTitle: Unit Converters editorial draft\nseoDescription: Draft category guidance requiring editorial review.\n---\n\n## Editorial draft\n\nExplain ordinary and special-case conversion models before publication.\n`, { force });
 
 const featured=new Set(["length-converter","weight-converter","temperature-converter","data-storage-converter","fuel-economy-converter","cooking-measurement-converter"]);
 for(const [index,item] of tools.entries()){
   const [id,title,shortDescription,seoTitle,seoDescription,exampleInput,exampleResult,faqQuestion,faqAnswer,tags,aliases]=item;
   const directory=path.join(rootDir,"src","plugins","tools",id);await mkdir(directory,{recursive:true});
-  const metadata={schemaVersion:1,id,version:"1.0.0",type:"converter",family:"unit-converters",variant:"converter",slug:id,icon:"converter",publishedAt:"2026-08-03",updatedAt:"2026-08-03",featured:featured.has(id),popularity:Math.max(20,90-index*2),estimatedTime:"instant",status:"published",entry:"./index.js",category:"unit",tags,aliases,components:["tool.shell","field.input","field.select","action.button"],capabilities:{offline:true,fileAccess:false,networkAccess:false,webWorker:false},discovery:{priority:220-index}};
-  await writeFile(path.join(directory,"tool.json"),JSON.stringify(metadata,null,2)+"\n");
-  await writeFile(path.join(directory,"index.js"),`export { mount, unmount } from "../../families/unit-converters/universal-plugin.js";\n`);
+  const metadata={schemaVersion:1,id,version:"1.0.0",type:"converter",family:"unit-converters",variant:"converter",slug:id,icon:"converter",publishedAt:"2026-08-03",updatedAt:"2026-08-03",featured:featured.has(id),popularity:Math.max(20,90-index*2),estimatedTime:"instant",status:publish?"published":"draft",entry:"./index.js",category:"unit",tags,aliases,components:["tool.shell","field.input","field.select","action.button"],capabilities:{offline:true,fileAccess:false,networkAccess:false,webWorker:false},discovery:{priority:220-index}};
+  await seedFile(path.join(directory,"tool.json"),JSON.stringify(metadata,null,2)+"\n", { force });
+  await seedFile(path.join(directory,"index.js"),`export { mount, unmount } from "../../families/unit-converters/universal-plugin.js";\n`, { force });
   const related=tools.filter((_,other)=>other!==index).slice(Math.max(0,index-1),Math.max(0,index-1)+3).map(([slug,name])=>`- [${name}](../../${slug}/)`).join("\n");
-  await writeFile(path.join(directory,"content.md"),`---\ntitle: ${title}\nshortDescription: ${shortDescription}\nseoTitle: ${seoTitle}\nseoDescription: ${seoDescription}\n---\n\n## ${title} for quick, accurate results\n\n${shortDescription} The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.\n\n## How to use ${title}\n\n1. Enter a numeric value. Commas used as thousands separators are accepted.\n2. Choose the source and target units, then select an optional display precision.\n3. Review the live result, swap the unit direction if needed, or copy the converted value.\n\n## Practical example\n\n**Input:** ${exampleInput}\n\n**Result:** ${exampleResult}\n\n## Conversion accuracy\n\nThe converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.\n\n## Privacy\n\nYour value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.\n\n## Frequently asked questions\n\n### ${faqQuestion}\n\n${faqAnswer}\n\n### Can I reverse the conversion?\n\nYes. Use Swap units to exchange the source and target selections without re-entering the value.\n\n## Related unit converters\n\n${related}\n`);
+  await seedFile(path.join(directory,"content.md"),editorialScaffold({ title, shortDescription, seoTitle, seoDescription }), { force });
 }
-console.log(`Seeded ${tools.length} Unit Converters.`);
+console.log(`Processed ${tools.length} Unit Converter scaffolds. Existing files were ${force ? "deliberately replaceable" : "preserved"}.`);

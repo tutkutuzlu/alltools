@@ -1,6 +1,10 @@
 import path from "node:path";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir } from "node:fs/promises";
 import { rootDir } from "./lib/project.mjs";
+import { editorialScaffold, seedFile, seedOptions } from "./lib/seed-files.mjs";
+
+const { force } = seedOptions();
+const publish = process.argv.includes("--publish");
 
 const tools = [
   ["json-formatter","JSON Formatter","Format JSON with readable indentation and validate its syntax.","JSON Formatter Online – Beautify JSON","Format and beautify JSON online with selectable indentation and clear syntax errors.","formatter",["json","format","beautify"],["json beautifier","pretty print json"],'{"name":"Ada","active":true}',"Indented JSON that is easier to review.","Does formatting change JSON values?","No. It changes whitespace only; parsed keys and values remain the same."],
@@ -32,16 +36,16 @@ const tools = [
 
 const categoryDir=path.join(rootDir,"src","content","categories","developer");
 await mkdir(categoryDir,{recursive:true});
-await writeFile(path.join(categoryDir,"category.json"),JSON.stringify({schemaVersion:1,id:"developer",slug:"developer-tools",title:"Developer Tools",shortDescription:"Format, validate, parse and convert common developer data in your browser.",icon:"developer",order:20,featured:true,accent:"blue",status:"published"},null,2)+"\n");
-await writeFile(path.join(categoryDir,"content.md"),`---\nseoTitle: Free Online Developer Tools\nseoDescription: Browser-based JSON, CSV, XML, HTML, CSS, SQL, URL, UUID and debugging tools for developers.\n---\n\n## Practical utilities for development work\n\nFormat payloads, inspect identifiers and convert common data without installing a package or sending project content to a server. Every Developer Tool in this collection runs locally in your browser.\n`);
+await seedFile(path.join(categoryDir,"category.json"),JSON.stringify({schemaVersion:1,id:"developer",slug:"developer-tools",title:"Developer Tools",shortDescription:"Format, validate, parse and convert common developer data in your browser.",icon:"developer",order:20,featured:true,accent:"blue",status:publish?"published":"draft"},null,2)+"\n", { force });
+await seedFile(path.join(categoryDir,"content.md"),`---\nseoTitle: Developer Tools editorial draft\nseoDescription: Draft category guidance requiring editorial review.\n---\n\n## Editorial draft\n\nExplain how users should choose between the implemented developer workflows before publication.\n`, { force });
 
 for(const [index,item] of tools.entries()){
   const [id,title,shortDescription,seoTitle,seoDescription,type,tags,aliases,exampleInput,exampleResult,faqQuestion,faqAnswer]=item;
   const directory=path.join(rootDir,"src","plugins","tools",id);await mkdir(directory,{recursive:true});
-  const metadata={schemaVersion:1,id,version:"1.0.0",type,family:"developer-tools",variant:type,slug:id,icon:"developer",publishedAt:"2026-08-03",updatedAt:"2026-08-03",featured:["json-formatter","json-validator","jwt-decoder","uuid-generator","regex-tester","color-converter"].includes(id),popularity:Math.max(25,95-index*2),estimatedTime:"instant",status:"published",entry:"./index.js",category:"developer",tags,aliases,components:["tool.shell","field.textarea","action.button"],capabilities:{offline:true,fileAccess:false,networkAccess:false,webWorker:false},discovery:{priority:250-index}};
-  await writeFile(path.join(directory,"tool.json"),JSON.stringify(metadata,null,2)+"\n");
-  await writeFile(path.join(directory,"index.js"),`export { mount, unmount } from "../../families/developer-tools/universal-plugin.js";\n`);
+  const metadata={schemaVersion:1,id,version:"1.0.0",type,family:"developer-tools",variant:type,slug:id,icon:"developer",publishedAt:"2026-08-03",updatedAt:"2026-08-03",featured:["json-formatter","json-validator","jwt-decoder","uuid-generator","regex-tester","color-converter"].includes(id),popularity:Math.max(25,95-index*2),estimatedTime:"instant",status:publish?"published":"draft",entry:"./index.js",category:"developer",tags,aliases,components:["tool.shell","field.textarea","action.button"],capabilities:{offline:true,fileAccess:false,networkAccess:false,webWorker:false},discovery:{priority:250-index}};
+  await seedFile(path.join(directory,"tool.json"),JSON.stringify(metadata,null,2)+"\n", { force });
+  await seedFile(path.join(directory,"index.js"),`export { mount, unmount } from "../../families/developer-tools/universal-plugin.js";\n`, { force });
   const related=tools.filter((_,other)=>other!==index).slice(Math.max(0,index-1),Math.max(0,index-1)+3).map(([slug,name])=>`- [${name}](../../${slug}/)`).join("\n");
-  await writeFile(path.join(directory,"content.md"),`---\ntitle: ${title}\nshortDescription: ${shortDescription}\nseoTitle: ${seoTitle}\nseoDescription: ${seoDescription}\n---\n\n## ${title} for focused development work\n\n${shortDescription} Processing happens locally, so you can inspect routine development values without uploading them or creating an account.\n\n## How to use ${title}\n\n1. Enter or paste the source value into the input area.\n2. Adjust any options shown above the editor.\n3. Review the generated result or validation details, then copy or download it when available.\n\n## Practical example\n\n**Input:** ${exampleInput}\n\n**Result:** ${exampleResult}\n\n## Privacy\n\nYour input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.\n\n## Frequently asked questions\n\n### ${faqQuestion}\n\n${faqAnswer}\n\n### Can I use this tool on mobile?\n\nYes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.\n\n## Related developer tools\n\n${related}\n`);
+  await seedFile(path.join(directory,"content.md"),editorialScaffold({ title, shortDescription, seoTitle, seoDescription }), { force });
 }
-console.log(`Seeded ${tools.length} Developer Tools.`);
+console.log(`Processed ${tools.length} Developer Tool scaffolds. Existing files were ${force ? "deliberately replaceable" : "preserved"}.`);

@@ -1,7 +1,7 @@
 {
   "name": "AllTools",
-  "tagline": "Fast, private tools that work in your browser.",
-  "description": "Free online tools for text, data and everyday tasks.",
+  "tagline": "Focused utilities that run in your browser.",
+  "description": "Free browser tools for text, developer data, unit conversion, color workflows and security-related generation.",
   "language": "en",
   "siteUrl": "https://tutkutuzlu.github.io/alltools",
   "basePath": "/alltools",

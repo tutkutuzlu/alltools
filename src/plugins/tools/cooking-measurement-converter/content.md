@@ -5,42 +5,12 @@ seoTitle: Cooking Measurement Converter – Cups Tbsp mL
 seoDescription: Convert teaspoons, tablespoons, cups, fluid ounces, pints, quarts, gallons and metric volume.
 ---
 
-## Cooking Measurement Converter for quick, accurate results
+## Translate recipe volumes
 
-Convert common US kitchen volume measurements. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+This kitchen-focused converter uses milliliters as its reference and implements US customary volumes: teaspoon `4.92892159375 mL`, tablespoon `14.78676478125 mL`, cup `236.5882365 mL`, fluid ounce, pint, quart and gallon. Liters are also available.
 
-## How to use Cooking Measurement Converter
+If a recipe calls for `2 US cups` of stock, the converted volume is about `473.176473 mL`. That is useful when a metric jug is available but the source recipe uses US cups. The values are not rounded to common kitchen-friendly fractions, so you may still choose a practical measuring increment.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+These are volume conversions, not ingredient-weight conversions. A cup of flour and a cup of honey occupy the same nominal volume but have very different masses because density and packing differ. The catalog does not include Imperial cups, metric cups or Australian tablespoons, so confirm the recipe's convention before converting.
 
-## Practical example
-
-**Input:** 1 US cup to milliliters
-
-**Result:** 236.5882365 Milliliters
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### Are these US or metric cups?
-
-The cup, teaspoon, tablespoon and fluid-ounce options use US customary definitions and are labeled accordingly.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Density Converter](../../density-converter/)
-- [Font Size Converter](../../font-size-converter/)
-- [Flow Rate Converter](../../flow-rate-converter/)
+For non-kitchen US and Imperial liquid units, see [Volume Converter](../../volume-converter/). [Weight Converter](../../weight-converter/) can convert a mass only after the recipe supplies one.

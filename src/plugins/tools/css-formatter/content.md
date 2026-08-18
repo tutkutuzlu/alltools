@@ -5,38 +5,12 @@ seoTitle: CSS Formatter Online – Beautify Stylesheets
 seoDescription: Format CSS rules online with readable braces, declarations and indentation.
 ---
 
-## CSS Formatter for focused development work
+## Add lines around braces and semicolons
 
-Expand compact CSS into a readable indented layout. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+The runtime walks characters rather than parsing CSS. An opening brace starts a deeper two-space indentation, a closing brace reduces it, and semicolons create declaration lines. Horizontal whitespace is then normalized.
 
-## How to use CSS Formatter
+`.card{color:red;background:white;}` becomes a multi-line rule that is easier to review in a quick snippet. Nested braces receive deeper indentation, which can help with ordinary at-rules.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+No syntax validation occurs. Braces or semicolons inside strings, comments, data URLs or custom-property values are still treated as structure, so complex or malformed CSS can be rearranged incorrectly. The tool does not sort declarations, expand shorthand or change selector meaning intentionally.
 
-## Practical example
-
-**Input:** body{color:red;margin:0;}
-
-**Result:** A readable rule with each declaration on its own line.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Can it format nested at-rules?
-
-Yes. Brace depth is reflected in the generated indentation.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [HTML Minifier](../../html-minifier/)
-- [CSS Minifier](../../css-minifier/)
-- [SQL Formatter](../../sql-formatter/)
+Choose this formatter for uncomplicated CSS you need to scan, and compare carefully before replacing source. [CSS Minifier](../../css-minifier/) provides heuristic compaction; neither replaces a parser-based build tool.

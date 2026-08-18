@@ -3,7 +3,7 @@ slug: terms
 title: Terms of Service
 seoTitle: AllTools Terms of Service
 seoDescription: Review the terms that apply when accessing and using AllTools and its free browser-based utilities.
-updatedAt: 2026-08-03
+updatedAt: 2026-08-18
 ---
 
 ## Acceptance of these terms
@@ -29,9 +29,9 @@ You may use AllTools for lawful personal or business purposes. You must not:
 
 ## Your content and responsibility
 
-You retain responsibility for text, data and other material you choose to process. Current Text Tools operate locally in the browser, but you remain responsible for determining whether a tool is appropriate for confidential, regulated or sensitive information.
+You retain responsibility for text, data and other material you choose to process. Current Text, Developer, Unit Converter, Color, and Security & Generators tools perform their operations in the browser, but you remain responsible for determining whether a tool is appropriate for confidential, regulated or sensitive information.
 
-Review results before relying on them. Text conversion, counting, encoding and generation utilities may not cover every language rule, file format, edge case or professional standard.
+Review results before relying on them. Counting, formatting, parsing, encoding, conversion, color, accessibility and security-related utilities may not cover every language rule, data format, measurement convention, color profile, edge case or professional standard. Generator output is not a substitute for secure storage, access controls or the policies of the system where it is used.
 
 ## No professional advice
 
@@ -45,7 +45,7 @@ You are responsible for ensuring that content you process does not infringe copy
 
 ## Third-party services and links
 
-The site may use or link to third-party services such as GitHub, Google Analytics and, in the future, Google AdSense. Those services operate under their own terms and privacy policies. AllTools is not responsible for the availability, security or content of third-party websites.
+The site uses or links to third-party services such as GitHub, Google Analytics and Google AdSense. Those services operate under their own terms and privacy policies. The [Privacy Policy](../privacy/) describes their current role. AllTools is not responsible for the availability, security or content of third-party websites.
 
 ## Disclaimer of warranties
 

@@ -5,38 +5,12 @@ seoTitle: URL Parser Online – Inspect URL Components
 seoDescription: Parse a URL into protocol, host, port, path, query, fragment and origin fields.
 ---
 
-## URL Parser for focused development work
+## Inspect the browser's normalized URL components
 
-Break a complete URL into its standard components. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+The parser requires a complete absolute URL such as `https://example.com:8443/docs?q=test#install`. It uses the browser `URL` class and returns protocol, username, whether a password is present, hostname, port, pathname, search, hash and origin as JSON.
 
-## How to use URL Parser
+This is useful when debugging whether a port, encoded path or fragment is in the component you expect. The browser may normalize details such as default ports and percent-encoding. Password text itself is deliberately replaced with `(present)` in output.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+Relative paths like `/docs`, bare domains and malformed URLs are rejected because no base URL is supplied. Parsing does not fetch the address, test DNS, prove that the destination is safe or decode query parameters into an object.
 
-## Practical example
-
-**Input:** https://example.com:8080/docs?q=test#top
-
-**Result:** Structured JSON describing every URL component.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Are query parameters decoded here?
-
-The search string is preserved. Use Query String Parser to decode individual parameters.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [Unix Timestamp Converter](../../unix-timestamp-converter/)
-- [Query String Parser](../../query-string-parser/)
-- [Regex Tester](../../regex-tester/)
+Use [Query String Parser](../../query-string-parser/) for parameter values, or the Text Tools [URL Encoder](../../url-encoder/) when preparing one component for transport.

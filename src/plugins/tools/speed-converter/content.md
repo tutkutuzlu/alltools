@@ -5,42 +5,12 @@ seoTitle: Speed Converter Online – MPH KM/H Knots
 seoDescription: Convert meters per second, kilometers per hour, miles per hour, knots and feet per second.
 ---
 
-## Speed Converter for quick, accurate results
+## Translate distance traveled per time
 
-Convert road, marine and scientific speed units. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+Meters per second are the reference. Kilometers per hour convert through 3.6, mph through the international mile, and one knot equals one nautical mile per hour (`0.514444444444 m/s`). Feet per second are also supported.
 
-## How to use Speed Converter
+A highway speed of `60 mph` becomes `96.56064 km/h`. A vessel moving at `20 knots` travels at about `37.04 km/h`; knots should not be written as “knots per hour” because the unit already contains time.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+The converter treats speed as a scalar magnitude. It does not include direction, acceleration, wind, current or route effects, so it cannot turn airspeed into ground speed or indicated speed into true speed. Negative values are numerically convertible but may represent signed velocity rather than ordinary speed.
 
-## Practical example
-
-**Input:** 100 kilometers per hour to mph
-
-**Result:** 62.1371192237 Miles per hour
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### Is a knot the same as a nautical mile per hour?
-
-Yes. One knot is exactly one nautical mile per hour.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Area Converter](../../area-converter/)
-- [Time Converter](../../time-converter/)
-- [Data Storage Converter](../../data-storage-converter/)
+Use [Length Converter](../../length-converter/) for distance and [Time Converter](../../time-converter/) for duration. [Acceleration Converter](../../acceleration-converter/) measures change in velocity rather than velocity itself.

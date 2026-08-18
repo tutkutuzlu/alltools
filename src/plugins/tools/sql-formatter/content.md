@@ -5,38 +5,12 @@ seoTitle: SQL Formatter Online – Format Queries
 seoDescription: Format common SQL SELECT, JOIN, WHERE, GROUP BY and ORDER BY clauses for review.
 ---
 
-## SQL Formatter for focused development work
+## Reflow a limited set of SQL keywords
 
-Add line breaks around common SQL clauses and lists. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+This formatter first collapses whitespace, then inserts line breaks before a fixed keyword list including `SELECT`, `FROM`, `WHERE`, common joins, `GROUP BY`, `ORDER BY`, `HAVING`, `LIMIT`, `UNION`, `VALUES`, `SET` and `RETURNING`. Commas are moved onto indented continuation lines.
 
-## How to use SQL Formatter
+An ordinary `SELECT id,name FROM users WHERE active=1 ORDER BY name` becomes easier to scan during a query review. Keyword matching is case-insensitive and the emitted recognized keyword is uppercase.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+The implementation is not a SQL parser and does not choose a database dialect. Keywords or commas inside quoted strings, identifiers, comments and functions may be reformatted incorrectly. It does not validate syntax, indent nested subqueries reliably or understand every statement type.
 
-## Practical example
-
-**Input:** select id,name from users where active=1 order by name
-
-**Result:** A query separated into readable clauses.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Does the formatter execute SQL?
-
-No. It only changes query layout locally and never connects to a database.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [CSS Minifier](../../css-minifier/)
-- [JWT Decoder](../../jwt-decoder/)
-- [UUID Generator](../../uuid-generator/)
+Choose it for quick visual separation of a conventional query, then rely on your database tooling for authoritative formatting and validation. [JSON Formatter](../../json-formatter/) is parser-backed and therefore has different guarantees.

@@ -34,5 +34,6 @@ Mimari kabul edilmiştir. Proje, V1 ve V2+ olmak üzere iki uygulama aşamasına
 - [GA4 custom definitions and reports](./ga4-custom-dimensions.md)
 - [Analytics privacy](./analytics-privacy.md)
 - [AdSense readiness](./adsense-readiness.md)
+- [Editorial content guideline](./editorial-content-guideline.md)
 - [Popularity scoring](./popularity-scoring.md)
 - [Experimental Cloudflare analytics](./experimental/cloudflare-analytics/README.md)

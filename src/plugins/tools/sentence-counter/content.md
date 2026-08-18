@@ -5,35 +5,12 @@ seoTitle: Sentence Counter – Count Sentences and Average Length
 seoDescription: Count sentences and words, then calculate average words per sentence with abbreviation awareness.
 ---
 
-## Sentence Counter for focused text work
+## A punctuation-based sentence estimate
 
-Count sentences and calculate average sentence length. All processing happens immediately on this page, so the result is available without an account or upload.
+Segments end at one or more `.`, `!`, `?` or ellipsis characters, or at the remaining end of text. The runtime temporarily protects a small abbreviation list including Mr., Dr., Prof., etc., e.g. and i.e. to avoid some obvious false splits.
 
-## How to use Sentence Counter
+Words use the Text Tools Unicode letter/number pattern, with internal apostrophes and hyphens allowed. Average words per sentence is shown to one decimal. `Dr. Lee arrived. Did she stay?` is counted as two sentences rather than three.
 
-1. Type or paste the source text into the input editor.
-2. Read the live measurements as the content changes.
-3. Clear the editor when you are finished.
+This is an approximation, not linguistic parsing. Initials, decimal numbers, unfamiliar abbreviations, headings and punctuation-free fragments can produce surprising results. A final fragment without terminal punctuation still counts as a sentence when it contains text.
 
-## Practical example
-
-Review a paragraph for overly long sentences before publishing a help article.
-
-## Privacy
-
-Your text stays in your browser. The input and result are processed locally and are never included in analytics events.
-
-## Frequently asked questions
-
-### Does Dr. create an extra sentence?
-
-Common abbreviations such as Dr., Mr. and e.g. are protected from simple false splits.
-
-### Does it work on mobile devices?
-
-Yes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.
-
-## Related text tools
-
-- [word-counter](../word-counter/)
-- [Paragraph Counter](../paragraph-counter/)
+Use [Paragraph Counter](../../paragraph-counter/) for blank-line-separated blocks or [Word Counter](../../word-counter/) for reading-time context.

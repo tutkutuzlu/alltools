@@ -5,42 +5,12 @@ seoTitle: Tint and Shade Generator – Color Scale Builder
 seoDescription: Create seven consistent lightness steps around a base color for UI design.
 ---
 
-## Tint and Shade Generator for reliable browser-based color work
+## Build a lightness scale around one color
 
-Generate lighter and darker variants. The shared AllTools color engine validates every channel before calculating the result and renders a bordered live preview that stays readable in Light and Dark themes.
+The generator converts the base color to HSL and changes its lightness by −40, −25, −10, 0, +10, +25 and +40 percentage points. Values are clamped to the 0–100% HSL lightness range, then converted to opaque HEX. Hue and HSL saturation are held constant.
 
-## How to use Tint and Shade Generator
+This seven-step sequence can help draft button states, surfaces or a tonal illustration family. For `#3366CC`, the center swatch remains the base while the preceding and following entries provide darker and lighter candidates.
 
-1. Enter or choose the required color value using the clearly labeled controls.
-2. Review the live result and preview; correct any validation message before using the value.
-3. Copy the generated output, or download CSS only when that action is available.
+In traditional pigment terminology, a tint mixes with white and a shade mixes with black. This tool approximates that design intent by changing HSL lightness; it does not perform physical pigment mixing or linear-light compositing. HSL is not perceptually uniform, so equal numeric steps may look uneven, and extreme bases can cause multiple clamped results near black or white.
 
-## Practical example
-
-**Input:** #3366CC
-
-**Result:** Seven light-to-dark HEX colors
-
-## Accuracy and formats
-
-Calculations use standard sRGB, HSL, HSV, CMYK and alpha formulas where relevant. Display rounding is kept separate from input validation so valid channels remain predictable across modern browsers.
-
-## Privacy
-
-Your colors stay in your browser. Entered values, generated palettes and copied output are never included in telemetry or sent to an external API.
-
-## Frequently asked questions
-
-### Are RGB channels simply multiplied?
-
-No. The generator adjusts HSL lightness to create predictable visual steps.
-
-### Can I copy the result?
-
-Yes. Use Copy result to place the generated text on your clipboard. Color values are not included in analytics events.
-
-## Related color tools
-
-- [HEX to RGB](../../hex-to-rgb/)
-- [Color Palette Generator](../../color-palette-generator/)
-- [Contrast Checker](../../contrast-checker/)
+Use [Lighten and Darken Color](../../lighten-darken-color/) when you want the narrower ±10, ±20 and ±30 sequence. Test any selected text/background state with [WCAG Color Accessibility Checker](../../wcag-color-accessibility-checker/).

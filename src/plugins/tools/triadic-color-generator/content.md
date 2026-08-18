@@ -5,42 +5,12 @@ seoTitle: Triadic Color Generator – Balanced Color Scheme
 seoDescription: Create a deterministic three-color scheme spaced 120 degrees around the hue wheel.
 ---
 
-## Triadic Color Generator for reliable browser-based color work
+## Three hue anchors, 120 degrees apart
 
-Generate three evenly spaced colors. The shared AllTools color engine validates every channel before calculating the result and renders a bordered live preview that stays readable in Light and Dark themes.
+A triadic scheme uses three positions distributed evenly around a color wheel. The runtime takes the base HSL hue, then adds 120 and 240 degrees while keeping saturation and lightness fixed. The three results are emitted as opaque HEX values.
 
-## How to use Triadic Color Generator
+With a blue starting point, the other anchors fall in green- and red-side regions. This can provide distinct first-pass categories for an infographic, a three-part illustration or primary/secondary accent exploration while retaining a common HSL intensity.
 
-1. Enter or choose the required color value using the clearly labeled controls.
-2. Review the live result and preview; correct any validation message before using the value.
-3. Copy the generated output, or download CSS only when that action is available.
+Mathematical balance is not visual balance. Different hues with identical HSL saturation and lightness can appear unequal in brightness, and the sequence does not check contrast or color-vision accessibility. Neutral input is another edge case: when saturation is zero, hue rotations all collapse to the same gray.
 
-## Practical example
-
-**Input:** #3366CC
-
-**Result:** Three balanced hue swatches
-
-## Accuracy and formats
-
-Calculations use standard sRGB, HSL, HSV, CMYK and alpha formulas where relevant. Display rounding is kept separate from input validation so valid channels remain predictable across modern browsers.
-
-## Privacy
-
-Your colors stay in your browser. Entered values, generated palettes and copied output are never included in telemetry or sent to an external API.
-
-## Frequently asked questions
-
-### Why are triadic colors balanced?
-
-Their equal 120 degree spacing creates contrast without relying on a single opposite pair.
-
-### Can I copy the result?
-
-Yes. Use Copy result to place the generated text on your clipboard. Color values are not included in analytics events.
-
-## Related color tools
-
-- [HEX to RGB](../../hex-to-rgb/)
-- [Color Palette Generator](../../color-palette-generator/)
-- [Contrast Checker](../../contrast-checker/)
+Choose this tool when exactly three separated hue directions are useful. [Complementary Color Generator](../../complementary-color-generator/) produces a two-color opposition, while [Color Palette Generator](../../color-palette-generator/) offers six less-symmetrical positions for broader exploration.

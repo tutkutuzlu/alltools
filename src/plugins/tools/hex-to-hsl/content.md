@@ -5,42 +5,14 @@ seoTitle: HEX to HSL Converter – Hue Saturation Lightness
 seoDescription: Translate HEX colors into readable HSL values with optional alpha support.
 ---
 
-## HEX to HSL for reliable browser-based color work
+## Move from channel bytes to HSL controls
 
-Convert HEX colors to HSL values. The shared AllTools color engine validates every channel before calculating the result and renders a bordered live preview that stays readable in Light and Dark themes.
+HEX describes a color through red, green and blue bytes. HSL reorganizes the same web color into hue angle, saturation and lightness, which can be easier to adjust for themes and component states. Hue runs around a 0–360 degree circle; saturation and lightness are percentages.
 
-## How to use HEX to HSL
+Enter a 3-, 4-, 6- or 8-digit HEX value. `#3366CC` converts to approximately `hsl(220, 60%, 50%)`. If the HEX value includes alpha, the result uses HSLA and preserves that opacity value, rounded for display.
 
-1. Enter or choose the required color value using the clearly labeled controls.
-2. Review the live result and preview; correct any validation message before using the value.
-3. Copy the generated output, or download CSS only when that action is available.
+The RGB-to-HSL formula is deterministic, but the printed HSL components are rounded. A later HSL-to-HEX conversion can therefore differ by a channel value at rounding boundaries. Hue is also undefined for neutral gray; the tool reports zero degrees in that case because changing hue cannot affect a fully desaturated color.
 
-## Practical example
+Choose this converter when a fixed brand HEX color needs tunable HSL parameters for hover, focus or theme experiments. It does not judge whether a changed color remains accessible—use [Contrast Checker](../../contrast-checker/) after adjusting it.
 
-**Input:** #3366CC
-
-**Result:** hsl(220, 60%, 50%)
-
-## Accuracy and formats
-
-Calculations use standard sRGB, HSL, HSV, CMYK and alpha formulas where relevant. Display rounding is kept separate from input validation so valid channels remain predictable across modern browsers.
-
-## Privacy
-
-Your colors stay in your browser. Entered values, generated palettes and copied output are never included in telemetry or sent to an external API.
-
-## Frequently asked questions
-
-### Why use HSL?
-
-HSL makes hue, saturation and lightness adjustments intuitive for design systems.
-
-### Can I copy the result?
-
-Yes. Use Copy result to place the generated text on your clipboard. Color values are not included in analytics events.
-
-## Related color tools
-
-- [HEX to RGB](../../hex-to-rgb/)
-- [Color Palette Generator](../../color-palette-generator/)
-- [Contrast Checker](../../contrast-checker/)
+Use [HSL to HEX](../../hsl-to-hex/) to return to a token-friendly representation.

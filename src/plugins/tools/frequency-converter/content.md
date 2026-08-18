@@ -5,42 +5,12 @@ seoTitle: Frequency Converter – Hz kHz MHz GHz RPM
 seoDescription: Convert hertz, kilohertz, megahertz, gigahertz and revolutions per minute.
 ---
 
-## Frequency Converter for quick, accurate results
+## Convert cycles per second
 
-Convert frequency units and revolutions per minute. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+Hertz is the reference: one hertz means one cycle per second. The SI options scale through kHz, MHz and GHz. Revolutions per minute are converted with `1 rpm = 1/60 Hz`, so a motor turning at `3,600 rpm` has a rotational frequency of `60 Hz`.
 
-## How to use Frequency Converter
+This helps compare rotating machinery with cycle-based measurements or move an electronics specification between decimal prefixes. The result describes repetition rate, not speed along a path.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+RPM conversion assumes one cycle per revolution. Equipment with multiple poles, pulses, teeth or events per revolution needs an additional ratio that this tool does not apply. Angular frequency in radians per second is also not included; it would require multiplying hertz by `2π`.
 
-## Practical example
-
-**Input:** 60 revolutions per minute to hertz
-
-**Result:** 1 Hertz (Hz)
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### Why is RPM included?
-
-A repeating rotation is a frequency; 60 revolutions per minute equals one cycle per second.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Angle Converter](../../angle-converter/)
-- [Fuel Economy Converter](../../fuel-economy-converter/)
-- [Data Transfer Rate Converter](../../data-transfer-rate-converter/)
+Use [Angle Converter](../../angle-converter/) for radians, turns and degrees, or [Speed Converter](../../speed-converter/) for linear motion. Frequency alone does not determine wavelength without a propagation speed.

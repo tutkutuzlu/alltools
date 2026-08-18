@@ -5,40 +5,12 @@ seoTitle: HTML Minifier Online – Compact Markup
 seoDescription: Minify HTML online while retaining conditional comments and element content.
 ---
 
-## HTML Minifier for focused development work
+## Regex-based compaction for simple markup
 
-Compact HTML by removing comments and layout whitespace. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+The operation removes ordinary HTML comments while retaining comments that begin with `[if`, deletes whitespace between adjacent tags, collapses every run of two or more whitespace characters to one space, and trims the result.
 
-## How to use HTML Minifier
+For a small static fragment with indentation between elements, the output becomes a compact single line. Conditional-comment preservation is intended for legacy markup that uses `<!--[if ...]>` syntax.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+Because this is not DOM-aware, it can change meaningful whitespace in text and in `pre`, `textarea`, `script` or `style` content. Comment-like text inside scripts may also be unsafe. Treat the result as a preview for simple snippets, not a substitute for a production minifier with parser-level language awareness and tests.
 
-## Practical example
-
-**Input:** <div>
-  <span>Hello</span>
-</div>
-
-**Result:** Compact markup with whitespace between tags removed.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Does it remove conditional comments?
-
-No. Regular comments are removed, while legacy conditional comments are retained.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [HTML Formatter](../../html-formatter/)
-- [CSS Formatter](../../css-formatter/)
-- [CSS Minifier](../../css-minifier/)
+[HTML Formatter](../../html-formatter/) makes uncomplicated nesting readable again. Use [CSS Minifier](../../css-minifier/) separately for standalone stylesheets.

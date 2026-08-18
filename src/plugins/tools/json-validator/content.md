@@ -5,38 +5,12 @@ seoTitle: JSON Validator Online – Check JSON Syntax
 seoDescription: Validate JSON syntax online and inspect root type, entry count and nesting depth.
 ---
 
-## JSON Validator for focused development work
+## Syntax status plus four structural metrics
 
-Check JSON syntax and inspect its root structure. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+The validator attempts `JSON.parse` and reports Valid JSON, root type, root entry count and maximum nesting depth. An array root is labeled `array`, `null` is distinguished from objects, and entry count is the number of top-level keys or array positions.
 
-## How to use JSON Validator
+For `{"user":{"id":7},"roles":["editor"]}`, the root is an object with two entries and nested depth. A malformed comma or quote returns “No” with neutral metrics; the current analyzer does not expose the parser's error position or message.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+This is syntax validation only. It does not apply JSON Schema, verify required properties, constrain formats or detect domain errors. Valid JSON can still be invalid for the application receiving it, and duplicate keys may parse with only the last value retained.
 
-## Practical example
-
-**Input:** {"status":"ok"}
-
-**Result:** A valid result with object type and one root entry.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Does this send JSON to a server?
-
-No. Validation and structural analysis run locally in your browser.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [JSON Minifier](../../json-minifier/)
-- [JSON to CSV Converter](../../json-to-csv/)
-- [CSV to JSON Converter](../../csv-to-json/)
+Choose [JSON Formatter](../../json-formatter/) when you also need readable output, or use [JSON to CSV Converter](../../json-to-csv/) after confirming that the root has the object structure that converter expects.

@@ -3,10 +3,10 @@ seoTitle: Security & Generators – Private Browser Crypto Tools
 seoDescription: Generate passwords, tokens, passphrases, PINs and UUID v7 values or calculate hashes, HMACs and checksums locally.
 ---
 
-## Local security utilities without uploads
+## Choose the correct security primitive
 
-These focused tools use browser-native cryptographic randomness and Web Crypto operations where appropriate. Secrets, source text and generated values stay in the active page and are never stored or sent to AllTools analytics.
+Use a **password or passphrase generator** for a new human credential and a **token or random-string generator** for machine-oriented values. Secure generators use browser cryptographic randomness where the runtime requires it. **Hashing** creates an unkeyed digest and is not encryption; **HMAC** combines a secret key with a message for authentication; **checksums** are intended to detect accidental changes and are not a substitute for a cryptographic integrity check.
 
 ## Use security primitives carefully
 
-Generators and calculators can support a secure workflow, but no isolated utility can guarantee the security of an entire account or system. Review algorithm warnings, use unique credentials and follow the requirements of the service receiving a generated value.
+Secrets, source text and generated values remain in the active page and are excluded from telemetry. These utilities provide individual operations, not complete account or system security; follow the receiving system's requirements and protect copied secrets from clipboard history.

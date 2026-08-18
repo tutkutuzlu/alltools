@@ -5,35 +5,12 @@ seoTitle: HTML Encoder – Escape HTML Characters Safely
 seoDescription: Encode ampersands, brackets, quotes and apostrophes as HTML entities without rendering markup.
 ---
 
-## HTML Encoder for focused text work
+## Escape five HTML-sensitive characters
 
-Escape HTML-sensitive characters as safe entities. All processing happens immediately on this page, so the result is available without an account or upload.
+The operation replaces `&`, `<`, `>`, double quote and apostrophe with `&amp;`, `&lt;`, `&gt;`, `&quot;` and `&#39;`. Every other character, including Unicode text and line breaks, is left unchanged.
 
-## How to use HTML Encoder
+Encoding `<strong title="note">Ada & Lin</strong>` makes the markup visible as text rather than interpretable tags. This is useful for documentation examples or for inspecting the exact characters a template needs to escape.
 
-1. Type or paste the source text into the input editor.
-2. Choose any available mode or comparison options.
-3. Review the result, then copy or download it when available.
+Running the encoder twice also escapes the ampersands in existing entities, producing values such as `&amp;lt;`. The result is not a complete security policy: safe HTML output depends on context, and JavaScript, URL and CSS contexts require different escaping. The tool does not sanitize or selectively allow markup.
 
-## Practical example
-
-Display a literal `<button>` example in documentation without allowing the browser to treat it as an element.
-
-## Privacy
-
-Your text stays in your browser. The input and result are processed locally and are never included in analytics events.
-
-## Frequently asked questions
-
-### Does this sanitize complete HTML documents?
-
-It escapes five common syntax characters; it is not a replacement for context-aware application sanitization.
-
-### Does it work on mobile devices?
-
-Yes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.
-
-## Related text tools
-
-- [HTML Decoder](../html-decoder/)
-- [URL Encoder](../url-encoder/)
+Use [HTML Decoder](../../html-decoder/) to reverse supported entities. [JSON String Escape](../../json-string-escape/) targets JSON string syntax instead.

@@ -5,38 +5,12 @@ seoTitle: Query String Parser Online
 seoDescription: Parse query strings and full URLs into JSON while preserving repeated parameter values.
 ---
 
-## Query String Parser for focused development work
+## Turn parameters into a JSON object
 
-Decode URL query parameters into structured JSON. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+Input may be a raw query, a leading `?` query or a full URL. Text before the first question mark and any fragment after `#` are removed, then `URLSearchParams` decodes the pairs. Repeated keys become arrays in encounter order.
 
-## How to use Query String Parser
+`?tag=web&tag=tools&empty=` produces a `tag` array and an empty string for `empty`. Percent escapes are decoded and `+` follows form-query behavior by becoming a space.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+All values remain strings; numbers, booleans and nested bracket conventions are not inferred. A key without `=` receives an empty value. When duplicate keys occur, the shape changes from a string to an array, which consuming code must handle.
 
-## Practical example
-
-**Input:** ?tag=js&tag=css&page=2
-
-**Result:** JSON with tag as an array and page as a string.
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### What happens to repeated keys?
-
-Repeated keys are collected into arrays in their original order.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [URL Parser](../../url-parser/)
-- [Regex Tester](../../regex-tester/)
-- [Cron Expression Explainer](../../cron-expression-explainer/)
+Choose this parser when diagnosing a link or form submission. [URL Parser](../../url-parser/) exposes the untouched `search` component alongside the rest of an absolute URL, while [JSON String Escape](../../json-string-escape/) solves a different embedding problem.

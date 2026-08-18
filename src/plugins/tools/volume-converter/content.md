@@ -5,42 +5,12 @@ seoTitle: Volume Converter Online – Liters Gallons Cups
 seoDescription: Convert milliliters, liters, cubic meters, cups, pints and US or imperial gallons.
 ---
 
-## Volume Converter for quick, accurate results
+## Compare liquid and cubic capacity
 
-Convert liquid and cubic volume units. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+Liters are the reference. The catalog includes mL, m³, US teaspoons, tablespoons, cups, pints and gallons, plus Imperial gallons. One US gallon is exactly `3.785411784 L`; one Imperial gallon is `4.54609 L`, so the gallon convention must be selected deliberately.
 
-## How to use Volume Converter
+A `20 US gal` fuel tank holds about `75.708 L`, while `20 Imperial gal` is `90.9218 L`. One cubic meter equals 1,000 liters, making the same tool useful for tanks and larger spaces.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+Volume does not determine mass. Converting liters of water or fuel into kilograms requires density, which depends on material and conditions. Kitchen measures can also use regional conventions; this catalog's spoon, cup and pint entries are US values.
 
-## Practical example
-
-**Input:** 1 US gallon to liters
-
-**Result:** 3.785411784 Liters (L)
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### Are US and imperial gallons distinguished?
-
-Yes. US gallons and imperial gallons are separate options with different exact volumes.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Temperature Converter](../../temperature-converter/)
-- [Area Converter](../../area-converter/)
-- [Speed Converter](../../speed-converter/)
+Choose [Cooking Measurement Converter](../../cooking-measurement-converter/) for a kitchen-focused US set, or [Density Converter](../../density-converter/) when comparing a known mass-per-volume value. The runtime does not derive volume from object dimensions.

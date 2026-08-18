@@ -5,42 +5,12 @@ seoTitle: HMAC Generator – SHA-256 SHA-384 SHA-512
 seoDescription: Generate HMAC values from a message and local secret key with HEX or Base64 output.
 ---
 
-## HMAC Generator for private browser workflows
+## A keyed authenticator, not encryption
 
-Authenticate a message using a key that never leaves the current page. All processing uses local browser capabilities and the result is never sent to an external service.
+HMAC combines the UTF-8 bytes of a message with a required UTF-8 secret key using HMAC-SHA-256, HMAC-SHA-384 or HMAC-SHA-512 through Web Crypto. The resulting MAC is displayed as lowercase HEX or padded Base64. Anyone with the same key, message, algorithm and encoding can reproduce it.
 
-## How to use HMAC Generator
+Use it to verify an integration test or reproduce a webhook signature when the external protocol explicitly specifies the same construction. HMAC can establish message integrity and authenticity between parties that already share a suitable secret; it does not conceal the message.
 
-1. Choose the controls that match your intended format or security requirement.
-2. Enter local input when required, then generate or review the calculated result.
-3. Copy the output and handle any secret according to the policy of the system where it will be used.
+Key generation, distribution, rotation and storage determine the real security boundary. A short, reused or exposed key undermines the result, and copying a MAC is not equivalent to performing a constant-time verification. The page clears the password-type key field on unmount and telemetry excludes its value, but it cannot control extensions or the surrounding device.
 
-## Practical example
-
-**Input:** Message plus a secret key using SHA-256
-
-**Result:** A keyed authentication code
-
-## Security boundaries
-
-This utility provides a focused primitive, not a complete security guarantee. Review algorithm warnings, protect copied secrets from clipboard history and never reuse credentials across unrelated services.
-
-## Privacy
-
-Passwords, keys, tokens, source text and generated values stay in the active page. They are not stored in localStorage, written to the console or included in telemetry.
-
-## Frequently asked questions
-
-### Is the secret key stored?
-
-No. It remains only in the page control, never enters storage or telemetry, and is cleared on unmount.
-
-### Is HMAC the same as hashing?
-
-No. HMAC authenticates data with a secret key; a plain hash has no shared secret.
-
-## Related security tools
-
-- [Password Generator](../../password-generator/)
-- [Secure Token Generator](../../secure-token-generator/)
-- [Hash Generator](../../hash-generator/)
+[Hash Generator](../../hash-generator/) produces an unkeyed fingerprint and cannot prove who supplied a message. [Checksum Calculator](../../checksum-calculator/) targets accidental changes, while [Secure Token Generator](../../secure-token-generator/) supplies random bytes suitable for a key only when the consuming protocol’s length and handling requirements are followed.

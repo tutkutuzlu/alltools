@@ -5,35 +5,12 @@ seoTitle: ROT13 Converter – Encode and Decode Text Online
 seoDescription: Encode or decode ROT13 text instantly while preserving numbers, punctuation and non-ASCII characters.
 ---
 
-## ROT13 Converter for focused text work
+## Rotate ASCII letters by thirteen places
 
-Apply the reversible ROT13 substitution to ASCII letters. All processing happens immediately on this page, so the result is available without an account or upload.
+ROT13 maps A–Z and a–z halfway around the English alphabet while preserving case. Applying the same operation a second time restores the original. Numbers, punctuation, spaces, accented letters, emoji and every non-ASCII character remain untouched.
 
-## How to use ROT13 Converter
+`Hello, World! 123` becomes `Uryyb, Jbeyq! 123`. This can hide a puzzle answer, spoiler or punchline from casual reading while keeping it easy to reveal.
 
-1. Type or paste the source text into the input editor.
-2. Choose any available mode or comparison options.
-3. Review the result, then copy or download it when available.
+ROT13 is not encryption or security. There is no key, the transformation is immediately recognizable, and it provides no confidentiality or integrity. It also does not transliterate other alphabets.
 
-## Practical example
-
-Reveal a ROT13-obscured puzzle hint, then run the result again to restore the original text.
-
-## Privacy
-
-Your text stays in your browser. The input and result are processed locally and are never included in analytics events.
-
-## Frequently asked questions
-
-### Why is there one operation?
-
-ROT13 is symmetrical: applying the same conversion twice returns the original ASCII letters.
-
-### Does it work on mobile devices?
-
-Yes. The controls, editor and results adapt to narrow screens and remain accessible from a keyboard.
-
-## Related text tools
-
-- [Text Reverser](../text-reverser/)
-- [Base64 Encoder](../base64-encoder/)
+Choose [Text Reverser](../../text-reverser/) for positional novelty transformations, or [Base64 Encoder](../../base64-encoder/) when an interoperability format needs UTF-8 binary-to-text encoding. Neither should be mistaken for protecting a secret.

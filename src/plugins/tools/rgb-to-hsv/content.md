@@ -5,42 +5,14 @@ seoTitle: RGB to HSV Converter – Hue Saturation Value
 seoDescription: Convert RGB or RGBA channels to HSV while preserving alpha where supplied.
 ---
 
-## RGB to HSV for reliable browser-based color work
+## Express RGB as hue, saturation and value
 
-Convert RGB colors to HSV values. The shared AllTools color engine validates every channel before calculating the result and renders a bordered live preview that stays readable in Light and Dark themes.
+HSV describes color with a hue angle, saturation and value. Unlike HSL lightness, HSV value is the largest normalized RGB channel. That makes HSV convenient for picker interfaces where moving toward zero value should reliably approach black.
 
-## How to use RGB to HSV
+Input channels must be between 0 and 255. Optional alpha accepts 0–1 or a percentage and is carried into the formatted HSV result. `rgb(51, 102, 204)` converts to approximately `hsv(220, 75%, 80%)`: blue is the strongest channel, so value is 80%.
 
-1. Enter or choose the required color value using the clearly labeled controls.
-2. Review the live result and preview; correct any validation message before using the value.
-3. Copy the generated output, or download CSS only when that action is available.
+Displayed hue, saturation and value are rounded. For black, saturation is reported as zero because hue cannot be recovered when all channels are zero. Grays likewise have no meaningful hue. A later conversion back to RGB can differ by one byte because the displayed HSV numbers and RGB output are quantized.
 
-## Practical example
+Choose HSV when implementing a conventional saturation/value picker or comparing a color by its maximum channel. Choose [RGB to HSL](../../rgb-to-hsl/) instead when CSS-style lightness adjustments are the intended workflow.
 
-**Input:** rgb(51, 102, 204)
-
-**Result:** hsv(220, 75%, 80%)
-
-## Accuracy and formats
-
-Calculations use standard sRGB, HSL, HSV, CMYK and alpha formulas where relevant. Display rounding is kept separate from input validation so valid channels remain predictable across modern browsers.
-
-## Privacy
-
-Your colors stay in your browser. Entered values, generated palettes and copied output are never included in telemetry or sent to an external API.
-
-## Frequently asked questions
-
-### How is HSV different from HSL?
-
-HSV models brightness as value, while HSL separates lightness around a midpoint.
-
-### Can I copy the result?
-
-Yes. Use Copy result to place the generated text on your clipboard. Color values are not included in analytics events.
-
-## Related color tools
-
-- [HEX to RGB](../../hex-to-rgb/)
-- [Color Palette Generator](../../color-palette-generator/)
-- [Contrast Checker](../../contrast-checker/)
+Neither HSV value nor HSL lightness predicts readable text contrast; [Contrast Checker](../../contrast-checker/) uses relative luminance for that purpose.

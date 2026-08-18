@@ -5,42 +5,14 @@ seoTitle: Fuel Economy Converter – MPG and L/100km
 seoDescription: Convert US MPG, imperial MPG, kilometers per liter and liters per 100 kilometers.
 ---
 
-## Fuel Economy Converter for quick, accurate results
+## Convert efficiency and consumption scales
 
-Convert MPG, km/L and L/100 km fuel economy. The calculation runs locally and uses explicit unit definitions so the result is available immediately without an upload or account.
+Kilometers per liter, US mpg and Imperial mpg express distance per fuel amount: higher is more efficient. Liters per 100 km expresses consumption: lower is better. The runtime converts through km/L, using reciprocal `100 / value` for L/100 km rather than one fixed multiplier.
 
-## How to use Fuel Economy Converter
+For example, `8 L/100 km` becomes `12.5 km/L`, about `29.38 mpg US` or `35.31 mpg Imperial`. US and Imperial results differ because the Imperial gallon is larger; both options are explicitly available.
 
-1. Enter a numeric value. Commas used as thousands separators are accepted.
-2. Choose the source and target units, then select an optional display precision.
-3. Review the live result, swap the unit direction if needed, or copy the converted value.
+Every accepted value must be greater than zero. Zero consumption would require infinite distance-per-volume efficiency, and zero mpg would create an undefined reciprocal, so the runtime rejects zero and negative input.
 
-## Practical example
+This is a unit conversion, not a prediction of real vehicle use. Driving conditions, measurement cycles, rounding and fuel blends affect observed economy. It also does not calculate trip fuel cost or range.
 
-**Input:** 8 liters per 100 km to US MPG
-
-**Result:** 29.4018229167 Miles per US gallon
-
-## Conversion accuracy
-
-The converter calculates with JavaScript double-precision numbers and displays up to twelve significant digits in automatic mode. Fixed decimal options affect display only, not the underlying calculation.
-
-## Privacy
-
-Your value stays in your browser. Inputs and results are not included in analytics events or sent to an external conversion service.
-
-## Frequently asked questions
-
-### Why is this conversion reciprocal?
-
-L/100 km measures consumption while MPG and km/L measure distance per fuel amount, so conversion uses a reciprocal relationship.
-
-### Can I reverse the conversion?
-
-Yes. Use Swap units to exchange the source and target selections without re-entering the value.
-
-## Related unit converters
-
-- [Frequency Converter](../../frequency-converter/)
-- [Data Transfer Rate Converter](../../data-transfer-rate-converter/)
-- [Acceleration Converter](../../acceleration-converter/)
+Use [Volume Converter](../../volume-converter/) to compare gallon and liter quantities independently, or [Length Converter](../../length-converter/) for trip distance.

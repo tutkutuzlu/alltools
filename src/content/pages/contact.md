@@ -3,7 +3,7 @@ slug: contact
 title: Contact
 seoTitle: Contact AllTools – Feedback and Support
 seoDescription: Contact AllTools to report a problem, suggest a tool or ask a question about the platform and its policies.
-updatedAt: 2026-08-03
+updatedAt: 2026-08-18
 ---
 
 ## How to reach AllTools
@@ -17,12 +17,12 @@ When reporting a technical issue, please include:
 - A short description of what you expected and what happened.
 - Reproduction steps that do not contain private or confidential information.
 
-Do not post passwords, personal documents, private text, access tokens or other sensitive information in a public issue. AllTools never needs the content you entered into a text tool to investigate a general interface problem.
+GitHub issues are public. Do not post passwords, personal documents, private text, access tokens, unpublished vulnerability details or other sensitive information. AllTools does not need your tool input to investigate a general interface problem.
 
 ## Privacy and legal requests
 
-For a privacy or policy question, open an issue with a neutral description and clearly label it as a privacy or legal request. If a request requires non-public information, ask for a private contact channel without publishing that information in the issue.
+For a privacy or policy question, open an issue with a neutral, non-sensitive description and clearly identify the subject. The project does not currently publish a verified private email address or private reporting channel. Do not use a public issue to disclose information that must remain confidential.
 
 ## Response expectations
 
-AllTools is an independently maintained project and does not offer guaranteed response times or emergency support. Reports are reviewed as capacity allows. Security-sensitive reports should not include exploit details or confidential data in a public issue; request a private reporting channel first.
+AllTools is independently maintained and does not offer guaranteed response times or emergency support. Reports are reviewed as capacity allows. A private contact method will need to be established before confidential privacy or security reports can be accepted.

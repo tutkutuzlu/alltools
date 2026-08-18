@@ -5,42 +5,12 @@ seoTitle: Secure Password Generator – Private Browser Tool
 seoDescription: Generate strong passwords with configurable length, character groups and ambiguous-character exclusion.
 ---
 
-## Password Generator for private browser workflows
+## How the password is assembled
 
-Build a password policy deliberately instead of accepting opaque defaults. All processing uses local browser capabilities and the result is never sent to an external service.
+Choose a length from 4 to 256 and enable lowercase letters, uppercase letters, digits or symbols. The generator first draws one character from every selected group, fills the remaining positions from the combined alphabet, then shuffles the result. Browser `crypto.getRandomValues` supplies the bytes; rejection sampling prevents modulo bias. “Exclude ambiguous” removes characters such as `I`, `l`, `1`, `O`, `0`, quotes and the vertical bar before selection.
 
-## How to use Password Generator
+The selected groups and exclusions determine the possible output space. The required-group rule means positions are not simply independent draws from one alphabet, so this page does not present a simplistic entropy number. A 20-character result using all four groups is appropriate for creating a new account password, provided the site accepts those symbols.
 
-1. Choose the controls that match your intended format or security requirement.
-2. Enter local input when required, then generate or review the calculated result.
-3. Copy the output and handle any secret according to the policy of the system where it will be used.
+Generation does not store, synchronize or protect the result after it is copied. Save each password in a reputable password manager, do not reuse it, and follow the account’s MFA and recovery practices. Clipboard history and extensions remain outside this tool’s security boundary.
 
-## Practical example
-
-**Input:** 20 characters with all groups
-
-**Result:** A unique mixed-character password
-
-## Security boundaries
-
-This utility provides a focused primitive, not a complete security guarantee. Review algorithm warnings, protect copied secrets from clipboard history and never reuse credentials across unrelated services.
-
-## Privacy
-
-Passwords, keys, tokens, source text and generated values stay in the active page. They are not stored in localStorage, written to the console or included in telemetry.
-
-## Frequently asked questions
-
-### How is randomness generated?
-
-The tool uses crypto.getRandomValues and rejection sampling instead of Math.random.
-
-### Can a generated password guarantee account security?
-
-No. Use a unique password, protect it in a reputable password manager and enable MFA where available.
-
-## Related security tools
-
-- [Secure Token Generator](../../secure-token-generator/)
-- [Hash Generator](../../hash-generator/)
-- [UUID v7 Generator](../../uuid-v7-generator/)
+Choose [Passphrase Generator](../../passphrase-generator/) when memorability matters, [PIN Generator](../../pin-generator/) for a numeric-only field, or [Secure Token Generator](../../secure-token-generator/) when a protocol specifies random bytes and an encoding.

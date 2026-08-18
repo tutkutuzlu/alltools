@@ -5,42 +5,12 @@ seoTitle: UUID v7 Generator – Time-Ordered UUIDs
 seoDescription: Generate one or more RFC-compatible UUID version 7 identifiers with secure random bits in your browser.
 ---
 
-## UUID v7 Generator for private browser workflows
+## Timestamp-prefixed version 7 identifiers
 
-Produce database-friendly identifiers that carry time ordering without replacing UUID v4. All processing uses local browser capabilities and the result is never sent to an external service.
+Each identifier contains the current Unix timestamp in milliseconds in its first 48 bits, the UUID version-7 nibble, the RFC variant bits and random bits sourced from `crypto.getRandomValues`. It is formatted in the canonical lowercase `8-4-4-4-12` hexadecimal form, such as `019...-....-7...-....-............`.
 
-## How to use UUID v7 Generator
+You can generate 1–100 UUIDs. Within one requested batch, the implementation adds one millisecond to the starting timestamp for each successive value, so their textual order follows the generated sequence. This is an approximate ordering convenience, not strict global chronology: separate browsers, clock changes and concurrent systems are not coordinated.
 
-1. Choose the controls that match your intended format or security requirement.
-2. Enter local input when required, then generate or review the calculated result.
-3. Copy the output and handle any secret according to the policy of the system where it will be used.
+UUID v7 is useful for database identifiers where time locality can improve sorting behavior. Random bits make collisions improbable, but neither uniqueness nor ordering is mathematically guaranteed, and the embedded timestamp exposes approximate creation time. A UUID is an identifier, not an authentication secret.
 
-## Practical example
-
-**Input:** Generate three UUID v7 values
-
-**Result:** Three version-7 UUIDs ordered by timestamp
-
-## Security boundaries
-
-This utility provides a focused primitive, not a complete security guarantee. Review algorithm warnings, protect copied secrets from clipboard history and never reuse credentials across unrelated services.
-
-## Privacy
-
-Passwords, keys, tokens, source text and generated values stay in the active page. They are not stored in localStorage, written to the console or included in telemetry.
-
-## Frequently asked questions
-
-### How is UUID v7 different from UUID v4?
-
-UUID v7 begins with a Unix-millisecond timestamp, improving chronological database ordering while retaining random bits.
-
-### Does this replace the UUID v4 tool?
-
-No. The existing UUID v4 Generator remains separate for workflows that prefer fully random UUIDs.
-
-## Related security tools
-
-- [Password Generator](../../password-generator/)
-- [Secure Token Generator](../../secure-token-generator/)
-- [Hash Generator](../../hash-generator/)
+The Developer family’s [UUID Generator](../../uuid-generator/) creates version 4 identifiers without a timestamp component. Choose that when fully random UUID structure is preferable; choose [Secure Token Generator](../../secure-token-generator/) when the value is intended to be an opaque secret rather than a public identifier.

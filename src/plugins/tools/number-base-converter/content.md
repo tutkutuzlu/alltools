@@ -5,37 +5,12 @@ seoTitle: Number Base Converter Online
 seoDescription: Convert large integers between bases 2, 8, 10, 16 and 36 without precision loss.
 ---
 
-## Number Base Converter for focused development work
+## Convert non-negative integers with BigInt
 
-Convert integers between binary, octal, decimal, hex and base 36. Processing happens locally, so you can inspect routine development values without uploading them or creating an account.
+Select base 2, 8, 10, 16 or 36 for input and output. The runtime reads each digit into a `BigInt`, so values larger than JavaScript's ordinary safe-integer range retain integer precision. Output uses uppercase letters.
 
-## How to use Number Base Converter
+Converting hexadecimal `FF` to decimal returns `255`; a large decimal database identifier can be converted to base 36 without floating-point rounding. Every character is checked against the selected source base, so `2` is rejected in binary.
 
-1. Enter or paste the source value into the input area.
-2. Adjust any options shown above the editor.
-3. Review the generated result or validation details, then copy or download it when available.
+Only unsigned whole numbers are supported. Do not include `0x`, `0b`, a minus sign, decimal point, exponent, whitespace between digits or digit separators. The operation changes representation, not byte order, encoding or bit width, and it does not preserve leading zeroes.
 
-## Practical example
-
-**Input:** 255 from decimal to hexadecimal
-
-**Result:** FF
-
-## Privacy
-
-Your input stays in your browser. This tool does not send source values, generated output or clipboard content through telemetry.
-
-## Frequently asked questions
-
-### Can it handle integers larger than JavaScript Number?
-
-Yes. Conversion uses BigInt arithmetic to avoid floating-point precision loss.
-
-### Can I use this tool on mobile?
-
-Yes. The editor, controls and results adapt to narrow screens and remain available from a keyboard.
-
-## Related developer tools
-
-- [Color Converter](../../color-converter/)
-- [JSON String Escape](../../json-string-escape/)
+Choose [UUID Validator](../../uuid-validator/) for structured hexadecimal identifiers. Base conversion is not encryption and should not be used to hide sensitive values.
