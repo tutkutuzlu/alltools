@@ -22,6 +22,8 @@ test("build generates discoverable static pages and indexes", async () => {
   const runtimeConfig = await readFile(path.join(root, "dist", "assets", "js", "config", "runtime-config.js"), "utf8");
   const robots = await readFile(path.join(root, "dist", "robots.txt"), "utf8");
   const adsText = await readFile(path.join(root, "dist", "ads.txt"), "utf8");
+  const { discoverProject } = await import("../scripts/lib/project.mjs");
+  const project = await discoverProject();
   assert.match(home, /Word Counter/);
   assert.match(home, /The tool you need/);
   assert.match(home, /Featured tools<\/h2>/);
@@ -73,6 +75,35 @@ test("build generates discoverable static pages and indexes", async () => {
   assert.equal((sitemap.match(/<url>/g) ?? []).length, 114);
   assert.equal((sitemap.match(/<loc>https:\/\/tutkutuzlu\.github\.io\/alltools\/tools\//g) ?? []).length, 104);
   assert.doesNotMatch(sitemap, /<loc>https:\/\/tutkutuzlu\.github\.io\/(?!alltools\/)/);
+  const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+  const publishedCategories = project.categories.filter((item) => item.status === "published");
+  const publishedTools = project.tools.filter((item) => item.status === "published");
+  const expectedRoutes = [
+    { file: "index.html", url: `${project.site.siteUrl}/` },
+    ...project.pages.map((page) => ({ file: path.join(page.slug, "index.html"), url: `${project.site.siteUrl}/${page.slug}/` })),
+    ...publishedCategories.map((item) => ({ file: path.join("categories", item.slug, "index.html"), url: `${project.site.siteUrl}/categories/${item.slug}/` })),
+    ...publishedTools.map((item) => ({ file: path.join("tools", item.slug, "index.html"), url: `${project.site.siteUrl}/tools/${item.slug}/` }))
+  ];
+  assert.equal(new Set(sitemapUrls).size, sitemapUrls.length, "sitemap must not contain duplicate URLs");
+  assert.deepEqual(new Set(sitemapUrls), new Set(expectedRoutes.map((route) => route.url)), "sitemap must contain exactly every canonical published route");
+  assert.ok(sitemapUrls.every((url) => url.startsWith("https://tutkutuzlu.github.io/alltools/") && url.endsWith("/")), "sitemap URLs must use the production base path and trailing slash");
+  const expectedUrlSet = new Set(expectedRoutes.map((route) => route.url));
+  for (const route of expectedRoutes) {
+    const html = await readFile(path.join(root, "dist", route.file), "utf8");
+    assert.doesNotMatch(html, /href="\.\.\/\.\.\//, `${route.file} must not emit source-relative editorial links`);
+    const canonical = html.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
+    const openGraphUrl = html.match(/<meta property="og:url" content="([^"]+)">/)?.[1];
+    assert.equal(canonical, route.url, `${route.file} canonical must match its production route`);
+    assert.equal(openGraphUrl, canonical, `${route.file} Open Graph URL must match canonical`);
+    assert.ok(expectedUrlSet.has(canonical), `${route.file} canonical must be present in sitemap`);
+    for (const match of html.matchAll(/<a\b[^>]*href="([^"]+)"/g)) {
+      const target = new URL(match[1], canonical);
+      if (target.origin !== "https://tutkutuzlu.github.io" || !target.pathname.startsWith("/alltools/")) continue;
+      const normalizedTarget = `${target.origin}${target.pathname.endsWith("/") ? target.pathname : `${target.pathname}/`}`;
+      if (expectedUrlSet.has(normalizedTarget)) assert.ok(target.pathname.endsWith("/"), `${route.file} emits slashless crawlable link: ${match[1]}`);
+      if (/^\/alltools\/(?:categories|tools)\//.test(target.pathname)) assert.ok(expectedUrlSet.has(`${target.origin}${target.pathname}`), `${route.file} links to an unpublished or missing route: ${match[1]}`);
+    }
+  }
   assert.match(runtimeConfig, /"enabled":true/);
   assert.match(runtimeConfig, /G-JLNSC16GEQ/);
   assert.match(home, /googletagmanager\.com\/gtag\/js\?id=G-JLNSC16GEQ/);
@@ -101,7 +132,8 @@ test("build generates discoverable static pages and indexes", async () => {
     ...[...home.matchAll(/<section class="section section--tools" id="([^"]+)"[\s\S]*?<\/section>/g)],
     ...[...home.matchAll(/<section class="discovery-group" id="([^"]+)"[\s\S]*?<\/section>/g)]
   ].map((match) => ({ section: match[1], ids: [...match[0].matchAll(/href="\/alltools\/tools\/([^/]+)\//g)].map((item) => item[1]) }));
-  assert.deepEqual(homeSectionIds.map((item) => [item.section, item.ids.length]), [["tools", 6], ["new", 3], ["popular", 3]]);
+  assert.deepEqual(homeSectionIds.filter((item) => item.section !== "new").map((item) => [item.section, item.ids.length]), [["tools", 6], ["popular", 3]]);
+  assert.ok((homeSectionIds.find((item) => item.section === "new")?.ids.length ?? 0) <= 3, "New section must remain optional and bounded by the ten-day publication window");
   const homeToolIds = homeSectionIds.flatMap((item) => item.ids);
   assert.equal(new Set(homeToolIds).size, homeToolIds.length, "home discovery sections must not repeat tools");
   assert.deepEqual(new Set(homeSectionIds.find((item) => item.section === "tools").ids), new Set(["word-counter", "password-generator", "json-formatter", "length-converter", "color-picker", "case-converter"]));

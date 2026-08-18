@@ -174,8 +174,8 @@ export function renderCategoryCard(site, category, toolCount) {
   </a>`;
 }
 
-function renderEditorialContent(markdown) {
-  const html = markdownToHtml(markdown);
+function renderEditorialContent(markdown, site) {
+  const html = markdownToHtml(markdown).replace(/href="\.\.\/\.\.\/([a-z0-9-]+)\/"/g, (_, slug) => `href="${joinPath(site.basePath, `tools/${slug}`)}/"`);
   const faqHeading = "<h2>Frequently asked questions</h2>";
   if (!html.includes(faqHeading)) return html;
   return html.replace(faqHeading, `<section class="faq-section">${faqHeading}`) + "</section>";
@@ -220,7 +220,7 @@ export function renderTool(project, tool) {
   const categoryLabel = category.toolLabel ?? category.title.replace(/s$/, "");
   const body = `<div class="container"><nav class="breadcrumbs" data-accent="${escapeHtml(category.accent ?? "default")}" aria-label="Breadcrumb"><ol><li><a href="${joinPath(site.basePath)}/">Home</a></li><li class="breadcrumbs__category"><a href="${joinPath(site.basePath, `categories/${category.slug}`)}/">${escapeHtml(category.title)}</a></li><li aria-current="page">${escapeHtml(tool.title)}</li></ol></nav></div>
   <section class="hero hero--tool" data-accent="${escapeHtml(category.accent ?? "default")}"><div class="container"><span class="hero-tool-icon">${iconMarkup(tool.icon ?? category.icon)}</span><p class="category-identity">${escapeHtml(categoryLabel)}</p><h1>${escapeHtml(tool.title)}</h1><p class="lead">${escapeHtml(tool.shortDescription)}</p>${privacyMessage ? `<p class="privacy-note">${iconMarkup("shield")}${escapeHtml(privacyMessage)}</p>` : ""}</div></section>
-  <div class="container tool-layout" data-accent="${escapeHtml(category.accent ?? "default")}"><section class="tool-panel" aria-label="${escapeHtml(tool.title)}" data-tool-root data-tool-id="${escapeHtml(tool.id)}" data-category="${escapeHtml(tool.category)}" data-tool-entry="${entryUrl}"><noscript>This tool requires JavaScript to run.</noscript></section><article class="content">${renderEditorialContent(tool.markdown)}</article></div>${related}`;
+  <div class="container tool-layout" data-accent="${escapeHtml(category.accent ?? "default")}"><section class="tool-panel" aria-label="${escapeHtml(tool.title)}" data-tool-root data-tool-id="${escapeHtml(tool.id)}" data-category="${escapeHtml(tool.category)}" data-tool-entry="${entryUrl}"><noscript>This tool requires JavaScript to run.</noscript></section><article class="content">${renderEditorialContent(tool.markdown, site)}</article></div>${related}`;
   return layout({ site, title: tool.seoTitle, description: tool.seoDescription, canonicalPath, body, structured: [
     { "@context": "https://schema.org", "@type": "WebApplication", name: tool.title, description: tool.shortDescription, applicationCategory: "UtilitiesApplication", operatingSystem: "Any", url: `${absolute(site, canonicalPath)}/`, offers: { "@type": "Offer", price: "0", priceCurrency: "USD" } },
     { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
